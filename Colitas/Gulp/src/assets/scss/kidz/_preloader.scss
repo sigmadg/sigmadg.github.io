@@ -1,0 +1,91 @@
+/* Preloader */
+$animationLength: 1.5s;
+$animationRadius: 30px;
+$dotSize: 20px;
+
+.smooth-loader-wrapper {
+	background-color: $white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  z-index: 700000;
+	.smooth-loader {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 2100;
+		line-height: 0;
+		transform: translate(-50%, 50%);
+		.loader {
+	    position: relative;
+	    width: $animationRadius * 3 + $dotSize;
+		}
+
+		.dot {
+      display: inline-block;
+      width: $dotSize;
+      height: $dotSize;
+      border-radius: $dotSize * .5;
+      background: #ccc;
+      position: absolute;
+		}
+
+		.dot-1 {
+      animation: animateDot1 $animationLength linear infinite;
+      left: $animationRadius;
+      background: $warning;
+		}
+
+		.dot-2 {
+      animation: animateDot2 $animationLength linear infinite;
+      animation-delay: $animationLength / 3;
+      left: $animationRadius * 2;
+      background: $danger;
+		}
+
+		.dot-3 {
+      animation: animateDot3 $animationLength linear infinite;
+      left: $animationRadius;
+      background: $success;
+		}
+
+		.dot-4 {
+      animation: animateDot4 $animationLength linear infinite;
+      animation-delay: $animationLength / 3;
+      left: $animationRadius * 2;
+      background: $info;
+		}
+	}
+}
+
+
+/* Keyframe animation */
+@keyframes animateDot1 {
+  0%{ transform: rotate(0deg) translateX(-$animationRadius); }
+  25% { transform: rotate(180deg) translateX(-$animationRadius); }
+  75% { transform: rotate(180deg) translateX(-$animationRadius); }
+  100% { transform: rotate(360deg) translateX(-$animationRadius); }
+}
+
+@keyframes animateDot2 {
+  0%{ transform: rotate(-0deg) translateX(-$animationRadius); }
+  25% { transform: rotate(-180deg) translateX(-$animationRadius); }
+  75% { transform: rotate(-180deg) translateX(-$animationRadius); }
+  100% { transform: rotate(-360deg) translateX(-$animationRadius); }
+}
+
+@keyframes animateDot3 {
+  0%{ transform: rotate(0deg) translateX($animationRadius); }
+  25% { transform: rotate(180deg) translateX($animationRadius); }
+  75% { transform: rotate(180deg) translateX($animationRadius); }
+  100% { transform: rotate(360deg) translateX($animationRadius); }
+}
+
+@keyframes animateDot4 {
+  0%{ transform: rotate(-0deg) translateX($animationRadius); }
+  25% { transform: rotate(-180deg) translateX($animationRadius); }
+  75% { transform: rotate(-180deg) translateX($animationRadius); }
+  100% { transform: rotate(-360deg) translateX($animationRadius); }
+}
