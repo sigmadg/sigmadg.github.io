@@ -1,0 +1,65 @@
+/* Cart Dropdown */
+.cart-dropdown {
+  position: relative;
+  .dropdown-menu {
+    width: 320px;
+    padding: 1rem;
+    height: auto;
+    overflow-y: inherit;
+    margin-top: 1.3125rem;
+    border-top: 4px solid $danger;
+    @include media-breakpoint-up(md) {
+      margin-top: 0.75rem;
+      width: 400px;
+      padding: 1.5rem;
+    }
+    &:after {
+      display: none;
+      @include media-breakpoint-up(md) {
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 7px solid $danger;
+        margin-left: -10px;
+        content: "";
+        display: inline-block;
+        right: 6px;
+        position: absolute;
+        top: -11px;
+      }
+    }
+  }
+  .dropdown-menu-right {
+    right: -60px;
+    @include media-breakpoint-up(md) {
+      right: 0;
+    }
+  }
+}
+
+/* Dropdown sm */
+.dropdown-sm {
+  position: relative;
+  .btn {
+    padding: 0;
+    color: rgba($color: $white, $alpha: 0.8);
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  .dropdown-menu {
+    min-width: 6rem;
+    padding: 0.3125rem;
+    top: 10px !important;
+    .dropdown-item {
+      font-size: .75rem;
+      padding: 6px 12px;
+      text-transform: capitalize;
+      color: $secondary;
+      transition: all .3s ease-in-out;
+      &:hover {
+        background-color: $info;
+        color: $white;
+      }
+    }
+  }
+}

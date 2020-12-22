@@ -1,0 +1,122 @@
+// Grid containers
+$container-max-widths: (
+  sm: 540px,
+  md: 750px,
+  lg: 970px,
+  xl: 1170px
+);
+
+// Colors
+$gray-800:      #222;
+$secondary:     #f8f8f8;
+$border-color:  #e7e7e7;
+$text-color:    #666;
+
+$primary:       #ea77ad;
+$warning:       #a597e7;
+$danger:        #ea77ad;
+$success:       #f0c24b;
+$info:          #ea7066;
+$purple:        #b5d56a;
+$pink:          #84bed6;
+$stone:         #2f3c43;
+
+// Theme Color
+$theme-colors: (
+  "primary":    $primary,
+  "warning":    $warning,
+  "danger":     $danger,
+  "success":    $success,
+  "info":       $info,
+  "purple":     $purple,
+  "pink":       $pink,
+  "stone":      $stone,
+);
+
+// Background colors
+$light-header: rgba(47, 60, 67, 0.502);
+//Border Radius
+$border-radius:  .25rem;
+$border-radius-sm: .4rem;
+
+// Fonts
+$font-family-inherit: inherit;
+$font-family-base: 'Open Sans', sans-serif;
+$font-family-monospace: Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-dosis: 'Dosis', sans-serif;
+$font-family-secondary: $font-family-dosis;
+$font-weight-medium: 600;
+$font-size-base: .875rem;
+
+
+// Space
+$spacer: 1rem ;
+$spacers: ();
+$spacers:(
+  0: 0,
+  1: ($spacer * .31),
+  2: ($spacer * .63),
+  3: $spacer,
+  4: ($spacer * 1.25),
+  5: ($spacer * 1.56),
+  6: ($spacer * 1.88),
+  7: ($spacer * 3.13),
+  8: ($spacer * 3.75),
+  9: ($spacer * 4.96),
+  10: ($spacer * 6.25),
+);
+
+// Card
+$card-border-width: 0;
+$card-bg: #f8f8f8;
+$card-inner-border-radius: 0.57rem;
+$card-border-radius: 0.57rem;
+
+
+// Shadow
+$box-shadow-sm: 0 .25rem 0 rgba(0, 0, 0, .1) ;
+$box-shadow: 0 4px 0 rgba(0, 0, 0, .1);
+$box-shadow-xl: 0 2px 7px 0 rgba(0,0,0,.15);
+$nav-pills-shadow: inset $box-shadow-sm;
+
+// Alert
+$alert-padding-y:                   1rem;
+$alert-padding-x:                   1.25rem;
+$alert-border-radius:               .25rem;
+
+// Input
+
+$input-btn-padding-y:         0.69rem;
+$input-btn-padding-x:         1.4rem;
+
+$input-btn-padding-y-lg:      1.33rem;
+$input-btn-padding-x-lg:      1.33rem;
+
+$input-placeholder-color: $text-color;
+
+$input-btn-border-width: 3px;
+
+// Button
+
+$btn-transition:              all .3s ease-in-out;
+$btn-font-size:               1rem;
+$btn-font-weight:             $font-weight-medium;
+$btn-border-radius:           .375rem;
+$btn-padding-y-sm:            0.5rem;
+$btn-padding-x-sm:            0.94rem;
+
+
+//Pagination
+$pagination-padding-y:              0.75rem;
+$pagination-padding-x:              1rem;
+$pagination-color:           $text-color;
+$pagination-border-color: transparent;
+$pagination-hover-border-color: transparent;
+$pagination-hover-bg: transparent;
+$pagination-font-size: 1rem;
+$pagination-focus-outline: none;
+$pagination-focus-box-shadow: none;
+
+// modal
+$modal-lg:                          1030px;
+$modal-sm:                          350px;

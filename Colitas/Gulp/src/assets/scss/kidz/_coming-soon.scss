@@ -1,0 +1,19 @@
+/* Custom Scss */
+.coming-soon {
+  img {
+    width: 200px;
+    height: 60px;
+  }
+  h1 {
+    font-size: 1.875rem;
+    @include media-breakpoint-up(md) {
+      font-size: 2.5rem;
+    }
+  }
+  p {
+    font-size: 0.875rem;
+    @include media-breakpoint-up(md) {
+      font-size: 1.5rem;
+    }
+  }
+}

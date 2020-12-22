@@ -1,0 +1,33 @@
+/* Blockquote */
+.blockquote {
+  p {
+    font-size: 1.38rem;
+    font-style: italic;
+    color: $white;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+}
+.blockquote-footer {
+  font-size: 90%;
+  font-weight: 600;
+  cite {
+    font-style: normal;
+    margin-top: 0.625rem;
+    font-weight: 400;
+  }
+  &::before {
+    content: "";
+  }
+}
+
+.blockquote-sm {
+  p {
+    font-size: 1rem;
+    font-weight: 400;    
+  }
+}
+
+.font-normal {
+  font-style: normal!important;
+}
