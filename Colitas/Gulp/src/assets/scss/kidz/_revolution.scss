@@ -1,0 +1,60 @@
+/* Revolution Slider Navigation */
+.hesperiden.tparrows {
+	background-color: $white;
+	border-radius: 0.8125rem;
+	width: 45px;
+	height: 45px;
+	box-shadow: 0 .25rem 0 rgba(0,0,0,.2);
+	visibility: hidden;
+	opacity: 0;
+	@include transition(opacity, .3s ease-in-out);
+	&:hover {
+		background-color: $white;
+	}
+	&:before {
+		color: #666;
+		line-height: 45px;
+	}
+}
+/*Revolution Slider  Arrows */
+.hesperiden.tparrows.tp-leftarrow {
+	&:before {
+		content: "\e81f";
+	}
+}
+.hesperiden.tparrows.tp-rightarrow {
+	&:before {
+		content: "\e81e";
+	}
+}
+
+.rev_slider_wrapper {
+	&:hover {
+		.hesperiden.tparrows {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+/* Revolution Slider  boxed version */
+.boxed {
+	.forcefullwidth_wrapper_tp_banner {
+		overflow: hidden;
+	}
+
+	.hesperiden.tparrows.tp-leftarrow {
+		left: 50px !important;
+		@include media-breakpoint-up(xl) {
+			left: 100px !important;
+		}
+	}
+
+	.hesperiden.tparrows.tp-rightarrow {
+		left: auto !important;
+		right: 10px !important;
+		@include media-breakpoint-up(xl) {
+			right: 60px !important;
+		}
+	}
+}

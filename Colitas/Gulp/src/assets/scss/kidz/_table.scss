@@ -1,0 +1,166 @@
+/* Tables */
+
+.table {
+  td {
+    span {
+      font-family: "Dosis", sans-serif;
+    }
+  }
+  tr {
+    th {
+      i {
+        color: #c09933;
+      }
+    }
+  }
+}
+
+/* Table Cart */
+
+.table-cart {
+  border-radius: 0.625rem;
+  border: 1px solid $border-color;
+  thead {
+    tr {
+      background-color: $warning;
+      border-top: 0;
+      th {
+        color: #fff;
+        padding: 15px 8px;
+        border-bottom: none;
+        border-top: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        &:first-child {
+          border-top-left-radius: 0.625rem;
+        }
+        &:last-child {
+          border-top-right-radius: 0.625rem;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        padding: 0.625rem; // border-bottom: 1px solid #dedede;
+        @include media-breakpoint-up(md) {
+          padding: 20px 8px 20px 8px;
+        }
+        @include media-breakpoint-up(lg) {
+          padding: 20px 40px 20px 10px;
+        }
+        .input-group {
+          @include media-breakpoint-up(xl){
+            width: 60%;
+          }
+          .form-control {
+            text-align: left;
+            margin-right: 1.5rem;
+          }
+          .btn {
+            height: 45px;
+            line-height: 1.4;
+          }
+        }
+        .btn-update {
+          height: 45px;
+          line-height: 1.4;
+          white-space: nowrap;
+        }
+
+        input {
+          width: 80px;
+          height: 48px;
+          text-align: center;
+          line-height: 45px;
+          color: #222;
+          border: 1px solid #dedede;
+          border-radius: 7px;
+        }
+        .form-control {
+          border-radius: 7px !important;
+          @include media-breakpoint-up(md) {
+            margin-bottom: 0px;
+          }
+          &:focus {
+            border-color: $border-color;
+          }
+        }
+        .close {
+          float: left;
+          margin-bottom: 0.625rem;
+          opacity: 1;
+          @include media-breakpoint-up(md) {
+            margin: 17px 30px 0 0;
+          }
+          span {
+            width: 30px;
+            height: 30px;
+            line-height: 25px;
+            display: block;
+            background-color: #e5e5e5;
+            color: #666;
+            border-radius: 50%;
+            font-size: 30px;
+            font-weight: 600;
+          }
+        }
+        .cart-image {
+          border-radius: 0.625rem;
+        }
+        &:first-child {
+          padding: 20px 0px 20px 30px;
+        }
+      }
+      .td-product-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 215px;
+      }
+      .td-price {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.close:not(:disabled):not(.disabled):hover,
+.close:not(:disabled):not(.disabled):focus {
+  outline: 0;
+  opacity: 1;
+}
+
+/* Table Class Schedule */
+
+.table-class-schedule {
+  border-radius: 0.625rem;
+  border: 1px solid $border-color;
+  .table-bordered {
+    margin-bottom: 0;
+    thead {
+      th {
+        border: 0;
+      }
+    }
+    tbody {
+      tr {
+        td {
+          &:first-child {
+            border-left: 0;
+          }
+          &:last-child {
+            border-right: 0;
+          }
+        }
+        &:last-child {
+          td {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
