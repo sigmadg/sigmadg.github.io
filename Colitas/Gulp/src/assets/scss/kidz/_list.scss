@@ -1,0 +1,41 @@
+/* List border bottom */
+.list-item-border-bottom {
+  li {
+    border-bottom: 1px solid rgba($white, .3);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.list-item-lg {
+  li {
+    font-size: 1.13rem;
+    font-family: $font-family-dosis;
+    margin-bottom: 1rem;
+    color: $text-color;
+  }
+}
+
+// List Style 1
+.list-style-1 {
+  flex-direction: column;
+  .nav-item {
+    .nav-link {
+      color: $text-color;    
+      border-radius: .8rem;
+      padding-top: 0.63rem;
+      padding-bottom: 0.63rem;
+      &:hover {
+        color: $primary;
+      }
+      &.active {
+        color: $primary;
+      }
+    }
+  }
+}
+
+.selectLanguage {
+  
+}

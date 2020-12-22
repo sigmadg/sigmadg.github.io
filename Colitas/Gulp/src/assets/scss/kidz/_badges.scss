@@ -1,0 +1,112 @@
+/* Icon Badge */
+.icon-badge {
+  display: block;
+  text-align: center;
+  position: relative;
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 0.1875rem 0.44rem;
+    border-radius: 0.625rem;
+    color: $white;
+  }
+}
+
+/* Badge Rounded And Rounded Circle */
+.badge-rounded,
+.badge-rounded-circle {
+  left: 20px;
+  top: 20px;
+  text-align: center;
+  color: $white;
+  transition: all .3s ease-in-out;
+}
+
+.badge-rounded {
+  font-size: 1rem;
+  padding: .89rem 1.375rem;
+  color: $white;
+  line-height: 1;
+  font-weight: 400;
+  box-shadow: 0 0 1px rgba(0,0,0,.5);
+  border-radius: 10px;
+}
+.badge-rounded-circle {
+  padding: 0;
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: none;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+/* Badge Wide */
+.badge-large {
+  position: absolute;
+  font-family: $font-family-dosis;
+  font-size: 1.25rem;
+  color: #fff;
+  text-transform: capitalize;
+  line-height: 1;
+  padding: 0 .625rem;
+  @include media-breakpoint-up(lg){
+    font-size: 1.88rem;
+    // padding: 0 1.56rem;
+    padding: 0.4375rem 1.8rem;
+  }
+}
+.badge-large-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: .375rem;
+  border-bottom-right-radius: .375rem;
+  top: 15px;
+  @include media-breakpoint-up(lg){
+    top: 55px;
+  }
+}
+.badge-large-right {
+  border-top-left-radius: .375rem;
+  border-bottom-left-radius: .375rem;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  top: 15px;
+  right: 0;
+  @include media-breakpoint-up(lg){
+    top: 55px;
+  }
+}
+.badge-medium-center,
+.badge-large-center {
+  border-radius: .375rem;
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%);
+}
+.badge-medium {
+  position: absolute;
+  font-size: 1.125rem;
+  color: #fff;
+  text-transform: capitalize;
+  padding: .937rem 0;
+  width: 100%;
+  @include media-breakpoint-up(md){
+    font-size: 1.25rem;
+    padding: .937rem 2.81rem;
+    width: auto;
+  }
+  @include media-breakpoint-up(lg){
+    padding: 22px 33px;
+    bottom: 30px;
+    span {
+      font-size: 1.5625rem;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+/* Right Sidebar */
+.element-right-sidebar {
+  min-width: 215px;
+  .list-unstyled {
+    li {
+      a {
+        padding: .25rem 0;
+        display: inline-block;
+        font-family: sans-serif;
+        font-size: 0.9375rem;
+        color: #495057;
+        transition: all .4s;
+        &:hover {
+          opacity: .4;
+        }
+      }
+    }
+  }
+  &.sidebar-fixed {
+    position: fixed;
+    top: 110px;
+    bottom: 0;
+  }
+  &.right-sidebar-absolute {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+  }
+}
