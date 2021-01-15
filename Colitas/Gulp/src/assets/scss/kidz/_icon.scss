@@ -1,0 +1,188 @@
+/* Icon Extra Small */
+.icon-xs {
+  width: 21px;
+  height: 21px;
+  line-height: 19px;
+}
+.icon-header {
+  width: 18px;
+  height: 18px;
+  line-height: 16px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 0.31rem;
+  border-radius: 50%;
+  @include media-breakpoint-up(md) {
+    width: 21px;
+    height: 21px;
+    line-height: 19px;
+  }
+  i {
+    font-size: 11px;
+    color: $white;
+     @include media-breakpoint-up(md) {
+      font-size: 0.81rem;
+    }
+  }
+}
+
+/* Icon Small */
+.icon-small {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+}
+
+/* Icon Rounded Small */
+.icon-rounded-circle-small {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  color: $white;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+/* Icon Medium */
+.icon-medium {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+}
+
+/* Icon Rounded Medium */
+.icon-rounded-circle-medium {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  text-align: center;
+  color: $white;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+/* Medium Icon */
+.medium-icon {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+}
+
+/* Medium Icon Rounded */
+.medium-icon-rounded-circle {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  color: $white;
+  font-size: 1rem;
+  display: inline-block;
+}
+
+/* Icon Large */
+.icon-large {
+  width: 85px;
+  height: 85px;
+  line-height: 85px;
+}
+
+/* Icon Rounded Large */
+.icon-rounded-circle-large {
+  width: 85px;
+  height: 85px;
+  line-height: 85px;
+  border-radius: 50%;
+  text-align: center;
+  color: $white;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+/* Icon Extra Large */
+.icon-extra-large {
+  width: 103px;
+  height: 103px;
+  line-height: 103px;
+}
+
+/* Icon Rounded Extra Large */
+.icon-rounded-circle-extra-large {
+  width: 103px;
+  height: 103px;
+  line-height: 103px;
+  border-radius: 50%;
+  text-align: center;
+  color: $white;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
+.card-icon-border-large {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 50px;
+  background-color: $white;
+  border: 6px solid;
+  border-radius: 50%;
+  font-size: 1.88rem;
+  line-height: 90px;
+  color: $text-color;
+  margin-top: -3.06rem;
+  img {
+    max-width: 100%;
+    border-radius: 50%;
+    display: block;
+  }
+}
+
+.media-icon-large {
+  width: 76px;
+  height: 76px;
+  height: 76px;
+  padding: 0.375rem;
+  box-shadow: 0.25rem 0.25rem 0 rgba(0,0,0, .1);
+  display: block;
+  margin-right: 0.94rem;
+  border-radius: 50%;
+  i {
+    width: 62px;
+    height: 62px;
+    line-height: 62px;
+    border-radius: 50%;
+    text-align: center;
+    border: 2px solid $white;
+    font-size: 1.38rem;
+    color: $white;
+    transition: all .3s ease-in-out;
+    &.extra-large {
+      width: 75px;
+      height: 75px;
+      line-height: 75px;
+      font-size: 1.25rem;
+    }
+  }
+  &.icon-large-border {
+    box-shadow: none;
+    padding: 0.25rem;
+    border: 2px solid $white;
+    i {
+      border: none;
+    }
+  }
+  &:hover {
+    i {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Icon Large */
+.icon-xl {
+  font-size: 8.13rem;
+}

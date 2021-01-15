@@ -1,0 +1,10 @@
+// Call To Action
+
+.call-to-action {
+  text-align: center;
+  p {
+    @include media-breakpoint-up(up){
+      font-size: 1.125rem;
+    }
+  }
+} 
