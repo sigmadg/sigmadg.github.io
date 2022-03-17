@@ -82,11 +82,11 @@ canvas{
 /* ---- stats.js ---- */
 
 .count-particles{
-  position: relative;
+  position: fixed;
 }
 
 .js-count-particles{
-  font-size: 1.1em;
+  font-size: 1 em;
 }
 
 #stats,
@@ -113,7 +113,7 @@ canvas{
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/header-bg.jpg");
+  background-image: url("../assets/img/header-bg.jpeg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -10166,7 +10166,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/header-bg.jpg");
+  background-image: url("../assets/img/header-bg.jpeg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
