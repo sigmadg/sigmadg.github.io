@@ -1,0 +1,872 @@
+
+{% if section.blocks.size > 0 %}
+{% case section.settings.grid %}
+{% when '1' %}
+{% when '2' %}
+{%- assign column = 'two-column' -%}
+{% when '3' %}
+{%- assign column = 'three-column' -%}              
+{% when '4' %}
+{%- assign column = 'four-column' -%}              
+{% else %}
+{%- assign column = 'three-column' -%}              
+{% endcase %} 
+{% endif %}
+
+
+{% if section.settings.enable_grid_style %}
+{% assign grid_style = 'dt-sc-grid-style' %}
+{% endif %}
+
+{% if section.settings.enable_overlay %}
+{% assign section_overlay = 'dt-sc-overlay' %}
+{% endif %}
+
+{% case section.settings.background_style %}
+{% when 'default' %}
+{% when 'parallax' %}
+{%- assign background_style = 'data-speed="2"' %}
+{% when 'fixed' %}
+{%- assign background_style = 'data-speed="1"' %}
+{% endcase %} 
+
+{% if section.settings.show_background_image %}
+{% assign lazyScript = "lazyload" %}
+{% endif %}
+
+<div class="dt-sc-section-wrapper {{lazyScript}} {{section_overlay}} {% if section.settings.background_style == 'parallax' %} parallax-initiated{% endif %}" style="{% render 'bg-color-image-padding' %}" data-style="parallax" {{background_style}} {% include 'bg_image' %}>  
+  <div class="{% render 'container-settings' %}"> 
+    <div class="row {{ section.settings.custom_class_name }}">   
+      {% render 'section-heading', class: section.id %}   
+      <div class="dt-sc-promo-blocks-section dt-sc-column {{grid_style}} three-column {{section.settings.block_style}} {{section.settings.vertical_position}}">
+        <div class="promo-blocks_left">
+          {% if section.settings.promo_1_link != blank %}
+          <a href="{{section.section.promo_1_link}}">
+            {% endif %}
+            {% if section.settings.promo_1 != blank %}
+            <div class="dt-sc-promo-icon-image">
+              {%- assign img_1_url = section.settings.promo_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img class="lazyload"
+                   data-src="{{ img_1_url }}"
+                   data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.promo_1.aspect_ratio }}"
+                   data-sizes="auto"            
+                   alt="{{ section.settings.promo_1.alt | escape }}">            
+              <noscript>
+                {{ section.settings.promo_1 | img_url: '480x480', scale: 2 | img_tag: section.settings.promo_1.alt, 'dt-sc-noscript-image' }}
+              </noscript>
+            </div>
+            {% endif%}    
+            {% if section.settings.promo_1_link != blank %}
+          </a>
+          {% endif %}
+        </div>
+       
+        <div class="promo-blocks_center" style="width:400px;">    
+         <div class="promo-block_swiper swiper-container">            
+            <div class="swiper-wrapper">
+              {% if section.blocks.size > 0 %}               
+              {% for block in section.blocks %}           
+              {% if block.type == 'icon' %}
+              <div class="promo-blocks_center swiper-slide">
+                {% if block.settings.promo != blank %}
+                <div class="dt-sc-promo-icon-main-image">                
+                  <img src="{{ block.settings.promo | img_url: '700x700' }}" alt="{{ block.settings.promo.alt | escape }}">                            
+                </div>
+                {% endif%} 
+                <div class="dt-sc-promo-block {{ section.settings.text_position}} {% if section.settings.reverse_column %}dt-sc-reverse-columns{% endif %}">    
+                  {% if block.settings.title != blank  %}  
+                  <h2 class="dt-sc-promo-heading">{{ block.settings.title }}</h2>
+                  {% endif %} 
+
+                  {% if block.settings.icon1 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    {%- assign img_url = block.settings.icon1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                         data-src="{{ img_url }}"
+                         data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                         data-aspectratio="{{ section.settings.icon1.aspect_ratio }}"
+                         data-sizes="auto"            
+                         alt="{{ block.settings.block_image.alt | escape }}">            
+                    <noscript>
+                      {{ block.settings.icon1 | img_url: '480x480', scale: 2 | img_tag: block.settings.icon1.alt, 'dt-sc-noscript-image' }}
+                    </noscript>
+                  </div>          
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">
+                    {% if block.settings.desc1 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc1}}</p>
+                    {% endif %}           
+                  </div>
+                  {% if block.settings.icon2 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    {%- assign img_url = block.settings.icon2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                         data-src="{{ img_url }}"
+                         data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                         data-aspectratio="{{ section.settings.icon2.aspect_ratio }}"
+                         data-sizes="auto"            
+                         alt="{{ block.settings.block_image.alt | escape }}">            
+                    <noscript>
+                      {{ block.settings.icon2 | img_url: '480x480', scale: 2 | img_tag: block.settings.icon2.alt, 'dt-sc-noscript-image' }}
+                    </noscript>
+                  </div>          
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">
+                    {% if block.settings.desc2 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc2}}</p>
+                    {% endif %}           
+                  </div>
+                  {% if block.settings.icon3 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    {%- assign img_url = block.settings.icon3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="lazyload"
+                         data-src="{{ img_url }}"
+                         data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                         data-aspectratio="{{ section.settings.icon3.aspect_ratio }}"
+                         data-sizes="auto"            
+                         alt="{{ block.settings.block_image.alt | escape }}">            
+                    <noscript>
+                      {{ block.settings.icon3 | img_url: '480x480', scale: 2 | img_tag: block.settings.icon3.alt, 'dt-sc-noscript-image' }}
+                    </noscript>
+                  </div>          
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">
+                    {% if block.settings.desc3 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc3}}</p>
+                    {% endif %}           
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+              {% if block.type == 'class' %}
+              <div class="promo-blocks_center  swiper-slide">
+                {% if block.settings.promo != blank %}
+                <div class="dt-sc-promo-icon-main-image">                
+                  <img src="{{ block.settings.promo | img_url: '700x700' }}" alt="{{ block.settings.promo.alt | escape }}">                            
+                </div>
+                {% endif%} 
+                <div class="dt-sc-promo-block {{ section.settings.text_position}} {% if section.settings.reverse_column %}dt-sc-reverse-columns{% endif %}">
+                  {% if block.settings.title != blank  %}  
+                  <h5 class="dt-sc-promo-heading">{{ block.settings.title }}</h5>
+                  {% endif %} 
+
+                  {% if block.settings.class1 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    <i class="{{block.settings.class1}}"></i>
+                  </div>
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">           
+                    {% if block.settings.desc1 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc1}}</p>
+                    {% endif %}          
+                  </div>
+                  {% if block.settings.class2 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    <i class="{{block.settings.class2}}"></i>
+                  </div>
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">           
+                    {% if block.settings.desc2 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc2}}</p>
+                    {% endif %}          
+                  </div>
+                  {% if block.settings.class3 != blank %}
+                  <div class="dt-sc-promo-icon-image">
+                    <i class="{{block.settings.class3}}"></i>
+                  </div>
+                  {% endif%}     
+                  <div class="dt-sc-promo-content">           
+                    {% if block.settings.desc3 != blank  %}  
+                    <p class="dt-sc-promo-description"> {{ block.settings.desc3}}</p>
+                    {% endif %}          
+                  </div>
+                </div>
+              </div>
+              {% endif %}               
+              {% endfor %}  
+              {% endif %}  
+              <div class="swiper-pagination swiper-pagination-white"></div>
+            </div>            
+          </div>
+        </div>
+        <div class="promo-blocks_right">
+          {% if section.settings.promo_2_link != blank %}
+          <a href="{{section.section.promo_2_link}}">
+            {% endif %}
+            {% if section.settings.promo_2 != blank %}
+            <div class="dt-sc-promo-icon-image">
+              {%- assign img_2_url = section.settings.promo_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img class="lazyload"
+                   data-src="{{ img_2_url }}"
+                   data-widths="[180, 360, 470, 600, 770, 970, 1060, 1280, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.promo_2.aspect_ratio }}"
+                   data-sizes="auto"            
+                   alt="{{ section.settings.promo_2.alt | escape }}">            
+              <noscript>
+                {{ section.settings.promo_2 | img_url: '480x480', scale: 2 | img_tag: section.settings.promo_2.alt, 'dt-sc-noscript-image' }}
+              </noscript>
+            </div>
+            {% endif%}   
+            {% if section.settings.promo_2_link != blank %}
+          </a>
+          {% endif %}       
+      </div> 
+    </div>
+  </div>
+</div>
+</div>
+<script>
+    var swiper = new Swiper('  #shopify-section-{{section.id}} .promo-block_swiper.swiper-container', {
+      spaceBetween: 30,
+      effect: 'fade',      
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '#shopify-section-{{section.id}} .swiper-pagination',
+        clickable: true,
+      },      
+    });
+  </script>
+<style type="text/css">  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-overlay:before  {
+    color: var(--DTTertiaryColor); 
+    color: {{ section.settings.background_color }};   
+    background: currentcolor; 
+    opacity: {{ section.settings.overlay_transparency }}; }  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-heading .dt-sc-main-heading { color: var(--DTColor_Body); color:{{ section.settings.section_heading_color }}; } 
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-heading .dt-sc-sub-heading { color: var(--DTColor_Body); color:{{ section.settings.section_sub_heading_color }}; } 
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-heading .dt-sc-heading-description { color: var(--DTColor_Body); color:{{ section.settings.section_description_color }}; } 
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-heading .dt-sc-btn { 
+    background: var(--DT_Button_BG_Color);  background:{{ section.settings.section_button_bg_color }}; 
+      color: var(--DT_Button_Text_Color); color:{{ section.settings.section_button_text_color }}; }
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-heading .dt-sc-btn:hover { 
+    background: var(--DT_Button_BG_Hover_Color); background:{{ section.settings.section_button_hover_bg_color }}; 
+      color: var(--DT_Button_Text_Hover_Color); color:{{ section.settings.section_button_hover_text_color }};
+        }
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image { 
+    border-radius: {{ section.settings.icon_border_radius }}; }  
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2 { 
+    
+    border-color: var(--DTTertiaryColor);
+    border-color: {{ section.settings.block_border_color }};
+    
+    border-left-width: 1px; border-left-style: solid; 
+    border-top-width: 1px; border-top-style: solid; 
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2 .dt-sc-promo-block { 
+    border-color: var(--DTTertiaryColor);
+    border-color: {{ section.settings.block_border_color }};
+    
+    border-right-width: 1px; border-right-style: solid; 
+    border-bottom-width: 1px; border-bottom-style: solid; 
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-3 .dt-sc-promo-block { 
+    border-color: var(--DTTertiaryColor);
+    border-color: {{ section.settings.block_border_color }};
+    
+    border-width: 1px; border-style: solid;
+    {% if section.settings.enable_box_shadow %} box-shadow: var(--DTboxShadow); {% endif %} 
+      border-radius: {{ section.settings.border_radius }};
+  }  
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image { 
+    background: var(--DTTertiaryColor); background: {{ section.settings.block_icon_bg }}; 
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section[class*="style-"] .dt-sc-promo-block { 
+    background: var(--DTBodyBGColor); background: {{ section.settings.block_bg }}; } 
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image {
+  	width: {{ section.settings.block_icon_outer_size }}; height: {{ section.settings.block_icon_outer_size }}; 
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section:not(.dt-sc-grid-style) .dt-sc-promo-block .dt-sc-promo-content { 
+    width: calc(100% - {{ section.settings.block_icon_outer_size }}); 
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image img,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image i { 
+    font-size: {{ section.settings.block_icon_size }}; width: {{ section.settings.block_icon_size }};
+  }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content .dt-sc-promo-heading { 
+    color: var(--DTColor_Body); color:{{ section.settings.block_heading_color }}; }
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content .dt-sc-promo-description { 
+    color: var(--DTColor_Body); color:{{ section.settings.block_description_color }}; }
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content .dt-sc-btn { 
+    background:var(--DT_Button_BG_Color); color: var(--DT_Button_Text_Color);
+  	background:{{ section.settings.block_button_bg_color }}; color:{{ section.settings.block_button_text_color }};
+  }
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content .dt-sc-btn:hover { 
+  	background:var(--DT_Button_BG_Hover_Color); color: var(--DT_Button_Text_Hover_Color);
+    background:{{ section.settings.block_button_hover_bg_color }}; color:{{ section.settings.block_button_hover_text_color }};
+  }
+    
+  .dt-sc-promo-blocks-section .dt-sc-promo-block { display: flex; flex-wrap: wrap; height: 100%; }
+  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block.text-center .dt-sc-promo-content { padding: 0 20px; }
+  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content { padding-left: 20px; padding-right: 0; }  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content .dt-sc-btn { display: inline-block; }
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content *, 
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content *:not(:only-child) { margin: 0; }
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-content *:not(:last-child) { margin: 0 0 10px 0; }
+  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block.dt-sc-reverse-columns .dt-sc-promo-content { padding-right: 20px; padding-left: 0; }
+  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image { display: flex; justify-content: center; align-items: center; }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image {
+    background: var(--DTTertiaryColor); background: {{ section.settings.block_icon_bg }}; 
+      
+    border-color: var(--DTTertiaryColor);
+    border-color: {{ section.settings.block_icon_border_color }};
+    
+    border-width: 1px; border-style: solid;
+  }
+  
+  .dt-sc-promo-blocks-section .dt-sc-promo-block .dt-sc-promo-icon-image img { width: 100%; }
+  
+  .dt-sc-promo-blocks-section.position-vertical-center:not(.dt-sc-grid-style) .dt-sc-promo-block { align-items: center; }	
+  .dt-sc-promo-blocks-section.position-vertical-bottom:not(.dt-sc-grid-style) .dt-sc-promo-block { align-items: flex-end; }	
+  
+  .dt-sc-promo-blocks-section:not(.dt-sc-grid-style) .dt-sc-promo-block { align-content: center; }
+  .dt-sc-promo-blocks-section:not(.dt-sc-grid-style) .dt-sc-promo-block .dt-sc-promo-icon-image { margin: 0 auto; }
+  
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block { flex-direction: row; }
+  
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block > *:not(:last-child)  { margin: 0 auto 20px; }
+  
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block.text-start > *:not(:last-child)  { margin-left: 0; margin-right: auto; }
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block.text-end > *:not(:last-child)  { margin-right: 0; margin-left: auto; }
+  
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block .dt-sc-promo-content { width: 100%; padding: 0; }
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block.text-end { justify-content: flex-end; }
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block.dt-sc-reverse-columns { flex-direction: column-reverse; align-self: center; justify-content: center; }
+  .dt-sc-promo-blocks-section.dt-sc-grid-style .dt-sc-promo-block.dt-sc-reverse-columns.text-end .dt-sc-promo-icon-image { margin-left: auto; }
+  
+  .dt-sc-promo-blocks-section.style-2 { grid-gap: 0; }
+  .dt-sc-promo-blocks-section.style-2 .dt-sc-promo-block { padding: 30px; }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2 { 
+    {% if section.settings.enable_box_shadow %} box-shadow: var(--DTboxShadow); {% endif %} 
+    border-radius: {{ section.settings.border_radius }}; overflow: hidden; 
+      }
+  
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2 .dt-sc-promo-block:last-child { 
+    border-radius: 0 0 {{ section.settings.border_radius }} 0;
+  }
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.one-column .dt-sc-promo-block:first-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.two-column .dt-sc-promo-block:nth-child(2):last-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.three-column .dt-sc-promo-block:nth-child(3):last-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.four-column .dt-sc-promo-block:nth-child(4):last-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.five-column .dt-sc-promo-block:nth-child(5):last-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.six-column .dt-sc-promo-block:nth-child(6):last-child { 
+    border-radius: 0 {{ section.settings.border_radius }} {{ section.settings.border_radius }} 0;
+  }
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.one-column .dt-sc-promo-block:first-child,
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.two-column .dt-sc-promo-block:nth-child(2):not(:last-child),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.three-column .dt-sc-promo-block:nth-child(3):not(:last-child),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.four-column .dt-sc-promo-block:nth-child(4):not(:last-child),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.five-column .dt-sc-promo-block:nth-child(5):not(:last-child),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.six-column .dt-sc-promo-block:nth-child(6):not(:last-child) { 
+    border-radius: 0 {{ section.settings.border_radius }} 0 0; 
+  }
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.one-column .dt-sc-promo-block:last-child { 
+    border-radius: 0 0 {{ section.settings.border_radius }} {{ section.settings.border_radius }}; 
+  }
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.one-column .dt-sc-promo-block:only-child { 
+    border-radius: 0 {{ section.settings.border_radius }} {{ section.settings.border_radius }} {{ section.settings.border_radius }}; 
+  } 
+
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.two-column .dt-sc-promo-block:nth-last-child(2),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.three-column .dt-sc-promo-block:nth-last-child(3),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.four-column .dt-sc-promo-block:nth-last-child(4),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.five-column .dt-sc-promo-block:nth-last-child(5),
+  #shopify-section-{{section.id}}.home-promo-block .dt-sc-promo-blocks-section.style-2.dt-sc-column.six-column .dt-sc-promo-block:nth-last-child(6) { 
+    border-radius: 0 0 0 {{ section.settings.border_radius }}; 
+  }
+  
+  .dt-sc-promo-blocks-section.style-3 .dt-sc-promo-block { padding: 30px; }
+
+
+</style>
+
+
+
+{% schema %}
+{
+"name": "Promo Block",
+"class": "index-section home-promo-block",
+"max_blocks":4,
+"settings": [
+{
+"type": "checkbox",
+"id": "full",
+"label": "Show Full width"
+},
+{
+"type": "checkbox",
+"id": "spacing_both_ends",
+"label": "Enable Right & Left Spacing (Works only on Fullwidth)",
+"default": false
+},
+{
+"type": "text",
+"id": "padding",
+"label": "Style value (Padding)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "text",
+"id": "margin",
+"label": "Style value (Margin)",
+"default":"0,0",
+"info":"Top(px),Bottom(px)"
+},
+{
+"type": "checkbox",
+"id": "show_background_image",
+"label": "Enable Background image"
+},
+{
+"type": "image_picker",
+"id": "background_image",
+"label": "Background image",
+"info": "Size: 1920x1280"
+},
+{
+"type": "select",
+"id": "background_style",
+"label": "Background Style",
+"default": "default",
+"options": [
+{
+"value": "default",
+"label": "Default"
+},
+{
+"value": "parallax",
+"label": "Parallax"
+},
+{
+"value": "fixed",
+"label": "Fixed"
+}
+]
+},
+{
+"type": "checkbox",
+"id": "enable_overlay",
+"label": "Enable Background Color (Used as Background Image Overlay Color too)"
+},
+{
+"type": "color",
+"id": "background_color",
+"label":"Background color"
+},
+{
+"type": "text",
+"id": "overlay_transparency",
+"label": "Overlay Transparency (0.01 to 1)",
+"default": "0.5"
+},
+{
+"type": "text",
+"id": "section_heading",
+"label": "Main Heading",
+"default": "promo Block"
+},  
+{
+"type": "text",
+"id": "section_sub_heading",
+"label": "Sub Heading",
+"default": "Sub Heading"
+},  
+{
+"type": "text",
+"id": "section_description",
+"label": "Description",
+"default": "Use this text to share the information which you like!."
+},  
+{
+"type": "text",
+"id": "section_button_text",
+"label": "Link text"
+},
+{
+"type": "url",
+"id": "section_button_link",
+"label": "Link URL"
+},
+{
+  "type": "header",
+  "content": "Section Color settings"
+  },
+  {
+  "type": "color",
+  "id": "section_heading_color",
+  "label": "Heading color"
+  },    
+  {
+  "type": "color",
+  "id": "section_sub_heading_color",
+  "label": "Sub heading color"
+  },   
+  {
+  "type": "color",
+  "id": "section_description_color",
+  "label": "Description color"
+  },  
+  {
+  "type": "color",
+  "id": "section_button_bg_color",
+  "label": "Button bg color"
+  },   
+  {
+  "type": "color",
+  "id": "section_button_text_color",
+  "label": "Button text color"
+  },   
+  {
+  "type": "color",
+  "id": "section_button_hover_bg_color",
+  "label": "Button hover bg color"
+  },   
+  {
+  "type": "color",
+  "id": "section_button_hover_text_color",
+  "label": "Button hover text color"
+  },
+{
+"type": "select",
+"id": "heading_position",
+"label": "Heading Position",
+"options": [
+{
+"value": "text-center",
+"label": "Center"
+},
+{
+"value": "text-start",
+"label": "Left"
+},
+{
+"value": "text-end",
+"label": "Right"
+}
+]
+},
+{
+"type": "image_picker",
+"id": "promo_1",
+"label": "Promo image 1",
+"info": "Size: 750x600"
+},
+{
+"type": "url",
+"id": "promo_1_link",
+"label": "Link URL"
+},
+{
+"type": "image_picker",
+"id": "promo_2",
+"label": "Promo image 2",
+"info": "Size: 750x600"
+},
+{
+"type": "url",
+"id": "promo_2_link",
+"label": "Link URL"
+},
+{
+"type": "header",
+"content": "Block Settings"
+},
+{
+"type": "select",
+"id": "text_position",
+"label": "Block Text position",
+"options": [
+{
+"value": "text-center",
+"label": "Center"
+},
+{
+"value": "text-start",
+"label": "Left"
+},
+{
+"value": "text-end",
+"label": "Right"
+}
+],
+"default": "text-start"
+},
+{
+"type": "select",
+"id": "block_style",
+"label": "Block Style",
+"options": [
+{
+"value": "default-style",
+"label": "Style 1"
+},
+{
+"value": "style-2",
+"label": "Style 2"
+},
+{
+"value": "style-3",
+"label": "Style 3"
+}
+],
+"default": "default-style"
+},
+{
+"type": "checkbox",
+"id": "enable_grid_style",
+"label": "Enable Grid Style"
+},
+{
+"type": "select",
+"id": "vertical_position",
+"label": "Vertical position (Uncheck 'Enable Grid Style' and set the position)",
+"options": [
+{
+"value": "position-default",
+"label": "Vertical top"
+},
+{
+"value": "position-vertical-center",
+"label": "Vertical center"
+},
+{
+"value": "position-vertical-bottom",
+"label": "Vertical bottom"
+}
+],
+"default": "position-default"
+},
+{
+"type": "checkbox",
+"id": "reverse_column",
+"label": "Content reverse",
+"default": false
+},
+{
+"type": "text",
+"id": "border_radius",
+"label": "Overall Radius (in px)",
+"default":"0px",
+"info": "Not for Style 1"
+},
+{
+"type": "text",
+"id": "icon_border_radius",
+"label": "Icon Radius (in px) - Set 50% for Rounded Icon",
+"default":"0px"
+},
+{
+"type": "checkbox",
+"id": "enable_box_shadow",
+"label": "Enable Box Shadow",
+"default": false,
+"info": "Not for Style 1"
+},
+{
+"type": "text",
+"id": "block_icon_outer_size",
+"label": "Icon/Image Outer Size (in px)",
+"default":"60px",
+"info":"To get rid of this Outer layer, set same size for Icon/Image Outer & Icon/Image, then remove Icon Background & Border Color"
+},
+{
+"type": "text",
+"id": "block_icon_size",
+"label": "Icon/Image Size (in px) - Should be lesser than Block Icon Size",
+"default":"40px"
+},
+{
+"type": "header",
+"content": "Block Color settings"
+},
+{
+"type": "color",
+"id": "block_border_color",
+"label": "Border color"
+},
+{
+"type": "color",
+"id": "block_bg",
+"label": "Background Color"
+},
+{
+"type": "color",
+"id": "block_icon_bg",
+"label": "Icon Background Color"
+},
+{
+"type": "color",
+"id": "block_icon_border_color",
+"label": "Icon Border Color"
+},
+{
+"type": "color",
+"id": "block_heading_color",
+"label": "Heading Color"
+},
+{
+"type": "color",
+"id": "block_description_color",
+"label": "Description Color"
+},
+{
+"type": "header",
+"content": "Custom class"
+},
+{
+"type": "text",
+"id": "custom_class_name",
+"label": "Add your custom class name here"
+}
+],
+"blocks": [
+{
+"type": "icon",
+"name": "Icon",        
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Heading"
+},
+{
+"type": "image_picker",
+"id": "promo",
+"label": "Promo Main"        
+},
+{
+"type": "image_picker",
+"id": "icon1",
+"label": "Icon"        
+},
+{
+"type": "text",
+"id": "desc1",
+"label": "Description",  
+"default": "Lorem ipsum dolor sit amet"
+},
+{
+"type": "image_picker",
+"id": "icon2",
+"label": "Icon"        
+},
+{
+"type": "text",
+"id": "desc2",
+"label": "Description",  
+"default": "Lorem ipsum dolor sit amet"
+},
+{
+"type": "image_picker",
+"id": "icon3",
+"label": "Icon"        
+},
+{
+"type": "text",
+"id": "desc3",
+"label": "Description",  
+"default": "Lorem ipsum dolor sit amet"
+}
+]
+},
+{
+"type": "class",
+"name": "Class",        
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Heading"
+},
+{
+"type": "image_picker",
+"id": "promo",
+"label": "Promo Main"        
+},
+{
+"type": "text",
+"id": "class1",
+"label": "Font Awesome class",
+"default": "fa fa-home"   
+},
+{
+"type": "text",
+"id": "desc1",
+"label": "Description",
+"default": "Lorem ipsum dolor sit amet"
+},
+{
+"type": "text",
+"id": "class2",
+"label": "Font Awesome class",
+"default": "fa fa-home"   
+},
+{
+"type": "text",
+"id": "desc2",
+"label": "Description",
+"default": "Lorem ipsum dolor sit amet"
+},
+{
+"type": "text",
+"id": "class3",
+"label": "Font Awesome class",
+"default": "fa fa-home"   
+},
+{
+"type": "text",
+"id": "desc3",
+"label": "Description",
+"default": "Lorem ipsum dolor sit amet"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Promo block",
+"category": "Text",
+"blocks": [
+{
+"type": "class"
+},
+{
+"type": "class"
+},
+{
+"type": "class"
+}
+]
+}
+]
+}
+{% endschema %}
+
+
