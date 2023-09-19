@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+    <style>
+        /* Selecciona todos los elementos y los cambia a color blanco */
+        * {
+            color: white;
+        }
+            a:link, a:visited {
+            color: white;
+        }
+            ::selection {
+            color: white;
+            background: black; /* Elige un color de fondo para que el texto sea visible cuando se selecciona */
+        }
+    </style>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Portafolio SigmaDG</title>
@@ -9,7 +22,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/logo-06.jpg">
     <!-- CSS 
     ============================================ -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -28,45 +41,18 @@
         <header class="rn-header-area d-flex align-items-start flex-column left-header-style">
             <div class="logo-area">
                 <a href="index.html">
-                    <img src="assets/images/logo/logo-06.jpeg" alt="personal-logo">
+                    <img src="assets/images/logo/logo-06.jpg" alt="personal-logo">
                 </a>
             </div>
             <nav id="sideNavs" class="mainmenu-nav navbar-example2">
                 <ul class="primary-menu nav nav-pills">
                     <li class="nav-item"><a class="nav-link smoth-animation-two active" href="#home"><i data-feather="home"></i> Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features"> <i data-feather="briefcase"></i>Freelance</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features"> <i data-feather="briefcase"></i>Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#portfolio"><i data-feather="layers"></i>Portafolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume"><i data-feather="users"></i>Curriculum</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#clients"><i data-feather="star"></i>Intereses</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#pricing"><i data-feather="book-open"></i>Miscelánea</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#about"><i data-feather="user"></i>Acerca de mí</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#blog"><i data-feather="image"></i>Blog</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#contacts"><i data-feather="message-circle"></i>Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume"><i data-feather="users"></i>Curriculum</a></li>
                 </ul>
             </nav>
-            <div class="footer">
-                <div class="social-share-style-1 mt--40">
-                    <span class="title">find with me</span>
-                    <ul class="social-share d-flex liststyle">
-                        <li class="facebook"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
-                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                </svg></a>
-                        </li>
-                        <li class="instagram"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                </svg></a>
-                        </li>
-                        <li class="linkedin"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                    <rect x="2" y="9" width="4" height="12"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </header>
     </div>
     <!-- start Header area end -->
@@ -104,35 +90,31 @@
                         <button class="close-menu-activation close"><i data-feather="x"></i></button>
                     </div>
                 </div>
-                <p class="discription">Portafolio Gaby Ordoñez</p>
+                <p class="discription">Portafolio</p>
             </div>
             <div class="content">
                 <ul class="primary-menu nav nav-pills">
                     <li class="nav-item"><a class="nav-link smoth-animation-two active" href="#home">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features">Freelance</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#portfolio">Portafolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume">Curriculum</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#clients">Intereses</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#pricing">Miscelánea</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#about">Acerca de mí</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#blog">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#contacts">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume">Curriculum</a></li>
                 </ul>
                 <!-- social sharea area -->
                 <div class="social-share-style-1 mt--40">
                     <span class="title">Redes sociales</span>
                     <ul class="social-share d-flex liststyle">
-                        <li class="facebook"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook">
+                        <li class="twitter"><a href="https://twitter.com/sigma_dg"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                                 </svg></a>
                         </li>
-                        <li class="instagram"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+                        <li class="instagram"><a href="https://www.instagram.com/sigmadg/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                 </svg></a>
                         </li>
-                        <li class="linkedin"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
+                        <li class="linkedin"><a href="https://www.linkedin.com/in/agabrielaordonezg/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin">
                                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                                     <rect x="2" y="9" width="4" height="12"></rect>
                                     <circle cx="4" cy="4" r="2"></circle>
@@ -164,15 +146,11 @@
                                 <span></span>
                             <!-- ROTATING TEXT -->
                             <span class="cd-words-wrapper">
-                                    <b class="is-visible">Desarrolladora de software.</b>
-                                    <b class="is-hidden">Consultora.</b>
-                                    <b class="is-hidden">Apasionada por la ciencia.</b>
+                                    <b class="is-visible">Futura investigadora.</b>
+                                    <b class="is-hidden">Ingeniera en Telemática.</b>
+                                    <b class="is-hidden">Desarrolladora de Software.</b>
                                 </span>
                             </span>
-                            <!-- type headline end -->
-                            <div class="button-area">
-                                <a class="rn-btn" href="#contacts"><span>Contactame</span></a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,8 +164,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title text-center" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true">
-                            <span class="subtitle">Freelance</span>
-                            <h2 class="title">Lo que hago</h2>
+                            <h2 class="title">Proyectos</h2>
                         </div>
                     </div>
                 </div>
@@ -201,12 +178,12 @@
                                     <i data-feather="code"></i>
                                 </div>
                                 <div class="content">
-                                    <h4 class="title"><a href="#">Trabajo independiente</a></h4>
-                                    <p class="description">Contacto para acordar proyectos independientes.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
+                                    <h4 class="title"><a href="https://www.fiverr.com/sigmadg">Proyectos</a></h4>
+                                    <p class="description">Colaboración o Proyectos.</p>
+                                    <a href="https://www.fiverr.com/sigmadg" class="read-more-button"><i class="feather-arrow-right"></i></a>
                                 </div>
                             </div>
-                            <a class="over-link" href="#"></a>
+                            <a class="over-link" href="https://www.fiverr.com/sigmadg"></a>
                         </div>
                     </div>
                     <!-- End SIngle Service -->
@@ -218,33 +195,32 @@
                                     <i data-feather="shopping-cart"></i>
                                 </div>
                                 <div class="content">
-                                    <h4 class="title"><a href="https://kriboutiquesd.myshopify.com/">Mi tienda</a></h4>
-                                    <p class="description"> Los envíos a veces tardan pero es una compra garantizada.</p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
+                                    <h4 class="title"><a href="https://techyk.shop/">Techyk</a></h4>
+                                    <p class="description">Gadgets y artículos kawaii.</p>
+                                    <a class="read-more-button" href="https://techyk.shop/"><i class="feather-arrow-right"></i></a>
                                 </div>
                             </div>
-                            <a class="over-link" href="#"></a>
+                            <a class="over-link" href="https://techyk.shop/"></a>
                         </div>
                     </div>
                     <!-- End SIngle Service -->
-                    <!-- Start Single Service -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
-                        <div class="rn-service">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i data-feather="book-open"></i>
-                                </div>
-                                <div class="content">
-                                    <h4 class="title"><a href="#">Mi blog</a></h4>
-                                    <p class="description">Mis redes sociales, y algúnos de mis apuntes en mi blog. </p>
-                                    <a class="read-more-button" href="#"><i class="feather-arrow-right"></i></a>
-                                </div>
+                   <!-- Start Single Service -->
+                   <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="col-lg-6 col-xl-4 col-md-6 col-sm-12 col-12 mt--50 mt_md--30 mt_sm--30">
+                    <div class="rn-service">
+                        <div class="inner">
+                            <div class="icon">
+                                <i data-feather="image"></i>
                             </div>
-                            <a class="over-link" href="#"></a>
+                            <div class="content">
+                                <h4 class="title"><a href="https://opensea.io/SigmaDG">NTF's</a></h4>
+                                <p class="description">NTF's en venta</p>
+                                <a class="read-more-button" href="https://opensea.io/SigmaDG"><i class="feather-arrow-right"></i></a>
+                            </div>
                         </div>
+                        <a class="over-link" href="https://opensea.io/SigmaDG"></a>
                     </div>
-                    <!-- End SIngle Service -->
-
+                </div>
+                <!-- End SIngle Service -->
                 </div>
             </div>
         </div>
@@ -256,8 +232,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="section-title text-center">
-                            <span class="subtitle">Visita mi portafolio y déjame tus comentarios</span>
-                            <h2 class="title">Mi portafolio</h2>
+                            <span class="subtitle">Aquí puedes ver mi portafolio</span>
+                            <h2 class="title">Portafolio</h2>
                         </div>
                     </div>
                 </div>
@@ -282,7 +258,7 @@
                                                 0</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Asociación sin fines de lucro.<i
+                                    <h4 class="title"><a href="javascript:void(0)">Colitas abandonadas.<i
                                                 class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
@@ -309,7 +285,7 @@
                                                 7</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Proyecto terminal de ingeniería telemática.<i class="feather-arrow-up-right"></i></a></h4>
+                                    <h4 class="title"><a href="javascript:void(0)">Prototipo de transceptor automático.<i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +336,7 @@
                                                 0</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Preparación de exámenes selección .
+                                    <h4 class="title"><a href="javascript:void(0)">Preparación para exámenes.
                                             <i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
@@ -379,14 +355,14 @@
                                 <div class="content">
                                     <div class="category-info">
                                         <div class="category-list">
-                                            <a href="javascript:void(0)">Otros proyectos</a>
+                                            <a href="javascript:void(0)">Varios proyectos</a>
                                         </div>
                                         <div class="meta">
                                             <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
                                                 0</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Otros proyectos en desarrollo y freelance
+                                    <h4 class="title"><a href="javascript:void(0)">Varios proyectos.
                                             <i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
@@ -399,20 +375,20 @@
                             <div class="inner">
                                 <div class="thumbnail">
                                     <a href="javascript:void(0)">
-                                        <img src="assets/images/portfolio/portfolio-06.jpg" alt="Personal Portfolio Images">
+                                        <img src="assets/images/portfolio/portfolio-06.png" alt="Personal Portfolio Images">
                                     </a>
                                 </div>
                                 <div class="content">
                                     <div class="category-info">
                                         <div class="category-list">
-                                            <a href="javascript:void(0)">Fotos</a>
+                                            <a href="javascript:void(0)">Artículos y publicaciones</a>
                                         </div>
                                         <div class="meta">
                                             <span><a href="javascript:void(0)"><i class="feather-heart"></i></a>
                                                 0</span>
                                         </div>
                                     </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Fotos y dibujos 
+                                    <h4 class="title"><a href="javascript:void(0)">Artículos y publicaciones.  
                                             <i class="feather-arrow-up-right"></i></a></h4>
                                 </div>
                             </div>
@@ -425,6 +401,317 @@
         <!-- End portfolio Area -->
 
 
+       <!-- Start News Area -->
+        <div class="rn-blog-area rn-section-gap section-separator" id="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="section-title text-center">
+                            <span class="subtitle">Holis</span>
+                            <h2 class="title">Mi Blog</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row--25 mt--30 mt_md--10 mt_sm--10">
+
+                    <!-- Start Single blog -->
+                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
+                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="javascript:void(0)">
+                                        <img src="assets/images/blog/blog-01.png" alt="Personal Portfolio Images">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="category-info">
+                                        <div class="category-list">
+                                            <a href="javascript:void(0)">Misceláneas</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span><i class="feather-clock"></i> Vídeos y Artículos</span>
+                                        </div>
+                                    </div>
+                                    <h4 class="title"><a href="javascript:void(0)">Varias cosas
+                                            <i class="feather-arrow-up-right"></i></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single blog -->
+
+                    <!-- Start Single blog -->
+                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
+                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="javascript:void(0)">
+                                        <img src="assets/images/blog/blog-02.png" alt="Personal Portfolio Images">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="category-info">
+                                        <div class="category-list">
+                                            <a href="javascript:void(0)">Zona Gaming</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span><i class="feather-clock"></i> Vídeos</span>
+                                        </div>
+                                    </div>
+                                    <h4 class="title"><a href="javascript:void(0)">A veces juego <i
+                                        class="feather-arrow-up-right"></i></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single blog -->
+
+                    <!-- Start Single blog -->
+                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="800" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
+                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
+                            <div class="inner">
+                                <div class="thumbnail">
+                                    <a href="javascript:void(0)">
+                                        <img src="assets/images/blog/blog-03.png" alt="Personal Portfolio Images">
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <div class="category-info">
+                                        <div class="category-list">
+                                            <a href="javascript:void(0)">Cursos</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span><i class="feather-clock"></i> Vídeos, Podcast.</span>
+                                        </div>
+                                    </div>
+                                    <h4 class="title"><a href="javascript:void(0)">Cosas filosóficas<i class="feather-arrow-up-right"></i></a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single blog -->
+
+                </div>
+            </div>
+
+            <br><br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <h2 class="title">Acerca de mí</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row--25 mt--50 mt_md--40 mt_sm--40">
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-wrap align-content-start h-100">
+                            <div class="position-sticky clients-wrapper sticky-top rbt-sticky-top-adjust">
+                                <ul class="nav tab-navigation-button flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="v-pills-profile-tab" data-toggle="tab" href="#v-pills-Design" role="tab" aria-selected="true">Sobre mí</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="v-pills-wordpress-tab" data-toggle="tab" href="#v-pills-Wordpress" role="tab" aria-selected="true">10 Datos personales</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="v-pills-dates-tab" data-toggle="tab" href="#v-pills-dates" role="tab" aria-selected="true">10 Datos académicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="tab" href="#v-pills-Javascript" role="tab" aria-selected="true">He trabajado para:</a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="tab-area">
+                            <div class="d-flex align-items-start">
+                                <div class="tab-content" id="v-pills-tabContent">
+
+                                    <div class="tab-pane fade" id="v-pills-Javascript" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="client-card">
+                                       
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+            
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">IBM</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">Palace Resorts</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">MAPFRE</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">GoNet</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                            <!-- Start Single Brand  -->
+                                            <div class="main-content">
+                                                <div class="inner text-center">
+                                                    <div class="thumbnail">
+                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
+                                                    </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">Banorte</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                            <!-- Start Single Brand  -->
+                                                <div class="main-content">
+                                                    <div class="inner text-center">
+                                                        <div class="thumbnail">
+                                                            <a href="#"><img src="assets/images/client/png/client6.png" alt="Client-image"></a>
+                                                        </div>
+                                                    <div class="seperator"></div>
+                                                    <div class="client-name"><span><a href="#">Grupo Salinas</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Single Brand  -->
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="tab-pane fade show active" id="v-pills-Design" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                            <!-- Start Single Brand  -->
+                                                    <p></p>
+                                                    <h12 class="discription color-body">
+                                                        Siento una profunda fascinación por la ciencia y la tecnología.  A la edad de 6 años, quedé cautivada por la serie de "El laboratorio de Dexter". La posibilidad de contribuir con nuevos avances en el ámbito científico y tecnológico sigue siendo mi principal motivación. 
+                                                    </h12> 
+                                                    <br><br><br>
+                                                    <center>
+                                                        <video width="300" height="200" controls>
+                                                            <source src="assets/videos/dexter.mp4" type="video/mp4">
+                                                            Tu navegador no soporta el elemento de video.
+                                                        </video>
+                                                    </center>
+                                            <!-- End Single Brand  -->
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-Wordpress" role="tabpanel" aria-labelledby="v-pills-wordpress-tab">
+                                            <!-- Start Single Brand  -->
+                                            <ul class="about-skill-style mb--40">
+                                                <li><i data-feather="check"></i><span>Mi comida favorita son los huazontles en chile pasilla.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Soy fan de la cosmetología Koreana.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Soy católica, pero practico el budismo como espiritualidad.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta bailar.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Botanas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Chocolate, los dorilocos, y el chicarron preparado.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta Mozart, Hans Zimmer, y el deep house.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Películas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : El viaje de Dexter, La ballena y Beau tiene miedo.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Libros <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Un Eterno y Grácil Bucle y Jurassichrist.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Documentales <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Cosmos, David Attenborough y Cousteau.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta la cultura geek, vídeo juegos, anime y  comics.
+                                                </span></li>
+                                            </ul>
+                                            <!-- End Single Brand  -->
+                                    </div>
+
+                                    <div class="tab-pane fade" id="v-pills-dates" role="tabpanel" aria-labelledby="v-pills-dates-tab">
+
+                                            <!-- Start Single Brand  -->
+                                            <ul class="about-skill-style mb--40">
+
+                                                <li><i data-feather="check"></i><span>Pertenezco a las FIDE (International Chess Federation) <a href="https://ratings.fide.com/profile/5145040"> <img src="assets/img/icons/link.png" width="20" height="20" alt="" /></a> 
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta programar
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Soy perfeccionista.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>I <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> Las matemáticas.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta participar en el activismo y el voluntariado.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Lenguajes de programación <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Python, Java y C#.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Asignaturas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Ondas electromagnéticas y Circuitos digitales.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Mi sueño más reciente es ser un nómada digital.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Me gusta aprender palabras de idiomas y dialectos.
+                                                </span></li>
+                                                <li><i data-feather="check"></i><span>Quiero especializarme en computación cuantica con IA.
+                                                </span></li>
+                                            </ul>
+                                            <!-- End Single Brand  -->
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- ENd Mews Area -->        
+
+<!-- Principio del widget de globo de Calendly -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/gabyordgue/reuniones?hide_event_type_details=1&hide_gdpr_banner=1', text: 'Programa una reunión conmigo', color: '#1a1a1a', textColor: '#23f0ec', branding: false }); }</script>
+<!-- Final del widget de globo de Calendly -->
  <!------------------------------------------------------------------------------------------->   
  
  <!-- Start Resume Area -->
@@ -434,7 +721,7 @@
             <div class="col-lg-12">
                 <div class="section-title text-center">
                     <span class="subtitle">5+ Años de experiencia</span>
-                    <h2 class="title">Mi curriculum</h2>
+                    <h2 class="title">Curriculum</h2>
                 </div>
             </div>
         </div>
@@ -465,76 +752,131 @@
                                     <div class="content">
                                         <h4 class="maintitle">Experiencia</h4>
                                         <div class="experience-list">
+
 <!-- ------------------------------------------------Experiencia profesional ------------------------------------------------>
                                             <!-- Start Single List  -->
                                             <div class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Soluciones en la nube</h4>
-                                                            <span>Workana (2020 - Actualidad)</span>
+                                                            <h4>Desarrollador Freelance.</h4>
+                                                            <span>Fiverr (Junio 2023 - Actualidad)</span>
                                                         </div>
                                                         <div class="date-of-time">
-                                                            <a href="https://www.workana.com/freelancer/b8188913d3e6d1551a5e490e03968e0f">Ver</a>
+                                                            <a href="https://www.fiverr.com/sigmadg">Ver</a>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Experiencia en C#,  tecnologías web,  software libre, computo científico, internet de las cosas, diseño circuitos electrónicos y lógicos.</p>
+                                                    <p class="description">Desarrollo de software python, C#, java, javascript.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
+
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Desarrollador de nuevas tecnologías.</h4>
+                                                            <span>Grupo Salinas (Junio 2022 - Actualidad)</span>
+                                                        </div>
+                                                    </div>
+                                                    <ul>
+                                                        <li>Modificaciones en backend</li>
+                                                        <p class="description">.Net y PL/SQL</p>
+                                                        <li>Capacitación de la FTT</li>
+                                                        <p class="description">Nube, datastreaming, DevOps, arquitectura, API's y microservicios.</p>
+                                                        <li>Desarrollador de API's</li>
+                                                        <p class="description">Jenkins, Apigee, Gitlab y YAML</p>
+                                                        <li>Decompilado del monolítico</li>
+                                                        <p class="description">SonarQube y Java.</p>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- End Single List  -->
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                     <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Consultor de tecnología
+                                                            </h4>
+                                                            <span>Virtual Business (Junio 2023 - Julio 2023)</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="description">SQL y C#</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single List  -->
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Desarrollador FrontEnd
+                                                            </h4>
+                                                            <span>GoNet (Agosto 2021 - Mayo 2022)</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="description">Desarrollo del sistema Front-End del Palace Resorts en Vue.js.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single List  -->
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Desarrollador Freelance.</h4>
+                                                            <span>Workana (Sep 2020 - Dec 2021)</span>
+                                                        </div>
+                                                        <div class="date-of-time">
+                                                            <a href="https://www.fiverr.com/sigmadg">Ver</a>
+                                                        </div>
+                                                    </div>
+                                                    <p class="description">Desarrollo de sitios web, Ecualizador con python y blender, Diseño de una aplicación móvil similar a una red social para una institución educativa.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single List  -->                                        
                                             
                                             <!-- Start Single List  -->
                                             <div class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Desarrollador vue.js</h4>
-                                                            <span>GoNet (Septiembre 2021 - Marzo 2022)</span>
+                                                            <h4>Descanso profesional</h4>
+                                                            <span>Cinvestav (Enero 2021 - Agosto 2021)</span>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Desarrollo del Middleware para la capa superior del sistema API REST de Palace Resorts en Vue.js</p>
+                                                    <p class="description">Propedéuticos del departamento de física</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
+
+
                                             <!-- Start Single List  -->
                                             <div class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Consultor Banorte</h4>
-                                                            <span>International Business Machines Corporation (IBM) (Noviembre 2020 - Diciembre 2020)</span>
+                                                            <h4> Dev. de aplicaciones</h4>
+                                                            <span>International Business Machines Corporation (IBM) (Febrero 2019 - Enero 2021)</span>
+                                                            <ul>
+                                                                <li>Consultor Banorte</li>
+                                                                <p class="description">BPM y JavaScript</p>
+                                                                <li>Consultor MAPFRE</li>
+                                                                <p class="description">PLSQL</p>
+                                                                <li>Azure Cloud Modernization</li>
+                                                                <p class="description">Capacitación en Azure Cloud</p>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                    <p class="description"> Desarrollador de aplicaciones modernización de la nube Azure: Experiencia Modernización a la nube Azure ere entregar diseños funcionales y técnicos, modelos, componentes, código, pruebas unitarias y documentación.</p>
                                                 </div>
                                             </div>
-                                            <!-- End Single List  -->
-                                            <!-- Start Single List  -->
-                                            <div class="resume-single-list">
-                                                <div class="inner">
-                                                    <div class="heading">
-                                                        <div class="title">
-                                                            <h4>Consultor Banorte</h4>
-                                                            <span>International Business Machines Corporation (IBM) (Diciembre 2019 - Noviembre 2020)</span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="description"> Desarrollador De Aplicaciones Oracle EBS: Mi rol como desarrollador de aplicaciones Oracle EBS en IBM consistió en dar solución a incidencias de impacto en producción del banco Banorte, en la herramienta de BPM con el lenguaje JavaScript. Ya sea realizando pruebas unitarias, o modificando código para adaptar el sistema a las necesidades del cliente.</p>
-                                                </div>
-                                            </div>
-                                            <!-- End Single List  -->                                                                                                       
-                                            <!-- Start Single List  -->
-                                            <div class="resume-single-list">
-                                                <div class="inner">
-                                                    <div class="heading">
-                                                        <div class="title">
-                                                            <h4>Consultor MAPFRE</h4>
-                                                            <span>International Business Machines Corporation (IBM) (Febrero 2019 - Diciembre 2019)</span>
-                                                        </div>
-                                                    </div>
-                                                    <p class="description">Contrato de formación: Mi rol en el programa de student dentro de IBM consistía en aprender a desarrollar y dar solución a los requerimientos del cliente, en lenguaje de PLSQL para MAPFRE. </p>
-                                                </div>
-                                            </div>
-                                            <!-- End Single List  -->
+                                            <!-- End Single List  -->                                                                                                    
                                         </div>
                                     </div>
                                 </div>
@@ -606,8 +948,8 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="progress-wrapper">
                                         <div class="content">
-                                            <span class="subtitle">Características</span>
-                                                    <h4 class="maintitle">Habilidades Misceláneas </h4>
+                                            <span class="subtitle">Habilidades</span>
+                                                    <h4 class="maintitle">Misceláneas </h4>
                                                     <!-- Start Single Progress Charts -->
                                                     <div class="progress-charts">
                                                         <h6 class="heading heading-h6">Electrónica</h6>
@@ -632,7 +974,7 @@
                                                     <div class="progress-charts">
                                                         <h6 class="heading heading-h6">Sistemas operativos</h6>
                                                         <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 100%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 95%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
                                                             class="percent-label">100%</span></div>
                                                         </div>
                                                     </div>
@@ -642,8 +984,8 @@
                                                     <div class="progress-charts">
                                                         <h6 class="heading heading-h6">Seguridad Informática</h6>
                                                         <div class="progress">
-                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 50%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                            class="percent-label">50%</span></div>
+                                                            <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 60%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                            class="percent-label">60%</span></div>
                                                         </div>
                                                     </div>
                                                     <!-- End Single Progress Charts -->
@@ -656,13 +998,13 @@
                                 <div class="col-lg-6 col-md-6 col-12 mt_sm--60">
                                     <div class="progress-wrapper">
                                         <div class="content">
-                                            <span class="subtitle">Característica</span>
-                                            <h4 class="maintitle">Habilidades de desarrollo</h4>
+                                            <span class="subtitle">Habilidades</span>
+                                            <h4 class="maintitle">Desarrollo</h4>
                                             <!-- Start Single Progress Charts -->
                                             <div class="progress-charts">
-                                                <h6 class="heading heading-h6">HTML, CSS, SCSS</h6>
+                                                <h6 class="heading heading-h6">HTML, CSS, SCSS, Sass</h6>
                                                 <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style="width: 100%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".3s" role="progressbar" style="width: 95%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
                                                     class="percent-label">100%</span></div>
                                                 </div>
                                             </div>
@@ -672,18 +1014,18 @@
                                             <div class="progress-charts">
                                                 <h6 class="heading heading-h6">Python</h6>
                                                 <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style="width: 40%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                    class="percent-label">40%</span></div>
+                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.6s" data-wow-delay=".4s" role="progressbar" style="width: 95%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                    class="percent-label">100%</span></div>
                                                 </div>
                                             </div>
                                             <!-- End Single Progress Charts -->
 
                                             <!-- Start Single Progress Charts -->
                                             <div class="progress-charts">
-                                                <h6 class="heading heading-h6">JavaScript</h6>
+                                                <h6 class="heading heading-h6">Java</h6>
                                                 <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 70%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                    class="percent-label">70%</span></div>
+                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.7s" data-wow-delay=".5s" role="progressbar" style="width: 80%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                    class="percent-label">80%</span></div>
                                                 </div>
                                             </div>
                                             <!-- End Single Progress Charts -->
@@ -692,8 +1034,8 @@
                                             <div class="progress-charts">
                                                 <h6 class="heading heading-h6">C#</h6>
                                                 <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 40%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
-                                                    class="percent-label">40%</span></div>
+                                                    <div class="progress-bar wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay=".6s" role="progressbar" style="width: 80%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"><span
+                                                    class="percent-label">80%</span></div>
                                                 </div>
                                             </div>
                                             <!-- End Single Progress Charts -->
@@ -715,8 +1057,7 @@
                                 <!-- Start Skill List Area  -->
                                 <div class="col-lg-6 col-md-12 col-12">
                                     <div class="content">
-                                        <span class="subtitle">2007 - 2010</span>
-                                        <h4 class="maintitle">Education Quality</h4>
+                                        <h4 class="maintitle">Educación</h4>
                                         <div class="experience-list">
 
                                             <!-- Start Single List  -->
@@ -724,17 +1065,15 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Personal Portfolio April Fools</h4>
-                                                            <span>University of DVI (1997 - 2001)</span>
+                                                            <h4>MEng Matemática</h4>
+                                                            <span>UNIR</span>
+                                                            <span>Noviembre 2022 - Actualidad</span>
                                                         </div>
                                                         <div class="date-of-time">
-                                                            <span>4.30/5</span>
+                                                            <span>Prox. cédula</span>
                                                         </div>
                                                     </div>
-                                                    <p class="description">The education should be very
-                                                        interactual. Ut tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
+                                                    <p class="description">Competencias y conocimientos en el campo computacional para el desarrollo matemático avanzado.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
@@ -744,17 +1083,15 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4> Examples Of Personal Portfolio</h4>
-                                                            <span>College of Studies (2000 - 2002)</span>
+                                                            <h4>BTech, Telemática</h4>
+                                                            <span>UPIITA IPN</span>
+                                                            <span>Agosto 2012 - Diciembre 2018</span>
                                                         </div>
                                                         <div class="date-of-time">
-                                                            <span>4.50/5</span>
+                                                            <span>Prox. cédula</span>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Maecenas finibus nec sem ut
-                                                        imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
+                                                    <p class="description">Telecomunicaciones, programación y electrónica.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
@@ -764,17 +1101,68 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Tips For Personal Portfolio</h4>
-                                                            <span>University of Studies (1997 - 2001)</span>
-                                                        </div>
+                                                            <h4>Matemáticas</h4>
+                                                            <span>UNED</span>
+                                                            <span>Octubre 2022 - Actualidad</span>
+                                                        </div> 
                                                         <div class="date-of-time">
-                                                            <span>4.80/5</span>
+                                                            <span>Prox. cédula</span>
                                                         </div>
                                                     </div>
-                                                    <p class="description"> If you are going to use a passage.
-                                                        Ut tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
+                                                    <p class="description">Razonamiento mediante formulación lógica, utilizando datos reales que sean verificables.</p>
+                                                </div>
+                                            </div>
+                                            <!-- End Single List  -->
+
+
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Ing. Biotecnología</h4>
+                                                            <span>UnADM</span>
+                                                            <span>Agosto 2020 - Actualidad</span>
+                                                        </div> 
+                                                    <div class="date-of-time">
+                                                        <span>Prox. cédula</span>
+                                                    </div>
+                                                </div>
+                                                    <p class="description">Aplicación de herramientas computacionales y de análisis a la captura e interpretación de datos biológicos.</p>
+                                                </div>
+                                            </div>
+                                             <!-- End Single List  -->
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Tec. Sistemas Digitales</h4>
+                                                            <span>CECyT #1 "Gonzalo Vázquez Vela"</span>
+                                                            <span>Junio 2019 - Junio 2012</span>
+                                                        </div> 
+                                                    <div class="date-of-time">
+                                                        <span>Prox. cédula</span>
+                                                    </div>
+                                                </div>
+                                                    <p class="description">Habilidades básicas en programación y electrónica.</p>
+                                                </div>
+                                            </div>
+                                             <!-- End Single List  -->                                             
+
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Artes plásticas</h4>
+                                                            <span>Instituto Nacional de Bellas Artes-INBA #3</span>
+                                                            <span>Enero 2010 - Mayo 2011</span>
+                                                        </div> 
+                                                </div>
+                                                <p class="description">Historia del arte, pintura, dibujo, escultura y grabado.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
@@ -787,8 +1175,7 @@
                                 <!-- Start Skill List Area 2nd  -->
                                 <div class="col-lg-6 col-md-12 col-12 mt_md--60 mt_sm--60">
                                     <div class="content">
-                                        <span class="subtitle">2007 - 2010</span>
-                                        <h4 class="maintitle">Job Experience</h4>
+                                        <h4 class="maintitle">Certificaciones</h4>
                                         <div class="experience-list">
 
                                             <!-- Start Single List  -->
@@ -796,62 +1183,55 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Diploma in Web Development</h4>
-                                                            <span>BSE In CSE (2004 - 2008)</span>
+                                                            <h4>Circuits and Electronics</h4>
+                                                            <span>MITx Courses (Mayo 2022)</span>
                                                         </div>
                                                         <div class="date-of-time">
-                                                            <span>4.70/5</span>
+                                                            <a href="https://courses.edx.org/certificates/985bad4ec2ca45fa9bbd1237bbd0b6e7">Ver</a>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Contrary to popular belief. Ut
-                                                        tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
-                                                </div>
+                                                </div>      
                                             </div>
                                             <!-- End Single List  -->
-
                                             <!-- Start Single List  -->
                                             <div class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>The Personal Portfolio Mystery</h4>
-                                                            <span>Job at Rainbow-Themes (2008 - 2016)</span>
+                                                            <h4>Azure Developer</h4>
+                                                            <span>IBM (Agosto 2020)</span>
                                                         </div>
                                                         <div class="date-of-time">
-                                                            <span>4.95/5</span>
+                                                            <a href="https://login.w3.ibm.com/idaas/mtfim/sps/idaas/login?runtime=true&Target=https%3A%2F%2Flogin.w3.ibm.com%2Fsaml%2Fsps%2Fauth">Ver</a>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Generate Lorem Ipsum which looks. Ut
-                                                        tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
-                                                </div>
+                                                </div>        
                                             </div>
                                             <!-- End Single List  -->
-
                                             <!-- Start Single List  -->
                                             <div class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h4>Diploma in Computer Science</h4>
-                                                            <span>Works at Plugin Development (2016 -
-                                                        2020)</span>
-                                                        </div>
-                                                        <div class="date-of-time">
-                                                            <span>5.00/5</span>
+                                                            <h4>Téc.Sistemas Computacionales</h4>
+                                                            <span>ITCCPM(Febrero 2011)</span>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Maecenas finibus nec sem ut
-                                                        imperdiet. Ut tincidunt est ac dolor aliquam sodales.
-                                                        Phasellus sed mauris hendrerit, laoreet sem in, lobortis
-                                                        mauris hendrerit ante.</p>
-                                                </div>
+                                                </div>       
                                             </div>
-                                            <!-- End Single List  -->
-
+                                            <!-- End Single List  -->                                            
+                                            <!-- Start Single List  -->
+                                            <div class="resume-single-list">
+                                                <div class="inner">
+                                                    <div class="heading">
+                                                        <div class="title">
+                                                            <h4>Téc. Diseño Gráfico Digital</h4>
+                                                            <span>ITCCPM(Febrero 2011)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>       
+                                            </div>
+                                            <!-- End Single List  -->      
                                         </div>
                                     </div>
                                 </div>
@@ -876,11 +1256,9 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h6>¿Por qué he terminado mi relación laboral en trabajos anteriores? </h6>
+                                                            <h6>¿Cúales son mis skills? </h6>
                                                         </div>
-                                                    </div>Porque no eran puestos en los que podía desarrollar mis habilidades considerablemente, 
-                                                    si bien, eran trabajos interesantes y que representaban retos, 
-                                                    no daban pauta a la creatividad que puede conllevar el desarrollo de software o aplicaciones.
+                                                    </div> Tengo experiencia en áreas como; Kafka, AWS, mi conocimiento abarca diversos lenguajes de programación como C#, Python, Java y JavaScript. Además, cuento con habilidades en el desarrollo de front-end utilizando tecnologías como Angular, Vue.js, React y Bootstrap. En el ámbito de las API, tengo experiencia en el desarrollo utilizando Apigee, API Gateway, metodología contract first y desarrollo de mocks y features. Mis competencias también se extienden a la gestión de bases de datos, abarcando PL/SQL, MySQL, SQL Server y MongoDB. Además, poseo conocimientos en telecomunicaciones, redes y electrónica, entre otras habilidades misceláneas.
                                                     <p class="description"></p>
                                                 </div>
                                             </div>
@@ -891,62 +1269,27 @@
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h6>¿Por qué hay espacios en mi experiencia laboral?</h6>
+                                                            <h6>¿Cúales son mis objetivos a futuro?</h6>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Porque en varias ocasiones he combinado mi preparación con mi desarrollo profesional. Por lo que en ocasiones cuando termino una relación laboral me centro en concluir algunos aspectos de mi preparación.</p>
+                                                    <p class="description">Aspiro a convertirme en investigadora, enfocándome en la especialización de problemas abordables mediante la convergencia de la computación cuántica y la inteligencia artificial.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
+
 
                                             <!-- Start Single List  -->
                                             <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900" data-aos-once="true" class="resume-single-list">
                                                 <div class="inner">
                                                     <div class="heading">
                                                         <div class="title">
-                                                            <h6>¿Cómo manejo la presión?</h6>
+                                                            <h6>¿Qué tipo de puestos me interesan?</h6>
                                                         </div>
                                                     </div>
-                                                    <p class="description">Considero que se gestionar muy bien la presión y el estrés.</p>
+                                                    <p class="description">No busco posiciones directivas ni de liderazgo, sino más bien roles que me brinden la oportunidad de continuar mi crecimiento y desarrollo profesional.</p>
                                                 </div>
                                             </div>
                                             <!-- End Single List  -->
-                                            <!-- Start Single List  -->
-                                            <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900" data-aos-once="true" class="resume-single-list">
-                                                <div class="inner">
-                                                    <div class="heading">
-                                                        <div class="title">
-                                                            <h6>¿Qué pasaría si después de 5 años trabajando con ustedes no obtuviera un ascenso? ¿Sería frustrante para mi?</h6>
-                                                        </div>
-                                                    </div>
-                                                    <p class="description">Considero que se gestionar muy bien la presión y el estrés.</p>
-                                                </div>
-                                            </div>
-                                            <!-- End Single List  -->
-                                            <!-- Start Single List  -->
-                                            <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900" data-aos-once="true" class="resume-single-list">
-                                                <div class="inner">
-                                                    <div class="heading">
-                                                        <div class="title">
-                                                            <h6>¿Cómo manejo la presión?</h6>
-                                                        </div>
-                                                    </div>
-                                                    <p class="description">Considero que se gestionar muy bien la presión y el estrés.</p>
-                                                </div>
-                                            </div>
-                                            <!-- End Single List  -->
-                                            <!-- Start Single List  -->
-                                            <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="900" data-aos-once="true" class="resume-single-list">
-                                                <div class="inner">
-                                                    <div class="heading">
-                                                        <div class="title">
-                                                            <h6>¿Cómo manejo la presión?</h6>
-                                                        </div>
-                                                    </div>
-                                                    <p class="description">Considero que se gestionar muy bien la presión y el estrés.</p>
-                                                </div>
-                                            </div>
-                                            <!-- End Single List  -->                                                         
 
                                         </div>
                                     </div>
@@ -963,543 +1306,6 @@
 </div>
 <!-- End Resume Area -->
  
- <!------------------------------------------------------------------------------------------->
-
-         <!-- Start skiull area -->
-        <div class="rn-client-area  section-separator" id="clients">
-        <div class="container">
-        <div class="row">
-        <div class="col-lg-12">
-        <div class="rn-skill-area section-height">
-            <div class="inner slide pt--100">
-                <h5 class="title">
-                    Acerca de mis habilidades e intereses.
-                </h5>
-                <div class="skill-share-inner pt--50">
-                    <span class="title">Intereses</span>
-                    <ul class="skill-share d-flex liststyle">
-                        <li><img src="assets/images/icons/icons-37.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-38.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-39.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-40.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-41.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-42.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-43.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-44.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-45.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-47.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-48.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-49.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-50.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-51.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-52.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-53.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-54.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-55.png" alt="Icons Images"></li>
-                    </ul>
-                </div>
-                <div class="skill-share-inner pt--20">
-                    <span class="title">Habilidades de programación</span>
-                    <ul class="skill-share d-flex liststyle">
-                        <li><img src="assets/images/icons/icons-01.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-02.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-05.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-06.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-07.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-08.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-09.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-16.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-17.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-25.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-46.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-57.png" alt="Icons Images"></li>
-                    </ul>
-                </div>
-                <div class="skill-share-inner pt--20">
-                    <span class="title">Habilidades misceláneas</span>
-                    <ul class="skill-share d-flex liststyle">
-                        <li><img src="assets/images/icons/icons-03.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-04.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-10.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-11.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-12.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-13.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-14.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-18.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-19.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-20.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-21.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-22.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-23.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-24.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-27.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-28.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-56.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-30.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-31.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-32.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-33.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-34.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-35.png" alt="Icons Images"></li>
-                        <li><img src="assets/images/icons/icons-36.png" alt="Icons Images"></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
-        <!-- End skiull area -->
-
-
-        <!-- Rn footer area Start -->
-    <div id="pricing" class="rn-footer-area footer-style-2 rn-section-gapTop section-separator">
-        <div class="container pb--80 pb_sm--40 plr_sm--20">
-            <div class="menu-title">
-                <h5>Cursos</h5>
-            </div>
-            <div class="row">
-                <div class="col-sl-6 col-12 mt_sm--20 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="menu-wrapper">
-                        <ul class="menu-footer">
-                            <li><a href="#">Aerospace & Defense Industry Foundations<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">IBM Cloud Kubernetes Service<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Cuarta revolución industrial<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Machine Learning with Sound<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">Watson AI and Swift APIs and Make Money<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">AWS Academy Machine Learning<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Estructuras de datos<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Mejora tu productividad<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">Build Your Own ChatbotBuild<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Enterprise Design Thinking Practitioner<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Conviértete en desarrollador Python<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">IoT - Optimize Operations with AI<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">Deep Learning: Image Recognition<i data-feather="arrow-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sl-6 col-12 mt_sm--20 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div class="menu-wrapper">
-                        <ul class="menu-footer">
-                            <li><a href="#">Lenguaje corporal para líderes<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Banking Industry Foundations<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">IBM Automation Essentials<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">IBM Quantum Conversations<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Blockchain Essentials<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Node-RED: Basics to Bots<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Python for Data Science<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">Building Robots with TJ<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Think Like a Hacker<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Linux Administrator<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Learning MATLAB<i data-feather="arrow-right"></i></a>
-                            <li><a href="#">The IBM Way<i data-feather="arrow-right"></i></a></li>
-                            <li><a href="#">Stadistics<i data-feather="arrow-right"></i></a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Rn footer area end -->
-
-
-
-        <!-- Start Client Area -->
-        <div class="rn-client-area rn-section-gap section-separator" id="about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <h2 class="title">Acerca de mí</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row row--25 mt--50 mt_md--40 mt_sm--40">
-                    <div class="col-lg-4">
-                        <div class="d-flex flex-wrap align-content-start h-100">
-                            <div class="position-sticky clients-wrapper sticky-top rbt-sticky-top-adjust">
-                                <ul class="nav tab-navigation-button flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="v-pills-profile-tab" data-toggle="tab" href="#v-pills-Design" role="tab" aria-selected="true">Sobre mí</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-wordpress-tab" data-toggle="tab" href="#v-pills-Wordpress" role="tab" aria-selected="true">10 Datos personales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-dates-tab" data-toggle="tab" href="#v-pills-dates" role="tab" aria-selected="true">10 Datos académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-python-tabs" data-toggle="tab" href="#v-pills-python" role="tab" aria-selected="true">Disponibilidad</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="tab" href="#v-pills-Javascript" role="tab" aria-selected="true">Empresas en las que trabajé</a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div class="tab-area">
-                            <div class="d-flex align-items-start">
-                                <div class="tab-content" id="v-pills-tabContent">
-
-                                    <div class="tab-pane fade" id="v-pills-Javascript" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                        <div class="client-card">
-                                       
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client1.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">IBM</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client5.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Palace Resorts</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client3.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">MAPFRE</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client4.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">GoNet</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <div class="thumbnail">
-                                                        <a href="#"><img src="assets/images/client/png/client2.png" alt="Client-image"></a>
-                                                    </div>
-                                                    <div class="seperator"></div>
-                                                    <div class="client-name"><span><a href="#">Banorte</a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="tab-pane fade show active" id="v-pills-Design" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                            <!-- Start Single Brand  -->
-                                                    <p></p>
-                                                    <h8 class="discription color-body">
-                                                        Me gusta mucho la ciencia y la tecnología. Llevo más de 15 años involucrada con éstas disciplinas, cuando tenía 6 años vi una caricatura que se llama el laboratorio de Dexter y me enamore.
-                                                    </h8> 
-                                                    <p></p>
-                                                    <h8 class="discription color-body">Desde pequeña quiero ser investigadora ó inventora, tambien me gusta la ficción al estilo cyberpunk o distopías futuristas, al igual que las ciencias como: física, matemáticas y biología. </h8>
-                                                                         
-                                            <!-- End Single Brand  -->
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-Wordpress" role="tabpanel" aria-labelledby="v-pills-wordpress-tab">
-                                            <!-- Start Single Brand  -->
-                                            <ul class="about-skill-style mb--40">
-                                                <li><i data-feather="check"></i><span>Mi comida favorita son los huazontles en chile pasilla.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Soy fan de la cosmetología Koreana.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Soy católica, pero practico el budismo como espiritualidad.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta bailar.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Botanas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Chocolate, los dorilocos, y el chicarron preparado.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta Mozart, Hans Zimmer, las música tipo lo-fi y el deep house.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Películas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : El viaje de Dexter, La fiesta de despedida y Parásitos.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Libros <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Un Eterno y Grácil Bucle y Del amor y otros demonios.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Documentales <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Cosmos, David Attenborough y Cousteau.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta la cultura geek, como los vídeo juegos, el anime y los comics.
-                                                </span></li>
-                                            </ul>
-                                            <!-- End Single Brand  -->
-                                    </div>
-
-                                    <div class="tab-pane fade" id="v-pills-dates" role="tabpanel" aria-labelledby="v-pills-dates-tab">
-
-                                            <!-- Start Single Brand  -->
-                                            <ul class="about-skill-style mb--40">
-
-                                                <li><i data-feather="check"></i><span>Pertenezco a las FIDE (International Chess Federation) <a href="https://ratings.fide.com/profile/5145040"> <img src="assets/img/icons/link.png" width="20" height="20" alt="" /></a> 
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta programar
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Soy perfeccionista.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span> <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> La cosmología, La genetica, Las telecomunicaciones y La robotica.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta participar en el activismo y el voluntariado.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Lenguajes de programación <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Python, Javascript y C#.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Asignaturas <img src="assets/img/icons/love.png" width="20" height="20" alt="" /> : Ondas electromagnéticas y Circuitos digitales.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Vivo por temporadas en La Paz, Baja California Sur, México.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Me gusta aprender palabras de idiomas y dialectos.
-                                                </span></li>
-                                                <li><i data-feather="check"></i><span>Quiero especializarme en computación cuantica con IA.
-                                                </span></li>
-                                            </ul>
-                                            <!-- End Single Brand  -->
-                                    </div>
-
-
-                                    <div class="tab-pane fade" id="v-pills-python" role="tabpanel" aria-labelledby="v-pills-python-tabs">
-                                        <div class="client-card">
-
-                                            <!-- Start Single Brand  -->
-                                            <div class="main-content">
-                                                <div class="inner text-center">
-                                                    <iframe class="pt--80" src="https://calendar.google.com/calendar/embed?height=300&wkst=1&bgcolor=%23D81B60&ctz=America%2FMexico_City&showNav=1&showCalendars=0&showPrint=0&showTabs=1&showTitle=0&src=c2lnbWEuZGV4dGVyLmdhYnlAZ21haWwuY29t&src=ZXMubWV4aWNhbiNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D81B60&color=%23009688" style="border:solid 1px #777" width="650" height="400" frameborder="0" scrolling="no"></iframe>
-                                                    </div> 
-                                            </div>
-                                            <!-- End Single Brand  -->
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End client section -->
-
-        <!-- Start News Area -->
-        <div class="rn-blog-area rn-section-gap section-separator" id="blog">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="500" data-aos-once="true" class="section-title text-center">
-                            <span class="subtitle">Visit my blog and keep your feedback</span>
-                            <h2 class="title">My Blog</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row--25 mt--30 mt_md--10 mt_sm--10">
-
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-01.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Canada</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 min read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">T-shirt design is the part of design
-                                            <i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="600" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-02.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Development</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 2 hour read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">The services provide for design <i
-                                        class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-
-                    <!-- Start Single blog -->
-                    <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="800" data-aos-once="true" class="col-lg-6 col-xl-4 mt--30 col-md-6 col-sm-12 col-12 mt--30">
-                        <div class="rn-blog" data-toggle="modal" data-target="#exampleModalCenters">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="javascript:void(0)">
-                                        <img src="assets/images/blog/blog-03.jpg" alt="Personal Portfolio Images">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="category-info">
-                                        <div class="category-list">
-                                            <a href="javascript:void(0)">Application</a>
-                                        </div>
-                                        <div class="meta">
-                                            <span><i class="feather-clock"></i> 5 min read</span>
-                                        </div>
-                                    </div>
-                                    <h4 class="title"><a href="javascript:void(0)">Mobile app landing design & app
-                                            maintain<i class="feather-arrow-up-right"></i></a></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single blog -->
-
-                </div>
-            </div>
-        </div>
-        <!-- ENd Mews Area -->
-        <!-- Start Contact section -->
-        <div class="rn-contact-area rn-section-gap section-separator" id="contacts">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <span class="subtitle">Contact</span>
-                            <h2 class="title">Contact With Me</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt--50 mt_md--40 mt_sm--40 mt-contact-sm">
-                    <div class="col-lg-5">
-                        <div class="contact-about-area">
-                            <div class="thumbnail">
-                                <img src="assets/images/contact/contact1.png" alt="contact-img">
-                            </div>
-                            <div class="title-area">
-                                <h4 class="title">Nevine Acotanza</h4>
-                                <span>Chief Operating Officer</span>
-                            </div>
-                            <div class="description">
-                                <p>I am available for freelance work. Connect with me via and call in to my account.
-                                </p>
-                                <span class="phone">Phone: <a href="tel:01941043264">+01234567890</a></span>
-                                <span class="mail">Email: <a href="mailto:admin@example.com">admin@example.com</a></span>
-                            </div>
-                            <div class="social-area">
-                                <div class="name">FIND WITH ME</div>
-                                <div class="social-icone">
-                                    <a href="#"><i data-feather="facebook"></i></a>
-                                    <a href="#"><i data-feather="linkedin"></i></a>
-                                    <a href="#"><i data-feather="instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos-delay="600" class="col-lg-7 contact-input">
-                        <div class="contact-form-wrapper">
-                            <div class="introduce">
-
-                                <form class="rnt-contact-form rwt-dynamic-form row" id="contact-form" method="POST" action="mail.php">
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="contact-name">Your Name</label>
-                                            <input class="form-control form-control-lg" name="contact-name" id="contact-name" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="contact-phone">Phone Number</label>
-                                            <input class="form-control" name="contact-phone" id="contact-phone" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="contact-email">Email</label>
-                                            <input class="form-control form-control-sm" id="contact-email" name="contact-email" type="email">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="subject">subject</label>
-                                            <input class="form-control form-control-sm" id="subject" name="subject" type="text">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="contact-message">Your Message</label>
-                                            <textarea name="contact-message" id="contact-message" cols="30" rows="10"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <button name="submit" type="submit" id="submit" class="rn-btn">
-                                            <span>SEND MESSAGE</span>
-                                            <i data-feather="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Contuct section -->
 
         <!-- Start Footer Area -->
         <div class="rn-footer-area rn-section-gap section-separator">
@@ -1507,14 +1313,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer-area text-center">
-
-                            <div class="logo">
-                                <a href="index.html">
-                                    <img src="assets/images/logo/logo-vertical.png" alt="logo">
-                                </a>
-                            </div>
-
-                            <p class="description mt--30">© 2021. All rights reserved by <a target="_blank" href="https://themeforest.net/user/rainbow-themes/portfolio">Rainbow-Themes.</a></p>
+                            <p class="description mt--30">© 2023</a></p>
                         </div>
                     </div>
                 </div>
@@ -1533,15 +1332,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="row align-items-center">
-
                             <div class="col-lg-6">
                                 <div class="portfolio-popup-thumbnail">
                                     <div class="image">
-                                        <img class="w-100" src="assets/images/portfolio/portfolio-04.jpg" alt="slide">
+                                        <video class="w-100" controls>
+                                            <source src="assets/videos/Prototipo.mp4" type="video/mp4">
+                                            Tu navegador no soporta el elemento de video.
+                                        </video>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-6">
                                 <div class="text-content">
                                     <h3>
@@ -1559,13 +1359,14 @@
                                             <i data-feather="chevron-right"></i>
                                         </a>
                                     </div>
-
                                 </div>
                                 <!-- End of .text-content -->
                             </div>
                         </div>
                         <!-- End of .row Body-->
                     </div>
+                    
+
                 </div>
             </div>
         </div>
@@ -1688,11 +1489,6 @@
     </main>
 
 
-
-
-
-
-
     <!-- JS ============================================ -->
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/modernizer.min.js"></script>
@@ -1706,6 +1502,7 @@
 
     <!-- main JS -->
     <script src="assets/js/main.js"></script>
+
 
     <script>
         particlesJS('particles-js',
@@ -1819,7 +1616,7 @@
                 "retina_detect": true,
                 "config_demo": {
                     "hide_card": false,
-                    "background_color": "#b61924",
+                    "background_color": "#fff",
                     "background_image": "",
                     "background_position": "50% 50%",
                     "background_repeat": "no-repeat",
