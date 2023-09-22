@@ -1,0 +1,110 @@
+/* Soyotimer */
+.courseCountTimer {
+  background-size: cover;
+  background-repeat: no-repeat;
+  .border {
+   padding: 2.875rem 0;
+   h3 {
+     font-size: 1.625rem;
+     @include media-breakpoint-up(md) {
+       font-size: 1.4rem;
+     }
+     @include media-breakpoint-up(xl) {
+       font-size: 1.625rem;
+     }
+   }
+    .timer-body-block {
+      display: flex;
+      justify-content: center;
+      .table-cell {
+        text-align: center;
+        .tab-val {
+          font-weight: bold;
+          border: 1px solid;
+          margin: 0.4375rem;
+          width: 45px;
+          height: 45px;
+          line-height: 45px;
+          border-radius: 5px;
+          font-size: 1.25rem;
+          @include media-breakpoint-up(md) {
+            margin: 0.2rem;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1rem;
+          }
+          @include media-breakpoint-up(xl) {
+            margin: 0.4375rem;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            font-size: 1.25rem;
+          }
+        }
+        .tab-unit {
+          text-transform: capitalize;
+          font-size: .75rem;
+          font-weight: 600;
+          @include media-breakpoint-up(lg) {
+            font-size: .7rem;
+          }
+          @include media-breakpoint-up(xl) {
+            font-size: .75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// comming Soon Count Timer
+.comming-soon-count {
+  .timer-body-block {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    .table-cell {
+      font-weight: 700;
+      display: block;
+      width: 65px;
+      height: 65px;
+      line-height: 65px;
+      margin: 0 2px;
+      font-size: 1.5625rem;
+      border-radius: 7px;
+      background-color: #f8f8f8;
+      box-shadow: 0 4px 0 rgba(0,0,0,.1);
+      font-family: dosis,sans-serif;
+      &.day {
+        color: $warning;
+      }
+      &.hour {
+        color: $success;
+      }
+      &.minute {
+        color: $danger;
+      }
+      &.second {
+        color: $info;
+      }
+      @include media-breakpoint-up(md) {
+        width: 85px;
+        height: 85px;
+        line-height: 85px;
+        font-size: 2.1875rem;
+        margin: 0 10px;
+        margin-bottom: 30px;
+      }
+      @include media-breakpoint-up(xl) {
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        font-size: 4.375rem;
+      }
+    }
+    .tab-unit {
+      display: none;      
+    }
+  }
+}

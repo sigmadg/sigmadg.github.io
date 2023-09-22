@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Linux </title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
+  <div class="header">
+    <div class="bg-color">
+      <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">SigmaDG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="lauraMenu">
+              <ul class="nav navbar-nav navbar-right navbar-border">
+                <li class="active"><a href="#main-header">SigmaDG</a></li>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../../indexE.html">Telemática</a></li>
+                <li><a href="../index">Comunicaciones</a></li>
+        
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 wow fadeIn delay-05s">
+              <div class="banner-text">
+                <h2> <span> Telecomunicaciones </span> </h2>
+                <p>  Tipos de modulación </p>
+              </div>
+              <div class="overlay-detail text-center">
+                <a href="#about"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+                     
+      <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-left">
+                                    
+                                    <h3> Modulación por desplazamiento de amplitud (ASK) </h3>
+                                    <p>&nbsp;</p>
+                                    <p >Las técnicas ASK utilizan diferentes niveles de amplitud para representar 0 y 1. Por ejemplo, un sistema modulación por desplazamiento de amplitud de dos niveles se muestra en la figura: </p>
+                                    <p>&nbsp;</p>
+                                      <img   src="img/senalask.png" >
+                                    <p>&nbsp;</p>
+                                  <p>  Como antes, la señal transmitida puede escribirse con su frecuencia portadora como una forma de onda cosenoidal, con una amplitud variable en el tiempo A(t). La señal de información está incrustada en la amplitud de la portadora con A(t)= a representando a 1 y A (t) = b representando un 0.</p> 
+                                    <p>&nbsp;</p>
+                                    
+                                  <p> Como se muestra en la figura, la frecuencia portadora es modulada por estas dos amplitudes diferentes, y se transmite un bit de información en cada intervalo de tiempo de transmisión. El lado del receptor extrae la información midiendo la amplitud de la señal portadora recibida y comparándola con un nivel de referencia para detectar si se ha transmitido un 1 o un 0.</p> 
+                                    <p>&nbsp;</p>
+                                   <p> La gráfica muestra la constelación de señal ASK binaria, donde el eje x muestra la amplitud de la señal, y a y b son los niveles de señal correspondientes a 0 y 1.</p>
+                                                                        <p>&nbsp;</p>
+                                      <img   src="img/nivelesask.png" >
+                                    <p>&nbsp;</p>
+                                   <p>El receptor mide la amplitud de la señal recibida y la compara con el medio punto de valor (a+b)/2.</p> 
+                                     <p>&nbsp;</p>
+                            
+          </div> 
+                                    
+ <div class="col-md-6 text-right">
+<h3 > Modulación por desplazamiento de fase (PSK) </h3>
+                                    <p>&nbsp;</p>
+                                    <p >La señal portadora A∗cos(2πf t+θ), la información de modulación también puede integrarse en la fase portadora θ. </p>
+                                    <p>&nbsp;</p>
+                                      <img   src="img/modulacionpsk.jpg"  alt="Image">
+                                    <p>&nbsp;</p>
+                                  <p> En  la  modulación  de  fase,  la  señal transmitida se escribe como A∗cos[2πf t+φ(t)] donde φ(t) denotala fase de desplazamiento de la señalal comienzo del intervalo de tiempode transmisión, o tiempo (t). En la figura se ilustra una constelaciónde señales de codificación de despla-zamiento de fase binaria (BPSK).</p> 
+                                    <p>&nbsp;</p>
+                                    
+                                  <p> Donde la fase de desplazamiento φ(t) = 0 indica la transmisión de un 0 y φ(t) =180 denota la transmisión de un 1</p> 
+                                    <p>&nbsp;</p>
+                                      <img   src="img/PSK.jpg"  alt="Image">
+                                    <p>&nbsp;</p>
+                                   <p> El receptor vuelve a comparar la fase de la señal recibida con un nivellímite, en este caso amplitud = 0, y detecta si se transmitió un 0 o un 1 </p> 
+                                     <p>&nbsp;</p>
+    
+
+       </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="footer-2 text-center-xs bg--white">
+    <div class="container">
+      <!--end row-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer">
+            ©SigmaDG
+            <div class="credits">
+                
+            <ul class="social-list">
+            <li> <a href="https://twitter.com/sigma_dg"> <i class="fa fa-twitter "></i> </a> </li>
+            <li> <a href="https://www.facebook.com/sigmadg-105084434703338/"><i class="fa fa-facebook-f "></i> </a> </li>
+            <li> <a href="https://github.com/SigmaDG"> <i class="fa fa-github"></i></a></li>
+            <li> <a href="https://www.instagram.com/sigmadg"> <i class="fa fa-instagram"></i></a>
+            <li> <a href="https://www.youtube.com/channel/UCiiFSdy7gYwywZEwQfoOPOQ?view_as=subscriber"> <i class="fa fa-youtube"></i> </a></li>
+            <li> <a href="https://www.twitch.tv/sigmadg"> <i class="fa fa-twitch"></i> </a> </li>  
+            <li> <a href="https://www.pinterest.com.mx/sigmadexter/boards/"> <i class="fa fa-pinterest "></i> </a></li>  
+            <li> <a href="https://www.linkedin.com/in/ana-gabriela-ord%C3%B3%C3%B1ez-7898b6161/"> <i class="fa fa-linkedin"></i> </a> </li>  
+            </ul>
+        </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!--end row-->
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.bxslider.min.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>

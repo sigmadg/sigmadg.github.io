@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Linux </title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
+  <div class="header">
+    <div class="bg-color">
+      <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">SigmaDG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="lauraMenu">
+              <ul class="nav navbar-nav navbar-right navbar-border">
+                <li class="active"><a href="#main-header">SigmaDG</a></li>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../../indexE.html">Telemática</a></li>
+                <li><a href="../index">Linux</a></li>
+                 <li><a href="../index">Ubuntu</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 wow fadeIn delay-05s">
+              <div class="banner-text">
+                <h2> Error de vídeo<span> Ubuntu Mate </span> 20.04 LTS </h2>
+                <p>  después de la instalación en AMD. </p>
+              </div>
+              <div class="overlay-detail text-center">
+                <a href="#about"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <h2 class="title-text">
+                
+            Fecha : <span class="deco"> Diciembre 2020 </span>
+          </h2>
+        </div>
+        <div class="col-md-12 text-left">
+          <div class="about-text">
+   <h3 > Síntomas: </h3>
+        <ol>
+            <li>Pantalla de inicio de sesión o el escritorio congelado o extremadamente lento aún usando el método de ‘nomodeset’. </li>
+             <li> Pantalla de bienvenida o escritorio intermitente: la pantalla parpadea e incluso cambia a un color oscuro. </li>
+              </ol>
+           <p>&nbsp;</p>
+              <p> <strong> Si el equipo que usas está pasando por esto, continúa leyendo. </strong>  </p>  
+             <p>&nbsp;</p>
+
+ <h3 >  Diagnóstico: </h3>
+
+<p>&nbsp;</p>
+ <p > Estos síntomas son causados por el controlador de la tarjeta de vídeo. Hay controladores de video de NVIDIA para Linux que normalmente no funcionan en ordenadores con tarjetas de video como la GeForce GT 540M e incluso hay sistemas NVIDIA que fallan en otros sistemas operativos como Windows. </p>  
+             <p>&nbsp;</p>
+              
+ <p > Ubuntu Mate 20.04 LTS decide, en la instalación y por defecto, instalar un controlador privativo o terciario de NVIDIA para ejecutar el sistema operativo. Estos controladores suelen ser totalmente ineficientes: presentan fallas y congelan o ralentizan el sistema.   </p>  
+             <p>&nbsp;</p>
+
+       <h3 >  Introducción </h3>
+            <p>&nbsp;</p>
+            <p> Me tarde un día completo en encontrar la solución a mi problema especifico, voy a mencionar paso a paso considerando varios escenarios, y en la situación más critica que fue la miá, recomiendo ampliamente el uso de Linux, ya que a pesar de ser complicado al inicio, con una sana y buena instalación tiene numerosas ventajas respecto a otros sistemas operativos. </p>
+                 <p>&nbsp;</p>
+             <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="img/1.jpg" class="img-responsive">
+
+            </div>
+              
+            <p>&nbsp;</p>
+       
+              <p   class="col-md-8 col-sm-8" > Después de la actualización a Ubuntu Mate 20.04 la pantalla se veía así, la solución que voy a proponer parece algo confusa pero si esas opciones no funcionan, entonces tenemos que formatear nuestro sistema operativo. </p>  
+             <p>&nbsp;</p>
+              
+              <p class="col-md-8 col-sm-8" > Primero ingrese a la terminal con <strong> CTRL + ALT + T </strong>  sin ver y despues de loggearme con mi usuario y contraseña <strong> SUDO SU </strong> cambie la contraseña de <strong> root </strong> para activarla, en caso de que ya puedas ingresar sin problemas con permisos de <strong> root </strong> esté paso no es necesario. El comando es el siguiente: </p>  
+              <p>&nbsp;</p>
+              <h4  class="col-md-8 col-sm-8" > <strong>  <em>  sudo passwd root  </em> </strong>  </h4>  
+             <p>&nbsp;</p>
+              
+              <p> Nos pedira ingresar una contraseña para el usuario <strong> root </strong> y repetirla. Ingresamos a la vista en modo terminal con  <strong> CTRL + ALT + F6 </strong> en mi caso. Ahora nos logueamos como usuario <strong> root </strong>. Otro ingreso a consola podría ser en modo "recovery mode"  </p> 
+            
+              <p>&nbsp;</p>
+              
+<h3 >  Método 1 </h3>
+              <p>&nbsp;</p>
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="img/2.jpg" class="img-responsive">
+
+            </div>
+                <p>&nbsp;</p>
+              <p class="col-md-8 col-sm-8" > <strong> Nota: es necesaria una conexión a la red (internet).</strong>  </p>  
+             <p>&nbsp;</p>
+              
+            <ol class="col-md-8 col-sm-8" >
+            <li> 1. Reiniciamos la computadora y en mi caso la combinación de teclas es <strong> SHIFT + F12 </strong>, después ingresamos en modo recovery, y finalmente como se ve en la imagen consola root. </li> <p>&nbsp;</p>
+             <li> 2. Una vez en la consola, ingresar el usuario y la contraseña si es necesario. </li> <p>&nbsp;</p>
+             <li> 3. Tener presente y observar la configuración gráfica y los controladores (drivers) con el siguiente comando: </li>
+              </ol>
+
+              <p>&nbsp;</p>
+              <h4  > <strong>  <em>  sudo ubuntu-drivers devices </em> </strong>  </h4>  
+             <p>&nbsp;</p>
+
+              <p> Ejemplo, en mi caso, la máquina muestra:</p>  
+                <p>&nbsp;</p>
+
+              <h4  >  <em>   
+            > == /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0 == <br>
+           > modalias : pci:v000010DEd00000DF4sv00001028sd0000050Ebc03sc00i00 <br>
+           > vendor   : <strong>NVIDIA</strong> Corporation <br>
+           > model    : GF108M [GeForce GT 540M] <br>
+           > driver   : <strong>nvidia</strong>-340 - distro non-free <br>
+           > driver   : <strong>nvidia</strong>-driver-390 - distro non-free recommended <br>
+           > driver   : <strong>xserver-xorg-video-nouveau</strong>  - distro free builtin </em>  </h4>  
+             <p>&nbsp;</p>
+    
+            <p> 4. Desinstalar los controladores propietarios, privativos y terceros de NVIDIA y eliminar los controladores restantes.</p>
+            <p>&nbsp;</p>
+              
+              <h4  > <strong>  <em> sudo apt-get remove nvidia-* <br>
+              sudo apt-get autoremove --purge nvidia-* </em> </strong>  </h4>  
+             <p>&nbsp;</p>
+
+           <p> 5. Detener el servicio 'lightdm' que ejecuta el administrador de pantalla que inicia el ‘X servers’, las sesiones de usuario y la pantalla de inicio de sesión. </p>
+            <p>&nbsp;</p>
+              
+            <h4  > <strong>  <em> sudo service lightdm stop <br>
+            sudo service lightgm stop </em> </strong>  </h4>  
+             <p>&nbsp;</p>  
+              
+            <p> 6. Verificar la eliminación de todas las librerías no usadas y actualizar.</p>
+            <p>&nbsp;</p>
+       
+            <h4  > <strong>  <em> sudo apt-get autoremove <br> sudo apt-get autoclean <br> sudo apt-get update <br>
+              sudo apt-get upgrade </em> </strong>  </h4>  
+             <p>&nbsp;</p>       
+              
+            <p> 7. Instalar el controlador nouveau predeterminado (<strong> xserver-xorg-video-nouveau </strong>). Este controlador funciona en Linux para tarjetas NVIDIA como la GeForce GT 540M:</p>
+            <p>&nbsp;</p>
+
+            <h4  > <strong>  <em> sudo apt-get install xserver-xorg-video-nouveau </em> </strong>  </h4>  
+             <p>&nbsp;</p>   
+              
+              <p> <em> En caso de que no funcione la instalación de está forma, puede buscar el paquete en github e instalarlo como se muestra a continuación clonando e instalando el paquete: </em></p>
+            <p>&nbsp;</p>  
+              
+            <h4  > <strong>  <em> 
+sudo apt install git <br>
+git clone https://github.com/gnab/rtl8812au.git <br>
+sudo dkms add ./rtl8812au <br>
+sudo dkms build rtl8812au/4.2.2 (si obtiene un error que dice que la carpeta 'rtl8812au' no existe, cambie rtl8812au a '8812au') <br>
+sudo dkms install rtl8812au/4.2.2 (si obtiene un error que dice que la carpeta 'rtl8812au' no existe, cambie rtl8812au a '8812au') <br>
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>     
+              
+<p> <em> Cargamos el controlador </em></p>
+            <p>&nbsp;</p>                
+
+<h4  > <strong>  <em> 
+sudo modprobe rtl8812au (o 8812au si recibe un mensaje de error que dice que rtl8812au no existe)
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>               
+
+ <p> 8. Verifica en la consola que la instalación está correcta y sin errores. </p>
+            <p>&nbsp;</p>              
+              
+  <p> 9. Reinicia </p>
+            <p>&nbsp;</p>      
+<h4  > <strong>  <em> 
+ Reboot
+</em> </strong>  </h4>  
+             <p>&nbsp;</p> 
+
+  <p> <strong> Nota: en la página de NVIDA, AMD, etc. hay controladores para descargar y probar directamente con tu tarjeta </strong></p>
+            <p>&nbsp;</p>     
+        
+ <h3>  Resumen: </h3>               
+ <p>&nbsp;</p> 
+ <h4  > <strong>  <em> 
+    Abrir consola/terminal. <br>
+    sudo ubuntu-drivers devices <br>
+    sudo apt-get remove nvidia-* <br>
+sudo apt-get autoremove --purge nvidia-* <br>
+    sudo service lightdm stop <br>
+    sudo apt-get autoremove <br>
+    sudo apt-get update <br>
+    sudo apt-get install xserver-xorg-video-nouveau <br>
+    Exit/Reboot <br>
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>  
+          
+              
+ <h3 >  Método 2 </h3>            
+      
+               <p> Desintalar e instalar el Escritorio. Primero lo desinstalamos. </p>
+            <p>&nbsp;</p>  
+
+              
+ <h4  > <strong>  <em> 
+sudo apt-get remove mate-desktop
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>  
+              
+
+              <p> Para realizar una instalación mínima (sólo la interfaz): </p>
+            <p>&nbsp;</p>  
+              
+ <h4  > <strong>  <em> 
+sudo apt-get install mate-core
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>  
+              
+ <p> Para instalar todo el entorno (incluye aplicaciones): </p>
+            <p>&nbsp;</p>  
+              
+ <h4  > <strong>  <em> 
+ sudo apt-get install mate-desktop-environment
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>  
+              
+ <h3 >  Método 3 </h3>            
+      
+               <p> Parche recomendado en foros de reddit, pero es probable que solo funciones para Xubuntu 20.04.</p>
+            <p>&nbsp;</p>                
+                            
+              
+    <h4  > <strong>  <em> 
+        sudo apt-get update <br>
+sudo apt-get install xfconf <br>
+xfconf-query -c xfwm4 -p /general/vblank_mode -t string -s "glx" --create
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>            
+<h3 >  Método 4 </h3>
+               <p> Si ésto nos ocurre después del 22 de abril de 2021 también podemos intentar actualizar a la versión 21.04 desde terminal:   </p>
+            <p>&nbsp;</p>  
+
+    <h4  > <strong>  <em> 
+sudo apt-get install update-manager <br>
+       sudo update-manager –devel-release <br>
+<strong> Precionamos ALT + F2 </strong>
+</em> </strong>  </h4>  
+             <p>&nbsp;</p>    
+              
+              <h3> <strong> ¡Ya está solucionado el problema de vídeo! que la deidad de su preferencia os acompañe. </strong> </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="footer-2 text-center-xs bg--white">
+    <div class="container">
+      <!--end row-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer">
+            ©SigmaDG
+            <div class="credits">
+                
+            <ul class="social-list">
+            <li> <a href="https://twitter.com/sigma_dg"> <i class="fa fa-twitter "></i> </a> </li>
+            <li> <a href="https://www.facebook.com/sigmadg-105084434703338/"><i class="fa fa-facebook-f "></i> </a> </li>
+            <li> <a href="https://github.com/SigmaDG"> <i class="fa fa-github"></i></a></li>
+            <li> <a href="https://www.instagram.com/sigmadg"> <i class="fa fa-instagram"></i></a>
+            <li> <a href="https://www.youtube.com/channel/UCiiFSdy7gYwywZEwQfoOPOQ?view_as=subscriber"> <i class="fa fa-youtube"></i> </a></li>
+            <li> <a href="https://www.twitch.tv/sigmadg"> <i class="fa fa-twitch"></i> </a> </li>  
+            <li> <a href="https://www.pinterest.com.mx/sigmadexter/boards/"> <i class="fa fa-pinterest "></i> </a></li>  
+            <li> <a href="https://www.linkedin.com/in/ana-gabriela-ord%C3%B3%C3%B1ez-7898b6161/"> <i class="fa fa-linkedin"></i> </a> </li>  
+            </ul>
+        </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!--end row-->
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.bxslider.min.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+/* Nav Custom */
+.nav-pills {
+  .nav-item {
+    margin-right: 0.625rem;
+  }
+  .nav-link {
+    padding: 0 1.5rem;
+    height: 40px;
+    font-size: .875rem;
+    line-height: 40px;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    background-color: #f8f8f8;
+    box-shadow: $box-shadow-sm;
+    @include border-radius($nav-pills-border-radius);
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: $nav-pills-link-active-color;
+    background-color: $danger;
+  }
+}
+
+.nav-tab {
+  .nav-link {
+    height: auto;
+    box-shadow: none;
+    border-radius: 0.75rem;
+    border: .25rem solid rgba(0,0,0,.1);
+    margin-bottom: .5rem;
+    opacity: .4;
+  }
+  .nav-link.active,
+  .show > .nav-link {
+    opacity: .9;
+    background-color: transparent;
+  }
+}

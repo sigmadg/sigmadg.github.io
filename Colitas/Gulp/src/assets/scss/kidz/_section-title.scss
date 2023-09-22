@@ -1,0 +1,111 @@
+/* Section Titile */
+.section-title {
+	display: flex;
+	position: relative;
+	align-items: center;
+	flex-direction: column;
+	@include media-breakpoint-up(md){
+		flex-direction: row;
+	}
+	.shape {
+		width:18px;
+		height:18px;
+		border-radius:50%;
+		display:inline-block;
+		padding:0;
+		position:absolute;
+		top: -20px;
+
+		@include media-breakpoint-up(md){
+			position: relative;
+			left: auto;
+			transform: none;
+			top: 0px;
+		}
+		&.shape-left {
+			left: 45%;
+			transform: translateX(-50%);
+			@include media-breakpoint-up(md){
+				left: 0;
+				transform: none;
+			}
+			&:before,
+			&:after {
+				content: "";
+				position: absolute;
+				background-color: inherit;
+				height: 2px;
+			}
+			&:before {
+				right: 3px;
+				width: 70px;
+				top: 6px;
+			}
+			&:after {
+				right: 3px;
+				width: 55px;
+				top: 11px;
+			}
+
+		}
+		&.shape-right {
+			right: 41%;
+			transform: translateX(-50%);
+			@include media-breakpoint-up(md){
+				right: 0;
+				transform: none;
+			}
+			&:before,
+			&:after {
+				content: "";
+				position: absolute;
+				background-color: inherit;
+				height: 2px;
+			}
+			&:before {
+				left: 3px;
+				width: 70px;
+				top: 6px;
+			}
+			&:after {
+				left: 3px;
+				width: 55px;
+				top: 11px;
+			}
+		}
+	}
+	h2 {
+		font-family: $font-family-dosis;
+		// font-size: 1.75rem;
+		font-size: 2.25rem;
+		text-transform: capitalize;
+    	font-weight: 700;
+		position: relative;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		order: 1;
+		@include media-breakpoint-up(md) {
+			order: 0;
+		}
+		@include media-breakpoint-up(lg) {
+			// font-size: 1.75rem;
+		}
+	}
+}
+
+.element-title {
+	font-weight: 600;
+	color: $danger;
+	margin-bottom: 2rem;
+}
+
+/* Section Top */
+.section-top {
+	margin-top: -60px;
+	@include media-breakpoint-up(lg) {
+		margin-top: -70px;
+	}
+	@include media-breakpoint-up(xl) {
+		margin-top: -90px;
+	}
+}

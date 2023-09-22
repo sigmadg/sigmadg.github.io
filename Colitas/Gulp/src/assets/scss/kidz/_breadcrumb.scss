@@ -1,0 +1,52 @@
+/* Breadcrumb Background */
+
+.breadcrumb-bg {
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  .breadcrumb-holder {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.breadcrumb-transparent {
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  .breadcrumb-item+.breadcrumb-item::before {
+    color: #fff;
+    font-family: "FontAwesome";
+    content: "\276F\00a0";
+    padding: 0 5px;
+  }
+}
+
+/* Breadcrumb */
+
+.breadcrumb-element {
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  h1 {
+    font-weight: 700;
+    color: $white;
+    text-align: center;
+  }
+  p {
+    color: $white;
+    text-align: center;
+  }
+}
+
+/* Breadcrumb Title */
+.breadcrumb-title {
+  color: $white;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.5rem;
+  font-family: $font-family-secondary;
+}

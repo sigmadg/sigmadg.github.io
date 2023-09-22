@@ -1,0 +1,10 @@
+/* Header */
+.header {
+  position: relative;
+}
+.header-absolute {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}

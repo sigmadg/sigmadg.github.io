@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Linux </title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
+  <div class="header">
+    <div class="bg-color">
+      <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">SigmaDG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="lauraMenu">
+              <ul class="nav navbar-nav navbar-right navbar-border">
+                <li class="active"><a href="#main-header">SigmaDG</a></li>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../../indexE.html">Telemática</a></li>
+                <li><a href="../index">Linux</a></li>
+                 <li><a href="../index">Ubuntu</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 wow fadeIn delay-05s">
+              <div class="banner-text">
+                <h2> Forzar en <span> Ubuntu </span> </h2>
+                <p>  la instalación de WineHQ </p>
+              </div>
+              <div class="overlay-detail text-center">
+                <a href="#about"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <h2 class="title-text">
+                
+            Fecha : <span class="deco"> Enero 2021 </span>
+          </h2>
+        </div>
+        <div class="col-md-12 text-left">
+          <div class="about-text">
+   <h3 > ¿Qué es wine? </h3>
+  <p>&nbsp;</p>
+<p> Wine es un emulador de aplicaciones windows en sistemas operativos linux permite a los usuarios ejecutar aplicaciones de Windows en Linux y otros sistemas operativos tipo Unix. Para ser un poco más técnico, Wine es una capa de compatibilidad; traduce las llamadas del sistema de Windows a Linux y utiliza algunas bibliotecas de Windows, en forma de archivos <strong>.dll</strong> .</p>
+  <p>&nbsp;</p>
+<p>Para aquellas personas que vienen migrando de Linux muy posiblemente necesiten de algun software o juego de Windows que no está disponible o no tiene equivalente en Linux. Wine hace posible ejecutar esos programas y juegos de Windows en su escritorio Linux.</p>
+  <p>&nbsp;</p>
+<p>Es importante reconocer el tipo de versión que vamos a instalar ya que la versión estable tiene menos errores y mayor estabilidad, pero admite menos aplicaciones de Windows. La versión de desarrollo ofrece una mayor compatibilidad, pero tiene más errores no resueltos.</p>
+
+             <p>&nbsp;</p>
+
+ <h3 >  ¿Por qué en algunas versiones de linux es necesario forzar la instalación de WineHQ? </h3>
+
+<p>Porque varias versiones de linux tienen dependencias con la instalación de wine, necesitamos hacer uso de synaptic ya que si esté metodo no funciona necesitamos intentar la instalación de <strong> winehq</strong> desde synaptic para que nos muestre el nombre de los archivos con que <strong> winehq</strong> tiene dependencias no compatibles.</p>
+              
+<p>&nbsp;</p>
+              
+<h3 > Instalación de WineHQ </h3>
+              
+ <p>&nbsp;</p>             
+<p> Abrimos una terminal con <strong> CTRL + ALT + T</strong>. El primer paso será habilitar la arquitectura de 32 bits, que aun que nuestro sistema sea de 64 bits, nos será de utilidad más adelante:</p>
+<p>&nbsp;</p>
+
+ <h4  >  <em>  sudo dpkg --add-architecture i386 </em> </h4>
+                <p>&nbsp;</p>  
+<p> Ahora debemos de importar las llaves y añadirlas al sistema con este comando:</p>
+  <p>&nbsp;</p>  
+ <h4  >  <em> wget -nc https://dl.winehq.org/wine-builds/Release.key </em> </h4>
+ <h4  >  <em> sudo apt-key add Release.key </em> </h4>
+                <p>&nbsp;</p>  
+<p>  Añadimos el repositorio al sistema,  para ello escribimos en la terminal:</p>
+  <p>&nbsp;</p>  
+ <h4  >  <em> sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ </em> </h4>
+                <p>&nbsp;</p>  
+<p> Después de esté paso es probable que la llave del repositorio esté desactualizada por lo tanto escribimos el siguiente comando para consultar a un servidor seguro de Ubuntu y actualizar la clave pública del repositorio con una válida (Debemos cambiar la clave por la que nos envía el error en la terminal): </p>
+                <p>&nbsp;</p>  
+ <h4  >  <em> sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <strong>1F3045A5DF7587C3 </strong>  </em> </h4>     
+                <p>&nbsp;</p>  
+<p> Ahora agregamos el repositorio </p>
+                <p>&nbsp;</p>  
+ <h4  >  <em> sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ artful main' </em> </h4>
+                <p>&nbsp;</p>  
+<p> En esté paso WineHQ tiene varias dependencias con varios paquetes y versiones por lo que intentamos solucionarlas intalandolas manualmente (podemos intentar saltarnos este paso, y validar que nos envía un error):</p>
+                <p>&nbsp;</p>  
+ <h4  >  <em> sudo apt-get install libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386 </em> </h4>
+ <h4  >  <em> sudo apt-get update -y    </em> </h4>
+ <h4  >  <em> sudo apt-get install -y libsdl2-2.0-0 </em> </h4>
+ <h4  >  <em>wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/amd64/libfaudio0_19.07-0~bionic_amd64.deb  </em> </h4>     
+<h4  >  <em> wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/i386/libfaudio0_19.07-0~bionic_i386.deb </em> </h4>
+ <h4  >  <em> sudo dpkg -i libfaudio0_19.07-0~bionic_amd64.deb libfaudio0_19.07-0~bionic_i386.deb </em> </h4>
+               <p>&nbsp;</p>   
+<p>  En caso de errores o paquetes rotos antes de reintentar la intalación usamos los comandos: </p>
+  <p>&nbsp;</p>  
+<h4  >  <em>sudo dpkg --configure -a  </em> </h4>            
+<h4  >  <em>sudo apt --fix-broken install   </em> </h4>           
+            <p>&nbsp;</p>      
+<p> Finalmente, solo debemos de escribir el comando para instalar la versión estable de Wine:</p>
+  <p>&nbsp;</p>  
+<h4  >  <em>sudo apt-get install --install-recommends winehq-stable</em> </h4>  
+          <p>&nbsp;</p>        
+<p> Ahora también tenemos acceso a la rama de desarrollo de Wine, el cual contiene muchas más características y mejoras, el problema al ser una versión de desarrollo es que corremos el riesgo de tener algunas fallas con la ejecución. Pero si lo deseas instalar, la que actualmente está en curso ejecutamos:</p>
+  <p>&nbsp;</p>  
+<h4  >  <em>sudo apt-get install --install-recommends winehq-devel</em> </h4>  
+      <p>&nbsp;</p>            
+<p> Hecha la instalación solo debes de ejecutar este comando para comprobar que se instaló con éxito y saber que versión tienes instalada:</p>
+  <p>&nbsp;</p>  
+<h4  >  <em>wine --version</em> </h4>  
+       <p>&nbsp;</p>           
+<p> Donde sí fue la versión estable recibiras una respuesta asi:</p>
+  <p>&nbsp;</p>  
+<p> <strong> wine-3.6 </strong> </p>
+   <p>&nbsp;</p>             
+<p> <strong> Nota: </strong> En caso de que sigan existiendo dependencias y/ó errores, podemos buscar en synaptic <strong>winehq-devel</strong> nos enviará la versión recomendada, winehq-devel-amd64, winehq-devel-i386, etc., y al intentar la instalación generalmente nos indicara el paquete que hace falta instalar.</p>              
+
+             <p>&nbsp;</p>    
+              
+              <h2> <strong> ¡Ya tenemos wine instalado! </strong> </h2>
+              <p>&nbsp;</p>  
+ <h3 > Desinstalar Wine </h3>    
+              <p>&nbsp;</p>  
+              
+ <p> <strong> Desinstalar la versión estable:</strong> </p>
+<p>&nbsp;</p> 
+<h4  >  <em>sudo apt purge winehq-stable</em> </h4>
+<h4  >  <em>sudo apt-get remove wine-stable</em> </h4>
+<h4  >  <em>sudo apt-get autoremove</em> </h4>
+              <p>&nbsp;</p> 
+<p> <strong> Desinstalar la versión de desarrollo:</strong> </p>
+<p>&nbsp;</p> 
+<h4  >  <em>sudo apt purge winehq-devel </em> </h4>
+<h4  >  <em>sudo apt-get remove wine-devel</em> </h4>
+<h4  >  <em>sudo apt-get autoremove </em> </h4>      
+              <p>&nbsp;</p> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer class="footer-2 text-center-xs bg--white">
+    <div class="container">
+      <!--end row-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer">
+            ©SigmaDG
+            <div class="credits">
+                
+            <ul class="social-list">
+            <li> <a href="https://twitter.com/sigma_dg"> <i class="fa fa-twitter "></i> </a> </li>
+            <li> <a href="https://www.facebook.com/sigmadg-105084434703338/"><i class="fa fa-facebook-f "></i> </a> </li>
+            <li> <a href="https://github.com/SigmaDG"> <i class="fa fa-github"></i></a></li>
+            <li> <a href="https://www.instagram.com/sigmadg"> <i class="fa fa-instagram"></i></a>
+            <li> <a href="https://www.youtube.com/channel/UCiiFSdy7gYwywZEwQfoOPOQ?view_as=subscriber"> <i class="fa fa-youtube"></i> </a></li>
+            <li> <a href="https://www.twitch.tv/sigmadg"> <i class="fa fa-twitch"></i> </a> </li>  
+            <li> <a href="https://www.pinterest.com.mx/sigmadexter/boards/"> <i class="fa fa-pinterest "></i> </a></li>  
+            <li> <a href="https://www.linkedin.com/in/ana-gabriela-ord%C3%B3%C3%B1ez-7898b6161/"> <i class="fa fa-linkedin"></i> </a> </li>  
+            </ul>
+        </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!--end row-->
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.bxslider.min.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>
