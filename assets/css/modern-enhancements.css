@@ -2303,10 +2303,166 @@ a:hover::after {
 
 /* Professional Footer */
 .rn-footer-area {
-  background: rgba(10, 11, 13, 0.8);
+  background: rgba(10, 11, 13, 0.95);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 40px 0;
+  padding: 60px 0 30px;
+  margin-top: 80px;
+}
+
+.rn-footer-area .footer-widget {
+  margin-bottom: 30px;
+}
+
+.rn-footer-area .footer-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.rn-footer-area .footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.rn-footer-area .footer-widget p.description {
+  color: #c4cfde;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rn-footer-area .footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rn-footer-area .footer-menu li {
+  margin-bottom: 10px;
+}
+
+.rn-footer-area .footer-menu li a {
+  color: #c4cfde;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.rn-footer-area .footer-menu li a:hover {
+  color: var(--color-accent);
+  transform: translateX(5px);
+}
+
+.rn-footer-area .footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.rn-footer-area .footer-social li {
+  margin: 0;
+}
+
+.rn-footer-area .footer-social li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #c4cfde;
+  transition: all 0.3s ease;
+}
+
+.rn-footer-area .footer-social li a:hover {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 1, 79, 0.3);
+}
+
+.rn-footer-area .footer-social li.twitter a:hover {
+  background: #1da1f2;
+}
+
+.rn-footer-area .footer-social li.linkedin a:hover {
+  background: #0077b5;
+}
+
+.rn-footer-area .footer-social li.github a:hover {
+  background: #333;
+}
+
+.rn-footer-area .footer-social li.fiverr a:hover {
+  background: #1dbf73;
+}
+
+.rn-footer-area .footer-social li.upwork a:hover {
+  background: #14a800;
+}
+
+.rn-footer-area .footer-copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+.rn-footer-area .footer-copyright p {
+  color: #c4cfde;
+  font-size: 12px;
+  margin: 0;
+}
+
+.rn-footer-area .footer-copyright #current-year {
+  color: var(--color-accent);
+}
+
+/* Responsive Footer */
+@media (max-width: 991px) {
+  .rn-footer-area {
+    padding: 40px 0 20px;
+  }
+  
+  .rn-footer-area .footer-widget {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .rn-footer-area .footer-social {
+    justify-content: center;
+  }
+  
+  .rn-footer-area .footer-title {
+    text-align: center;
+  }
+  
+  .rn-footer-area .footer-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .rn-footer-area .footer-widget p.description {
+    text-align: center;
+  }
+  
+  .rn-footer-area .footer-menu {
+    text-align: center;
+  }
 }
 
 /* Simple Elegant Scrollbar */
