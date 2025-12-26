@@ -37,12 +37,6 @@ function comenzar() {
 		//Muestro el div del número ganador.
 		muestraNumero();
 		
-		//Oculto el div de información
-		$("#info").css("display", "none");
-		
-		//Deshabilito el botón de comenzar
-		document.getElementById("biniciar").disabled = true;
-		
 		//Muestro la tarjeta
 		dibujaTarjeta(tarjeta);
 		iniciar();
