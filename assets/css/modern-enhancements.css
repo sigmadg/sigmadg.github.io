@@ -123,11 +123,17 @@ h3, .h3 {
 .rn-blog-area,
 .rn-resume-area,
 .rn-about-area,
-#courses,
 #blog {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Ensure courses tab only shows when active */
+#courses.tab-pane:not(.show):not(.active) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .rn-service-area .service,
