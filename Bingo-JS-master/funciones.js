@@ -111,15 +111,17 @@ function llenarBombo() {
 
 /**
  * Realiza la peticion ajax al archivo "bolas.php"
+ * MODIFICADO: Ahora funciona sin PHP, usando JavaScript puro para GitHub Pages
  */
 function peticionAJAX() {
-  $.ajax({
-    type: "POST",
-    url: "bolas.php",
-    data: { numeros : bombo },
-    dataType: "text",
-    success: sacaBola,
-  });
+  // En lugar de usar PHP, generamos el índice aleatorio directamente en JavaScript
+  if (bombo.length > 0) {
+    var indice = Math.floor(Math.random() * bombo.length);
+    sacaBola(indice);
+  } else {
+    resetear();
+    alert("Se han sacado todos los números");
+  }
 }
 
 function sacaBola(indice) {
