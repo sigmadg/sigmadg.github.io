@@ -1,0 +1,1 @@
+import{p as a}from"./-tpCl6nn.js";const t=a("/avator/avator-img1.jpg"),s=a("/avator/avator-img2.jpg"),r=a("/avator/avator-img3.jpg"),p=a("/avator/avator-img4.jpg");export{t as _,s as a,r as b,p as c};

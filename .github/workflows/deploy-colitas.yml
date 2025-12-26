@@ -1,0 +1,50 @@
+name: Deploy Colitas Abandonadas
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'Colitas/**'
+      - '.github/workflows/deploy-colitas.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Colitas/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: Colitas
+        run: npm ci
+      
+      - name: Build Nuxt
+        working-directory: Colitas
+        run: npm run generate
+        env:
+          NODE_ENV: production
+      
+      - name: Deploy to Colitas directory
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          rm -rf Colitas/*.html Colitas/*.vue Colitas/components Colitas/layouts Colitas/pages Colitas/plugins Colitas/.nuxt
+          cp -r Colitas/.output/public/* Colitas/
+          git add Colitas/
+          git commit -m "Deploy Colitas - $(date +'%Y-%m-%d %H:%M:%S')" || exit 0
+          git push

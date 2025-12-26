@@ -1,0 +1,189 @@
+/* Separadores en el menú de navegación */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar-nav .nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Separadores manuales */
+.nav-separator {
+  display: none;
+  width: 1px;
+  height: 35px;
+  background-color: #d0d0d0;
+  margin: 0 6px;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-separator {
+    display: block;
+  }
+}
+
+/* Asegurar que los items no se empalmen */
+.navbar-nav .nav-link {
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 992px) {
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Iconos del menú */
+.navbar-nav .nav-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Ajustes para dropdowns */
+.navbar-nav .dropdown-menu {
+  margin-top: 0.5rem;
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+}
+
+.navbar-nav .dropdown-item {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Mega dropdown */
+.navbar-nav .mega-dropdown .dropdown-menu,
+.navbar-nav .mega-menu {
+  padding: 1.5rem;
+  min-width: 600px;
+  max-width: 800px;
+  left: auto;
+  right: 0;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav .mega-dropdown .dropdown-menu,
+  .navbar-nav .mega-menu {
+    min-width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .list-unstyled,
+.navbar-nav .mega-menu .list-unstyled {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .list-unstyled > li:first-child,
+.navbar-nav .mega-menu .list-unstyled > li:first-child {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #333;
+  font-size: 0.95rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .list-unstyled > li:not(:first-child),
+.navbar-nav .mega-menu .list-unstyled > li:not(:first-child) {
+  margin-bottom: 0.5rem;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .list-unstyled a,
+.navbar-nav .mega-menu .list-unstyled a {
+  color: #6c757d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .list-unstyled a:hover,
+.navbar-nav .mega-menu .list-unstyled a:hover {
+  color: #333;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu .row,
+.navbar-nav .mega-menu .row {
+  margin: 0;
+}
+
+.navbar-nav .mega-dropdown .dropdown-menu [class*="col-"],
+.navbar-nav .mega-menu [class*="col-"] {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Ajustes para evitar desbordamiento */
+@media (min-width: 768px) {
+  .navbar-nav {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Ajuste para items con mismo color (Veterinarios y Noticias) */
+.navbar-nav .nav-item.bg-purple + .nav-item.bg-purple {
+  margin-left: 0;
+}
+
+/* Mejoras adicionales para alineación */
+.navbar-nav .nav-item {
+  margin: 0;
+}
+
+.navbar-nav .nav-link {
+  border-radius: 0.25rem;
+  margin: 0 2px;
+}
+
+/* Ajustes para responsive */
+@media (max-width: 767px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+  
+  .navbar-nav .nav-separator {
+    display: none;
+  }
+  
+  .navbar-nav .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin-top: 0;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .navbar-nav .mega-menu {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+

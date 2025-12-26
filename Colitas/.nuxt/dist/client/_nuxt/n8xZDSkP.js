@@ -1,0 +1,1 @@
+import{p as s}from"./-tpCl6nn.js";const r=s("/features/features-course-1.jpg"),t=s("/features/features-course-2.jpg"),o=s("/features/features-course-3.jpg"),a=s("/features/features-course-4.jpg");export{r as _,t as a,o as b,a as c};
