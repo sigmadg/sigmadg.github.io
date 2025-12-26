@@ -36,6 +36,9 @@ function comenzar() {
 		// El número de apuestas también indica cuántos sorteos se realizarán
 		sorteosTotales = Math.floor(apuesta);
 		
+		// Limpiar contenido anterior si existe
+		$("#derecho").empty();
+		
 		//Genero la tarjeta de lotería del jugador
 		tarjeta = generaTarjeta();
 		numeros_tarjeta = leerTarjeta(tarjeta);
@@ -45,6 +48,13 @@ function comenzar() {
 		
 		//Muestro la tarjeta
 		dibujaTarjeta(tarjeta);
+		
+		// Cambiar texto del botón a "REINICIAR" si ya existe
+		var btnReset = document.getElementById("reset");
+		if (btnReset) {
+			btnReset.innerHTML = "<b>REINICIAR</b>";
+		}
+		
 		iniciar();
 }
 
