@@ -104,7 +104,8 @@ function aleatorio(inicio, fin, numero)
  * Literalmente llena el bomo/array con los numeros de las bolas
  */
 function llenarBombo() {
-  for(i = 1; i <= 90; i++) {
+  bombo = []; // Asegurar que el bombo esté vacío antes de llenarlo
+  for(var i = 1; i <= 90; i++) {
     bombo.push(i);
   }
 }
@@ -125,14 +126,28 @@ function peticionAJAX() {
 }
 
 function sacaBola(indice) {
-      nbola = bombo[indice];
+      // Verificar que el índice sea válido y que el bombo tenga elementos
+      if (bombo.length === 0 || indice < 0 || indice >= bombo.length) {
+        console.error("Error: índice inválido o bombo vacío", indice, bombo.length);
+        return;
+      }
+      
+      var nbola = bombo[indice];
+      
+      // Verificar que el elemento de la bola existe antes de actualizarlo
+      var elementoBola = document.getElementById("bola");
+      if (!elementoBola) {
+        console.error("Error: elemento 'bola' no encontrado en el DOM");
+        return;
+      }
+	  
 	  //Guardo en un array los números que han salido
 	  hanSalido.push(nbola);
 	  
 	  if (hanSalido.length <= 90){
 		//Quito la bola del array
 		  bombo.splice(indice, 1);
-		  document.getElementById("bola").innerHTML=nbola;
+		  elementoBola.innerHTML = nbola;
 		  
 		  ////////////////// PON COMO COMENTARIO ESTO PARA JUGAR TU SOLO //////////////////
 		  compruebaResto();
