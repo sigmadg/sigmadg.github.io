@@ -21,11 +21,24 @@ var numeros_cartones = []; // Array múltiple que guarda en un array numeros ya 
  */
 function comenzar() {
 	
+		// Inicializar arrays y variables
+		cartones = [];
+		aciertos = [];
+		hanSalido = [];
+		numeros_cartones = [];
+		ganadores = 0;
+	
 		//Guardo en variables los datos del formulario lateral
 		// Corregido: usar document en lugar de window.parent.document para que funcione sin iframe
-		jugadores = document.getElementById("njugadores").value;
-		precio = document.getElementById("valorc").value;
-	    velocidad = document.getElementById("velo").value;
+		jugadores = parseInt(document.getElementById("njugadores").value);
+		precio = parseInt(document.getElementById("valorc").value);
+	    velocidad = parseInt(document.getElementById("velo").value);
+	
+		// Validar valores
+		if (isNaN(jugadores) || jugadores < 5 || jugadores > 20) {
+			alert("El número de jugadores debe estar entre 5 y 20");
+			return;
+		}
 	
 		//Relleno array bombo con los numeros
 		llenarBombo();
