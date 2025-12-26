@@ -192,8 +192,8 @@ function verificarGanador(numero) {
  */
 function muestraNumero() {
 	$("#derecho").append("<div style='text-align: center; margin-top: 20px;'>");
-	$("#derecho").append("<h2 style='color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-size: 2em; margin-bottom: 20px;'>🎰 Número Ganador 🎰</h2>");
-	$("#derecho").append("<div id='contador-sorteos' style='color: white; font-size: 1.2em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'>Sorteos: 0 / " + sorteosTotales + "</div>");
+	$("#derecho").append("<h2 style='font-size: 2em; margin-bottom: 20px; background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);'>🎰 Número Ganador 🎰</h2>");
+	$("#derecho").append("<div id='contador-sorteos' style='color: #c4cfde; font-size: 1.2em; margin-bottom: 10px;'>Sorteos: 0 / " + sorteosTotales + "</div>");
 	$("#derecho").append("<div id='numero-ganador'>?</div>");
 	$("#derecho").append("</div>");
 }
