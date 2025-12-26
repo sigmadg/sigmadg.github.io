@@ -348,3 +348,15 @@ h4 {
 #derecho::-webkit-scrollbar-thumb:hover {
     background: rgba(102, 126, 234, 0.7);
 }
+
+/* Animación para mensajes */
+@keyframes aparecerMensaje {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}

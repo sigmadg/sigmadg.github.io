@@ -6,11 +6,13 @@ Versión: 1.00
 ***********************************/ 
 
 var tarjeta = null; // Tarjeta de lotería del jugador
-var apuesta = 0; // Variable donde almaceno la apuesta
+var apuesta = 0; // Variable donde almaceno la apuesta (también indica número de sorteos)
 var intervalo; // Intervalo de tiempo
 var velocidad; // Velocidad del intervalo pasada en el select
 var numeros_tarjeta = []; // Array que guarda los números de la tarjeta
 var haGanado = false; // Indica si el jugador ha ganado
+var sorteosRealizados = 0; // Contador de sorteos realizados
+var sorteosTotales = 0; // Total de sorteos a realizar
 
 /**
  * Inicia la Lotería y todas las funciones relacionadas
@@ -19,6 +21,7 @@ function comenzar() {
 	
 		// Inicializar variables
 		haGanado = false;
+		sorteosRealizados = 0;
 	
 		//Guardo en variables los datos del formulario lateral
 		apuesta = parseFloat(document.getElementById("apuesta").value);
@@ -29,6 +32,9 @@ function comenzar() {
 			alert("La apuesta debe ser mayor que 0");
 			return;
 		}
+		
+		// El número de apuestas también indica cuántos sorteos se realizarán
+		sorteosTotales = Math.floor(apuesta);
 		
 		//Genero la tarjeta de lotería del jugador
 		tarjeta = generaTarjeta();
@@ -96,6 +102,19 @@ function aleatorio(inicio, fin, numero)
  * Genera un número aleatorio de lotería (1-99) y lo muestra
  */
 function sacarNumeroAleatorio() {
+  // Verificar si ya se alcanzó el número máximo de sorteos
+  if (sorteosRealizados >= sorteosTotales) {
+    parar();
+    mostrarFinJuego();
+    return;
+  }
+  
+  // Incrementar contador de sorteos
+  sorteosRealizados++;
+  
+  // Actualizar contador visual
+  actualizarContador();
+  
   // Generar número aleatorio entre 1 y 99
   var numeroAleatorio = Math.floor(Math.random() * 99) + 1;
   
@@ -174,8 +193,19 @@ function verificarGanador(numero) {
 function muestraNumero() {
 	$("#derecho").append("<div style='text-align: center; margin-top: 20px;'>");
 	$("#derecho").append("<h2 style='color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-size: 2em; margin-bottom: 20px;'>🎰 Número Ganador 🎰</h2>");
+	$("#derecho").append("<div id='contador-sorteos' style='color: white; font-size: 1.2em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'>Sorteos: 0 / " + sorteosTotales + "</div>");
 	$("#derecho").append("<div id='numero-ganador'>?</div>");
 	$("#derecho").append("</div>");
+}
+
+/**
+ * Actualiza el contador de sorteos
+ */
+function actualizarContador() {
+	var contador = document.getElementById("contador-sorteos");
+	if (contador) {
+		contador.innerHTML = "Sorteos: " + sorteosRealizados + " / " + sorteosTotales;
+	}
 }
 
 /**
@@ -259,11 +289,61 @@ function leerTarjeta(tarjeta){
  * Muestra el mensaje de ganador cuando se encuentra el número en la tarjeta
  */
 function mostrarGanador(){
-	var ventana = window.open("correcto.html", "_blank", "width=500,height=400");
-	//Calcula el premio
-	ventana.onload = function () {
-		ventana.document.getElementById('premio').innerHTML = calcularPremio();
-	};
+	parar();
+	
+	// Mensajes chuscos aleatorios
+	var mensajes = [
+		"🎉 ¡FELICIDADES! ¡GANASTE! 🎉<br>¡Eres el campeón de la suerte! 🍀",
+		"🎊 ¡BINGO! ¡ACERTASTE! 🎊<br>¡La fortuna está de tu lado! 💰",
+		"🏆 ¡GANADOR! ¡GANADOR! 🏆<br>¡Tienes más suerte que un gato con 7 vidas! 🐱",
+		"🎰 ¡JACKPOT! ¡LO LOGASTE! 🎰<br>¡Eres más afortunado que un trébol de 4 hojas! ☘️",
+		"💎 ¡FELICIDADES! ¡TRIUNFASTE! 💎<br>¡Tienes la suerte de un leprechaun! 🍀",
+		"🌟 ¡ÉXITO TOTAL! ¡GANASTE! 🌟<br>¡Tu suerte brilla más que las estrellas! ⭐",
+		"🎁 ¡PREMIO GANADO! ¡FELICIDADES! 🎁<br>¡Eres el rey/la reina de la suerte! 👑",
+		"🎯 ¡BULLSEYE! ¡ACERTASTE! 🎯<br>¡Tienes puntería de francotirador! 🎪"
+	];
+	
+	var mensajeAleatorio = mensajes[Math.floor(Math.random() * mensajes.length)];
+	var premio = calcularPremio();
+	
+	// Crear mensaje en la página
+	var mensajeDiv = document.createElement("div");
+	mensajeDiv.id = "mensaje-ganador";
+	mensajeDiv.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); " +
+		"background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); " +
+		"padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); " +
+		"z-index: 10000; text-align: center; color: #1a1a1a; font-size: 1.5em; " +
+		"font-weight: bold; border: 4px solid #ffd700; max-width: 500px; animation: aparecerMensaje 0.5s ease-out;";
+	mensajeDiv.innerHTML = "<div style='font-size: 2em; margin-bottom: 20px;'>" + mensajeAleatorio + "</div>" +
+		"<div style='font-size: 1.2em; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;'>" +
+		"💰 Premio: " + premio + " 💰</div>" +
+		"<button onclick='document.getElementById(\"mensaje-ganador\").remove(); resetear();' " +
+		"style='margin-top: 20px; padding: 12px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); " +
+		"color: white; border: none; border-radius: 25px; font-size: 1em; font-weight: bold; cursor: pointer;'>Jugar de Nuevo</button>";
+	
+	document.body.appendChild(mensajeDiv);
+}
+
+/**
+ * Muestra mensaje cuando terminan los sorteos sin ganar
+ */
+function mostrarFinJuego() {
+	if (haGanado) return; // Si ya ganó, no mostrar este mensaje
+	
+	var mensajeDiv = document.createElement("div");
+	mensajeDiv.id = "mensaje-fin";
+	mensajeDiv.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); " +
+		"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); " +
+		"padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); " +
+		"z-index: 10000; text-align: center; color: white; font-size: 1.3em; " +
+		"font-weight: bold; border: 4px solid rgba(255,255,255,0.3); max-width: 500px; animation: aparecerMensaje 0.5s ease-out;";
+	mensajeDiv.innerHTML = "<div style='font-size: 1.8em; margin-bottom: 20px;'>😔 Se acabaron los sorteos</div>" +
+		"<div style='font-size: 1em; margin-top: 20px; opacity: 0.9;'>No te desanimes, ¡la próxima vez será! 🍀</div>" +
+		"<button onclick='document.getElementById(\"mensaje-fin\").remove(); resetear();' " +
+		"style='margin-top: 20px; padding: 12px 30px; background: rgba(255,255,255,0.2); " +
+		"color: white; border: 2px solid white; border-radius: 25px; font-size: 1em; font-weight: bold; cursor: pointer;'>Intentar de Nuevo</button>";
+	
+	document.body.appendChild(mensajeDiv);
 }
 
 /**
