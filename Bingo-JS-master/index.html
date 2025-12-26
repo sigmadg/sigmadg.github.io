@@ -29,14 +29,7 @@
 						<option value="2000">Rápido</option>
 						<option value="4000" selected>Normal</option>
 					  </select><br>
-					   <p>Número de jugadores</p><input type="number" id="njugadores" class="form-control" min="5" max="20" value="5"><br>
-                       <p>Valor del cartón</p><select id="valorc" class="form-control">
-                            <option value="1" selected="selected">1 Euro</option>
-                            <option value="2">2 Euros</option>
-                            <option value="3">3 Euros</option>
-                            <option value="4">4 Euros</option>
-                            <option value="5">5 Euros</option>
-                        </select>	
+					   <p>Apuesta</p><input type="number" id="apuesta" class="form-control" min="1" value="1" step="0.5"><br>
             <hr>
            <button type="submit" class="btn btn-default" id="biniciar" onclick="comenzar()"><b>COMENZAR</b></button>
             <hr></div>
@@ -46,25 +39,13 @@
 			<div id="espacio"></div><br>
 			<h1>Documentación</h1><br>
 			<ul>
-			  <li>Puedes ajustar el número de jugadores y el valor del cartón en el menú izquierdo.</li>
-			  <li>Además también puedes seleccionar la velocidad la bola.</li>
+			  <li>Configura la velocidad de las bolas y tu apuesta en el menú izquierdo.</li>
 			  <li>La velocidad normal es de 4000 ms, la rápida de 2000 ms y la velocidad flash de 1000 ms.</li>
-			  <li>Esta práctica mezcla Javascript, CSS, jQuery y AJAX para sacar la bola.</li>
-			  <li>El resultado del bingo está hecho con ventanas emergentes y no con alerts así que es importante permitir su visaulización.</li>
-			  <li>En caso de cantar Bingo y que sea incorrecto hay que hacer uso del botón "Volver al juego" para continuar con el juego.</li>
-			  <li>El caso de que haya varios ganadores calculo el premio correctamente y muestro en una ventana que han sido varios los agraciados.</li>
-			  <li>A la hora de sacar una bola simulo un bombo de verdad de tal manera que tengo un array con 90 números y voy quitando del array las bolas que van saliendo.</li>
-			  <li>De esta forma evito repeticiones más facilmente y me parece que se ajusta más a la realidad.</li>
-			  <li>Genero en un array multidimensional los cartones con números aleatorios tan grande como jugadores haya.</li>
-			  <li>A las cldas con huecos vacios generados les asigno el valor -1 para posteriormente asignarle la clase "hueco".</li>
-			  <li>Para dibujar el cartón la función solo recibe el primer elemento del array cartones (cartones[0]) ya que solo quiero dibujar el mio.</li>
-			  <li>Posteriormente tengo una función que lee los números y me guarda de manera ordenada en un array simple todos los números sin los huecos de los cartones.</li>
-			  <li>De esta manera puedo comprobar los resultados de los bingos más facilmente.</li>
-			  <li>El bingo no tiene en cuenta los marcados, aunque esto sería facil de cambiar, ya que no tenía muy claro si se tenía que tener en cuenta las fichas marcadas o era algo estético.</li>
-			  <li>De esta manerá cuando le das a cantar bingo solo comprueba que los números del cartón coincidan con las bolas sacadas.</li>
-			  <li>Esta práctica está probada en el navegador Chrome 56, aunque es posible que también funcione en Firefox.</li>
-			  <li>Este Bingo ha sido probado con el XAMPP 5.6.30 que incluye el mismo número de versión de PHP.</li>
-			  <li>Que tengas mucha suerte y pongas buena nota.</li>
+			  <li>Haz clic en "COMENZAR" para iniciar el juego.</li>
+			  <li>Las bolas aparecerán con animación en el área central.</li>
+			  <li>Marca los números de tu cartón cuando salgan las bolas.</li>
+			  <li>Cuando tengas todos los números, haz clic en "¡Bingo!" para verificar.</li>
+			  <li>El premio se calcula según tu apuesta.</li>
 			</ul>
 		</div>
 		</div>

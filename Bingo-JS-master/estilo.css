@@ -65,6 +65,43 @@ h4 {
     text-align: center;
     font-size: 60px;
     padding: auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Animación para la bola */
+.bola-animando {
+    animation: bolaAnimacion 0.1s infinite;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+
+@keyframes bolaAnimacion {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.15) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Efecto cuando aparece el número final */
+#bola:not(.bola-animando) {
+    animation: numeroFinal 0.5s ease-out;
+}
+
+@keyframes numeroFinal {
+    0% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 #carton {
     width: 75%;

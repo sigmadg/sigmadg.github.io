@@ -5,16 +5,14 @@ Fecha creación: 01/03/2017
 Versión: 1.00 
 ***********************************/ 
 
-var cartones = []; //Tendremos una lista de cartones
-var jugadores; //Variable donde almaceno el número de jugadores
-var precio; //Variable donde almaceno el precio del cartón
-var intervalo; //Intervalo de tiempo
-var velocidad; //Velocidad del intervalo pasada en el select
-var ganadores=0; //Número de ganadores que hay
-var aciertos = []; //Array de aciertos de cada uno de los cartones
-var bombo = []; //Array del Bombo donde van a ir las bolas
-var hanSalido = []; //Números que ya han salido del bombo
-var numeros_cartones = []; // Array múltiple que guarda en un array numeros ya ordenados de cada uno de los cartones sin los huecos
+var carton = null; // Cartón del jugador
+var apuesta = 0; // Variable donde almaceno la apuesta
+var intervalo; // Intervalo de tiempo
+var velocidad; // Velocidad del intervalo pasada en el select
+var aciertos = 0; // Número de aciertos del cartón
+var bombo = []; // Array del Bombo donde van a ir las bolas
+var hanSalido = []; // Números que ya han salido del bombo
+var numeros_carton = []; // Array que guarda los números del cartón sin los huecos
 
 /**
  * Inicia el Bingo y todas las funciones realacionadas
@@ -22,32 +20,25 @@ var numeros_cartones = []; // Array múltiple que guarda en un array numeros ya 
 function comenzar() {
 	
 		// Inicializar arrays y variables
-		cartones = [];
-		aciertos = [];
 		hanSalido = [];
-		numeros_cartones = [];
-		ganadores = 0;
+		aciertos = 0;
 	
 		//Guardo en variables los datos del formulario lateral
-		// Corregido: usar document en lugar de window.parent.document para que funcione sin iframe
-		jugadores = parseInt(document.getElementById("njugadores").value);
-		precio = parseInt(document.getElementById("valorc").value);
+		apuesta = parseFloat(document.getElementById("apuesta").value);
 	    velocidad = parseInt(document.getElementById("velo").value);
 	
 		// Validar valores
-		if (isNaN(jugadores) || jugadores < 5 || jugadores > 20) {
-			alert("El número de jugadores debe estar entre 5 y 20");
+		if (isNaN(apuesta) || apuesta <= 0) {
+			alert("La apuesta debe ser mayor que 0");
 			return;
 		}
 	
 		//Relleno array bombo con los numeros
 		llenarBombo();
 		
-		//Genero el objeto carton para cada uno de los jugadores seleccionado
-		for (var i = 0; i < jugadores; i++) {
-			cartones[i] = generaCarton();
-			numeros_cartones[i]=leerCarton(cartones[i]);
-		};
+		//Genero el cartón del jugador
+		carton = generaCarton();
+		numeros_carton = leerCarton(carton);
 		
 		//Muestro el div de la bola.
 		muestraBola();
@@ -58,8 +49,8 @@ function comenzar() {
 		//Deshabilito el botón de comenzar
 		document.getElementById("biniciar").disabled = true;
 		
-		//Muestro el primer carton el 0 que será el nuestro ya que el resto no nos interesa dibujarlos
-		dibujaCarton(cartones[0]);
+		//Muestro el cartón
+		dibujaCarton(carton);
 		iniciar();
 }
 
@@ -160,16 +151,64 @@ function sacaBola(indice) {
 	  if (hanSalido.length <= 90){
 		//Quito la bola del array
 		  bombo.splice(indice, 1);
-		  elementoBola.innerHTML = nbola;
 		  
-		  ////////////////// PON COMO COMENTARIO ESTO PARA JUGAR TU SOLO //////////////////
-		  compruebaResto();
+		  // Animación: primero mostrar números aleatorios rápidos
+		  animarBola(elementoBola, nbola);
+		  
+		  // Marcar el número en el cartón si existe
+		  marcarNumeroEnCarton(nbola);
 	  }
 	  else
 	  {
 		  resetear();
 		  alert("Se han sacado todos los números");
 	  }
+}
+
+/**
+ * Anima la bola mostrando números aleatorios antes del número final
+ */
+function animarBola(elemento, numeroFinal) {
+  var duracion = Math.min(velocidad * 0.8, 1000); // 80% de la velocidad o máximo 1 segundo
+  var pasos = 10;
+  var paso = duracion / pasos;
+  var contador = 0;
+  
+  // Agregar clase de animación
+  elemento.classList.add("bola-animando");
+  
+  var intervaloAnimacion = setInterval(function() {
+    if (contador < pasos - 1) {
+      // Mostrar número aleatorio entre 1 y 90
+      elemento.innerHTML = Math.floor(Math.random() * 90) + 1;
+      contador++;
+    } else {
+      // Mostrar el número final
+      elemento.innerHTML = numeroFinal;
+      elemento.classList.remove("bola-animando");
+      clearInterval(intervaloAnimacion);
+    }
+  }, paso);
+}
+
+/**
+ * Marca automáticamente el número en el cartón si existe
+ */
+function marcarNumeroEnCarton(numero) {
+  if (!carton) return;
+  
+  for (var i = 0; i < carton.length; i++) {
+    for (var j = 0; j < carton[i].length; j++) {
+      if (carton[i][j].valor === numero && !carton[i][j].marca) {
+        carton[i][j].marca = true;
+        var celda = document.getElementById(i + "/" + j);
+        if (celda) {
+          celda.classList.add('marca');
+        }
+        break;
+      }
+    }
+  }
 }
 
 /**
@@ -304,9 +343,8 @@ function leerCarton(carton){
 function cantaBingo(){
 	//Paro el bingo
 	parar();
-	//Compruebo mi cartón que es el primero, como ya tengo los números extraidos y guardados en el array numeros_cartones es más sencillo.
-	if(compruebaBingo(0)==true){
-		ganadores++;
+	//Compruebo mi cartón
+	if(compruebaBingo()==true){
 		 var ventana = window.open("correcto.html", "_blank", "width=500,height=400");
 		 //Calcula el premio
 		 ventana.onload = function () {
@@ -317,74 +355,42 @@ function cantaBingo(){
 		var ventana = window.open("incorrecto.html", "_blank", "width=520,height=410");
 		//Manda el número de aciertos
 		 ventana.onload = function () {
-            ventana.document.getElementById('nac').innerHTML = aciertos[0];
+            ventana.document.getElementById('nac').innerHTML = aciertos;
         };
 	}
 }
 
 /**
- * Comprueba si los números del cartón del indice pasado han salido y si tiene los 15 aciertos devuelve que ha ganado.
- * @param {integer} indice Indice del array numeros_cartones para ver que cartón compruebo.
+ * Comprueba si los números del cartón han salido y si tiene los 15 aciertos devuelve que ha ganado.
  * @returns {boolean} correcto Devuelve si ha ganado o no.
  */
-function compruebaBingo(indice){
-	var numeros=numeros_cartones[indice];
+function compruebaBingo(){
+	var numeros = numeros_carton;
 	var correcto = false;
-	aciertos[indice]=0;
+	aciertos = 0;
 	
-	for (x=0;x<numeros.length;x++){
-		if(hanSalido.indexOf(numeros[x])!=-1){
-		aciertos[indice]++;
+	for (var x = 0; x < numeros.length; x++){
+		if(hanSalido.indexOf(numeros[x]) != -1){
+			aciertos++;
 		}
 	}
 	
-	if (aciertos[indice]==15){
+	if (aciertos == 15){
 		correcto = true;
 	}
 	return correcto;
 }
 
-/**
- * Compruebo el resto de cartones para ver si alguno ha ganado
- */
-function compruebaResto(){
-	//Empiezo en un por que el cero es el mio
-	for (y = 1; y < jugadores; y++) {
-		if(compruebaBingo(y)==true){
-			console.log(y);
-			var jugadorganador=y;
-			ganadores++;
-			
-			//Si solo hay un ganador ...
-			if (ganadores==1){
-				var ventana = window.open("otro.html", "_blank", "width=470,height=420");
-				//Calcula el premio y manda el número de jugador, teniendo en cuenta que yo siempre soy el jugador número 0.
-				 ventana.onload = function () {
-					ventana.document.getElementById('premio').innerHTML = calcularPremio();
-					ventana.document.getElementById('nj').innerHTML = jugadorganador;
-				};
-			}
-			else //Si hay varios, evito que me saque multiples ventanas, ya que en caso de ser numerosos jugadores sería poco práctico.
-			{
-				ventana.close();
-				var ventana = window.open("varios.html", "_blank", "width=470,height=420");
-				//Calcula el premio y manda el número de jugador, teniendo en cuenta que yo siempre soy el jugador número 1.
-				 ventana.onload = function () {
-					ventana.document.getElementById('premio').innerHTML = calcularPremio();
-				};
-			}
-			parar();
-		}
-	}
-}
+// Función compruebaResto eliminada - ya no es necesaria con un solo jugador
 
 /**
- * Calcula el premio según la fórmula especificada en la práctica
- * @returns {integer} resultado Devuelve el resultado del premio
+ * Calcula el premio según la apuesta
+ * @returns {number} resultado Devuelve el resultado del premio
  */
 function calcularPremio(){
-	var resultado=(jugadores*precio)/ganadores;
-	return resultado*0.8;
+	// Premio = apuesta * 10 (puedes ajustar esta fórmula)
+	var resultado = apuesta * 10;
+	return resultado.toFixed(2);
 }
 
 
