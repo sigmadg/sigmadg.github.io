@@ -777,6 +777,47 @@ h1, h2, h3, h4, h5, h6,
 .rn-resume-area .rn-nav-list {
   border-bottom: 2px solid var(--glass-border);
   margin-bottom: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+/* Ajustar pestañas del curriculum para que quepan las 5 en una fila */
+.rn-resume-area .rn-nav-list .nav-item {
+  flex: 1 1 20%;
+  min-width: 0;
+  text-align: center;
+}
+
+.rn-resume-area .rn-nav-list .nav-link {
+  padding: 20px 8px !important;
+  font-size: 13px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 991px) {
+  .rn-resume-area .rn-nav-list .nav-link {
+    padding: 18px 6px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .rn-resume-area .rn-nav-list {
+    flex-wrap: wrap;
+  }
+  
+  .rn-resume-area .rn-nav-list .nav-item {
+    flex: 1 1 50%;
+    margin-bottom: 5px;
+  }
+  
+  .rn-resume-area .rn-nav-list .nav-link {
+    padding: 15px 5px !important;
+    font-size: 11px !important;
+  }
 }
 
 .rn-resume-area .resume-single-list .inner .heading .title h4 {
