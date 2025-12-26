@@ -41,7 +41,6 @@
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume"><i data-feather="file-text"></i> Curriculum</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features"><i data-feather="briefcase"></i> Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#portfolio"><i data-feather="layers"></i> Portafolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#loteria"><i data-feather="zap"></i> Lotería</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#blog"><i data-feather="book"></i> Blog</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume" onclick="setTimeout(function(){ document.querySelector('#experience-tab').click(); setTimeout(function(){ document.querySelector('#courses').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 300); }, 100);"><i data-feather="book-open"></i> Cursos</a></li>
                 </ul>
@@ -126,7 +125,6 @@
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume">Curriculum</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#features">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#portfolio">Portafolio</a></li>
-                    <li class="nav-item"><a class="nav-link smoth-animation-two" href="#loteria">Lotería</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#blog">Blog</a></li>
                     <li class="nav-item"><a class="nav-link smoth-animation-two" href="#resume" onclick="setTimeout(function(){ document.querySelector('#experience-tab').click(); setTimeout(function(){ document.querySelector('#courses').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 300); }, 100);">Cursos</a></li>
                 </ul>
@@ -1468,33 +1466,24 @@
         </div>
         <!-- End portfolio Area -->
 
-        <!-- Start Lotería Game Area -->
-        <div class="rn-portfolio-area rn-section-gap section-separator" id="loteria" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="100" data-aos-once="true" class="section-title text-center">
-                            <span class="subtitle" style="color: rgba(255,255,255,0.9);">Juego interactivo</span>
-                            <h2 class="title" style="color: white;">Lotería</h2>
-                            <p style="color: rgba(255,255,255,0.8); margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                                Prueba tu suerte con este juego de lotería. Configura tu apuesta y velocidad, y disfruta del sorteo.
-                            </p>
+        <!-- Start Lotería Game Window -->
+        <div class="container" style="margin-top: 40px; margin-bottom: 40px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div data-aos="fade-up" data-aos-delay="300" data-aos-once="true" style="background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95)); border-radius: 15px; padding: 20px; box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e; border: 1px solid rgba(255, 255, 255, 0.05); max-width: 900px; margin: 0 auto;">
+                        <div style="text-align: center; margin-bottom: 15px;">
+                            <h4 style="color: #ffffff; font-size: 1.3em; margin-bottom: 5px; background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎰 Juego de Lotería</h4>
+                            <p style="color: #878e99; font-size: 0.9em; margin: 0;">Prueba tu suerte</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row mt--50">
-                    <div class="col-lg-12">
-                        <div data-aos="fade-up" data-aos-delay="200" data-aos-once="true" style="background: rgba(255,255,255,0.95); border-radius: 20px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
-                            <iframe src="Bingo-JS-master/index.html" 
-                                    style="width: 100%; height: 800px; border: none; border-radius: 15px;"
-                                    title="Juego de Lotería">
-                            </iframe>
-                        </div>
+                        <iframe src="Bingo-JS-master/index.html" 
+                                style="width: 100%; height: 600px; border: none; border-radius: 10px;"
+                                title="Juego de Lotería">
+                        </iframe>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Lotería Game Area -->
+        <!-- End Lotería Game Window -->
 
 <!-- Start News Area -->
         <div class="rn-blog-area rn-section-gap section-separator" id="blog">
