@@ -261,50 +261,15 @@ function leerTarjeta(tarjeta){
 }
 
 /**
- * Comprueba nuestro carton y muestra la ventana emergente en cada caso.
+ * Muestra el mensaje de ganador cuando se encuentra el número en la tarjeta
  */
-function cantaBingo(){
-	//Paro el bingo
-	parar();
-	//Compruebo mi cartón
-	if(compruebaBingo()==true){
-		 var ventana = window.open("correcto.html", "_blank", "width=500,height=400");
-		 //Calcula el premio
-		 ventana.onload = function () {
-            ventana.document.getElementById('premio').innerHTML = calcularPremio();
-        };
-	}
-	else{
-		var ventana = window.open("incorrecto.html", "_blank", "width=520,height=410");
-		//Manda el número de aciertos
-		 ventana.onload = function () {
-            ventana.document.getElementById('nac').innerHTML = aciertos;
-        };
-	}
+function mostrarGanador(){
+	var ventana = window.open("correcto.html", "_blank", "width=500,height=400");
+	//Calcula el premio
+	ventana.onload = function () {
+		ventana.document.getElementById('premio').innerHTML = calcularPremio();
+	};
 }
-
-/**
- * Comprueba si los números del cartón han salido y si tiene los 15 aciertos devuelve que ha ganado.
- * @returns {boolean} correcto Devuelve si ha ganado o no.
- */
-function compruebaBingo(){
-	var numeros = numeros_carton;
-	var correcto = false;
-	aciertos = 0;
-	
-	for (var x = 0; x < numeros.length; x++){
-		if(hanSalido.indexOf(numeros[x]) != -1){
-			aciertos++;
-		}
-	}
-	
-	if (aciertos == 15){
-		correcto = true;
-	}
-	return correcto;
-}
-
-// Función compruebaResto eliminada - ya no es necesaria con un solo jugador
 
 /**
  * Calcula el premio según la apuesta
