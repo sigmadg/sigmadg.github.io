@@ -190,30 +190,65 @@ function animarNumero(elemento, numeroFinal) {
 
 /**
  * Verifica si el número está en la tarjeta y marca si existe
+ * Probabilidad de ganar: 1 de 10 (10%)
  */
 function verificarGanador(numero) {
   if (!tarjeta || haGanado) return;
   
-  var encontrado = false;
+  // Probabilidad de ganar: 1 de 10 (10%)
+  var probabilidadGanar = Math.random();
+  var haGanadoPorProbabilidad = probabilidadGanar < 0.1; // 10% de probabilidad
   
+  var encontrado = false;
+  var numeroEnTarjeta = false;
+  
+  // Verificar si el número está en la tarjeta (para marcarlo)
   for (var i = 0; i < tarjeta.length; i++) {
     for (var j = 0; j < tarjeta[i].length; j++) {
       if (tarjeta[i][j].valor === numero) {
         encontrado = true;
+        numeroEnTarjeta = true;
         tarjeta[i][j].marca = true;
         var celda = document.getElementById(i + "/" + j);
         if (celda) {
           celda.classList.add('marca');
-          celda.classList.add('ganador');
         }
-        // ¡Ganaste!
-        haGanado = true;
-        parar();
-        mostrarGanador();
         break;
       }
     }
     if (encontrado) break;
+  }
+  
+  // Si gana por probabilidad (1 de 10), marcar un número aleatorio como ganador
+  if (haGanadoPorProbabilidad) {
+    haGanado = true;
+    parar();
+    
+    // Si el número no estaba en la tarjeta, marcar un número aleatorio como ganador
+    if (!numeroEnTarjeta) {
+      var filaAleatoria = Math.floor(Math.random() * tarjeta.length);
+      var columnaAleatoria = Math.floor(Math.random() * tarjeta[0].length);
+      var celdaGanadora = document.getElementById(filaAleatoria + "/" + columnaAleatoria);
+      if (celdaGanadora) {
+        celdaGanadora.classList.add('marca');
+        celdaGanadora.classList.add('ganador');
+      }
+    } else {
+      // Si el número estaba en la tarjeta, marcar esa celda como ganadora
+      for (var i = 0; i < tarjeta.length; i++) {
+        for (var j = 0; j < tarjeta[i].length; j++) {
+          if (tarjeta[i][j].valor === numero) {
+            var celda = document.getElementById(i + "/" + j);
+            if (celda) {
+              celda.classList.add('ganador');
+            }
+            break;
+          }
+        }
+      }
+    }
+    
+    mostrarGanador();
   }
 }
 
