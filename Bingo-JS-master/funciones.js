@@ -178,9 +178,10 @@ function verificarGanador(numero) {
  * Genera el div donde se mostrará el número ganador
  */
 function muestraNumero() {
-	$("#derecho").append("<br><h2>Número Ganador</h2>");
+	$("#derecho").append("<div style='text-align: center; margin-top: 20px;'>");
+	$("#derecho").append("<h2 style='color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); font-size: 2em; margin-bottom: 20px;'>🎰 Número Ganador 🎰</h2>");
 	$("#derecho").append("<div id='numero-ganador'>?</div>");
-	$("#derecho").append("<br><br>");
+	$("#derecho").append("</div>");
 }
 
 /**
