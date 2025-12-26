@@ -31,7 +31,9 @@ p {
     background: transparent;
     backdrop-filter: blur(5px);
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 20px;
+    max-height: 100vh;
 }
 #espacio {
 	width: 25%;
