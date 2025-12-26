@@ -15,9 +15,26 @@ var sorteosRealizados = 0; // Contador de sorteos realizados
 var sorteosTotales = 0; // Total de sorteos a realizar
 
 /**
- * Inicializa el botón de iniciar al cargar la página
+ * Inicializa el botón de iniciar al cargar la página y muestra elementos iniciales
  */
 function inicializarBoton() {
+	// Inicializar variables
+	haGanado = false;
+	sorteosRealizados = 0;
+	apuesta = parseFloat(document.getElementById("apuesta").value) || 5;
+	sorteosTotales = Math.floor(apuesta);
+	
+	// Generar y mostrar la tarjeta desde el inicio
+	tarjeta = generaTarjeta();
+	numeros_tarjeta = leerTarjeta(tarjeta);
+	
+	// Mostrar el div del número ganador desde el inicio
+	muestraNumero();
+	
+	// Mostrar la tarjeta desde el inicio
+	dibujaTarjeta(tarjeta);
+	
+	// Inicializar el botón
 	var btnReset = document.getElementById("reset");
 	if (btnReset) {
 		btnReset.onclick = function() {
@@ -54,18 +71,27 @@ function comenzar() {
 		// El número de apuestas también indica cuántos sorteos se realizarán
 		sorteosTotales = Math.floor(apuesta);
 		
-		// Limpiar contenido anterior si existe
-		$("#derecho").empty();
+		// Actualizar contador de sorteos
+		actualizarContador();
 		
-		//Genero la tarjeta de lotería del jugador
-		tarjeta = generaTarjeta();
-		numeros_tarjeta = leerTarjeta(tarjeta);
-		
-		//Muestro el div del número ganador.
-		muestraNumero();
-		
-		//Muestro la tarjeta
-		dibujaTarjeta(tarjeta);
+		// Si no existe la tarjeta o el número ganador, generarlos
+		if (!tarjeta || !document.getElementById("tarjeta")) {
+			// Limpiar contenido anterior si existe
+			$("#derecho").empty();
+			
+			//Genero la tarjeta de lotería del jugador
+			tarjeta = generaTarjeta();
+			numeros_tarjeta = leerTarjeta(tarjeta);
+			
+			//Muestro el div del número ganador.
+			muestraNumero();
+			
+			//Muestro la tarjeta
+			dibujaTarjeta(tarjeta);
+		} else {
+			// Si ya existen, solo actualizar el contador
+			actualizarContador();
+		}
 		
 		// Cambiar texto del botón a "REINICIAR" si ya existe
 		var btnReset = document.getElementById("reset");
@@ -256,6 +282,11 @@ function verificarGanador(numero) {
  * Genera el div donde se mostrará el número ganador
  */
 function muestraNumero() {
+	// Verificar si ya existe el número ganador para evitar duplicados
+	if (document.getElementById("numero-ganador")) {
+		return; // Ya existe, no crear duplicado
+	}
+	
 	$("#derecho").append("<div style='text-align: center; margin-top: 20px;'>");
 	$("#derecho").append("<h2 style='font-size: 2em; margin-bottom: 20px; background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);'>🎰 Número Ganador 🎰</h2>");
 	$("#derecho").append("<div id='contador-sorteos' style='color: #c4cfde; font-size: 1.2em; margin-bottom: 10px;'>Sorteos: 0 / " + sorteosTotales + "</div>");
@@ -307,6 +338,11 @@ function generaTarjeta() {
  */
 function dibujaTarjeta(tarjeta)
 {
+	// Verificar si ya existe la tarjeta para evitar duplicados
+	if (document.getElementById("tarjeta")) {
+		return; // Ya existe, no crear duplicado
+	}
+	
 	//Generamos la tabla
 	var tabla = document.createElement("table");
  	tabla.setAttribute("id", "tarjeta");
