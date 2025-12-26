@@ -15,6 +15,24 @@ var sorteosRealizados = 0; // Contador de sorteos realizados
 var sorteosTotales = 0; // Total de sorteos a realizar
 
 /**
+ * Inicializa el botón de iniciar al cargar la página
+ */
+function inicializarBoton() {
+	var btnReset = document.getElementById("reset");
+	if (btnReset) {
+		btnReset.onclick = function() {
+			if (intervalo) {
+				// Si ya hay un intervalo, reiniciar
+				resetear();
+			} else {
+				// Si no hay intervalo, iniciar el juego
+				comenzar();
+			}
+		};
+	}
+}
+
+/**
  * Inicia la Lotería y todas las funciones relacionadas
  */
 function comenzar() {
@@ -274,20 +292,6 @@ function dibujaTarjeta(tarjeta)
 	//Agregamos la tarjeta al div correspondiente
 	var sitio = document.getElementById("derecho");
 	sitio.appendChild(tabla);
-	
-	//Agregar botón de iniciar/reiniciar (solo si no existe)
-	if (document.getElementById("reset") === null) {
-		$("#datos").append("<hr><button id='reset' class='btn btn-default'><b>INICIAR</b></button>");
-		$("#reset").click(function() {
-			if (intervalo) {
-				// Si ya hay un intervalo, reiniciar
-				resetear();
-			} else {
-				// Si no hay intervalo, iniciar el juego
-				comenzar();
-			}
-		});
-	}
 }
 
 // Función marcar eliminada - ya no es necesaria, se marca automáticamente
