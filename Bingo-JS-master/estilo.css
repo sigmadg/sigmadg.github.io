@@ -54,7 +54,7 @@ p {
 h4 {
     line-height: 2px;
 }
-#bola{
+#numero-ganador{
     line-height: 95px;
     background-color: #515A5A;
     color: white;
@@ -69,14 +69,14 @@ h4 {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* Animación para la bola */
-.bola-animando {
-    animation: bolaAnimacion 0.1s infinite;
+/* Animación para el número */
+.numero-animando {
+    animation: numeroAnimacion 0.1s infinite;
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0,0,0,0.5);
 }
 
-@keyframes bolaAnimacion {
+@keyframes numeroAnimacion {
     0% {
         transform: scale(1) rotate(0deg);
     }
@@ -89,7 +89,7 @@ h4 {
 }
 
 /* Efecto cuando aparece el número final */
-#bola:not(.bola-animando) {
+#numero-ganador:not(.numero-animando) {
     animation: numeroFinal 0.5s ease-out;
 }
 
@@ -126,6 +126,26 @@ h4 {
 	background-size: 62px;
 }
 .marca {
-    background-color: white;
-    color: white;
+    background-color: #90EE90;
+    color: black;
+    font-weight: bold;
+}
+
+.ganador {
+    background-color: #FFD700 !important;
+    color: black;
+    font-weight: bold;
+    animation: ganadorAnimacion 0.5s ease-in-out;
+}
+
+@keyframes ganadorAnimacion {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

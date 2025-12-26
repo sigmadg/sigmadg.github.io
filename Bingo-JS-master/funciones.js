@@ -5,23 +5,20 @@ Fecha creación: 01/03/2017
 Versión: 1.00 
 ***********************************/ 
 
-var carton = null; // Cartón del jugador
+var tarjeta = null; // Tarjeta de lotería del jugador
 var apuesta = 0; // Variable donde almaceno la apuesta
 var intervalo; // Intervalo de tiempo
 var velocidad; // Velocidad del intervalo pasada en el select
-var aciertos = 0; // Número de aciertos del cartón
-var bombo = []; // Array del Bombo donde van a ir las bolas
-var hanSalido = []; // Números que ya han salido del bombo
-var numeros_carton = []; // Array que guarda los números del cartón sin los huecos
+var numeros_tarjeta = []; // Array que guarda los números de la tarjeta
+var haGanado = false; // Indica si el jugador ha ganado
 
 /**
- * Inicia el Bingo y todas las funciones realacionadas
+ * Inicia la Lotería y todas las funciones relacionadas
  */
 function comenzar() {
 	
-		// Inicializar arrays y variables
-		hanSalido = [];
-		aciertos = 0;
+		// Inicializar variables
+		haGanado = false;
 	
 		//Guardo en variables los datos del formulario lateral
 		apuesta = parseFloat(document.getElementById("apuesta").value);
@@ -32,16 +29,13 @@ function comenzar() {
 			alert("La apuesta debe ser mayor que 0");
 			return;
 		}
-	
-		//Relleno array bombo con los numeros
-		llenarBombo();
 		
-		//Genero el cartón del jugador
-		carton = generaCarton();
-		numeros_carton = leerCarton(carton);
+		//Genero la tarjeta de lotería del jugador
+		tarjeta = generaTarjeta();
+		numeros_tarjeta = leerTarjeta(tarjeta);
 		
-		//Muestro el div de la bola.
-		muestraBola();
+		//Muestro el div del número ganador.
+		muestraNumero();
 		
 		//Oculto el div de información
 		$("#info").css("display", "none");
@@ -49,16 +43,16 @@ function comenzar() {
 		//Deshabilito el botón de comenzar
 		document.getElementById("biniciar").disabled = true;
 		
-		//Muestro el cartón
-		dibujaCarton(carton);
+		//Muestro la tarjeta
+		dibujaTarjeta(tarjeta);
 		iniciar();
 }
 
 /**
- * Inicia intervalo que muestra las volas según la velocidad establecida.
+ * Inicia intervalo que muestra números aleatorios según la velocidad establecida.
  */
 function iniciar() {
-	intervalo = setInterval(peticionAJAX,velocidad);
+	intervalo = setInterval(sacarNumeroAleatorio, velocidad);
 }
 
 /**
@@ -105,239 +99,165 @@ function aleatorio(inicio, fin, numero)
 }
 
 /**
- * Literalmente llena el bomo/array con los numeros de las bolas
+ * Genera un número aleatorio de lotería (1-99) y lo muestra
  */
-function llenarBombo() {
-  bombo = []; // Asegurar que el bombo esté vacío antes de llenarlo
-  for(var i = 1; i <= 90; i++) {
-    bombo.push(i);
+function sacarNumeroAleatorio() {
+  // Generar número aleatorio entre 1 y 99
+  var numeroAleatorio = Math.floor(Math.random() * 99) + 1;
+  
+  // Verificar que el elemento del número existe antes de actualizarlo
+  var elementoNumero = document.getElementById("numero-ganador");
+  if (!elementoNumero) {
+    console.error("Error: elemento 'numero-ganador' no encontrado en el DOM");
+    return;
   }
+  
+  // Animación: primero mostrar números aleatorios rápidos
+  animarNumero(elementoNumero, numeroAleatorio);
+  
+  // Verificar si el número está en la tarjeta
+  verificarGanador(numeroAleatorio);
 }
 
 /**
- * Realiza la peticion ajax al archivo "bolas.php"
- * MODIFICADO: Ahora funciona sin PHP, usando JavaScript puro para GitHub Pages
+ * Anima el número mostrando números aleatorios antes del número final
  */
-function peticionAJAX() {
-  // En lugar de usar PHP, generamos el índice aleatorio directamente en JavaScript
-  if (bombo.length > 0) {
-    var indice = Math.floor(Math.random() * bombo.length);
-    sacaBola(indice);
-  } else {
-    resetear();
-    alert("Se han sacado todos los números");
-  }
-}
-
-function sacaBola(indice) {
-      // Verificar que el índice sea válido y que el bombo tenga elementos
-      if (bombo.length === 0 || indice < 0 || indice >= bombo.length) {
-        console.error("Error: índice inválido o bombo vacío", indice, bombo.length);
-        return;
-      }
-      
-      var nbola = bombo[indice];
-      
-      // Verificar que el elemento de la bola existe antes de actualizarlo
-      var elementoBola = document.getElementById("bola");
-      if (!elementoBola) {
-        console.error("Error: elemento 'bola' no encontrado en el DOM");
-        return;
-      }
-	  
-	  //Guardo en un array los números que han salido
-	  hanSalido.push(nbola);
-	  
-	  if (hanSalido.length <= 90){
-		//Quito la bola del array
-		  bombo.splice(indice, 1);
-		  
-		  // Animación: primero mostrar números aleatorios rápidos
-		  animarBola(elementoBola, nbola);
-		  
-		  // Marcar el número en el cartón si existe
-		  marcarNumeroEnCarton(nbola);
-	  }
-	  else
-	  {
-		  resetear();
-		  alert("Se han sacado todos los números");
-	  }
-}
-
-/**
- * Anima la bola mostrando números aleatorios antes del número final
- */
-function animarBola(elemento, numeroFinal) {
+function animarNumero(elemento, numeroFinal) {
   var duracion = Math.min(velocidad * 0.8, 1000); // 80% de la velocidad o máximo 1 segundo
   var pasos = 10;
   var paso = duracion / pasos;
   var contador = 0;
   
   // Agregar clase de animación
-  elemento.classList.add("bola-animando");
+  elemento.classList.add("numero-animando");
   
   var intervaloAnimacion = setInterval(function() {
     if (contador < pasos - 1) {
-      // Mostrar número aleatorio entre 1 y 90
-      elemento.innerHTML = Math.floor(Math.random() * 90) + 1;
+      // Mostrar número aleatorio entre 1 y 99
+      elemento.innerHTML = Math.floor(Math.random() * 99) + 1;
       contador++;
     } else {
       // Mostrar el número final
       elemento.innerHTML = numeroFinal;
-      elemento.classList.remove("bola-animando");
+      elemento.classList.remove("numero-animando");
       clearInterval(intervaloAnimacion);
     }
   }, paso);
 }
 
 /**
- * Marca automáticamente el número en el cartón si existe
+ * Verifica si el número está en la tarjeta y marca si existe
  */
-function marcarNumeroEnCarton(numero) {
-  if (!carton) return;
+function verificarGanador(numero) {
+  if (!tarjeta || haGanado) return;
   
-  for (var i = 0; i < carton.length; i++) {
-    for (var j = 0; j < carton[i].length; j++) {
-      if (carton[i][j].valor === numero && !carton[i][j].marca) {
-        carton[i][j].marca = true;
+  var encontrado = false;
+  
+  for (var i = 0; i < tarjeta.length; i++) {
+    for (var j = 0; j < tarjeta[i].length; j++) {
+      if (tarjeta[i][j].valor === numero) {
+        encontrado = true;
+        tarjeta[i][j].marca = true;
         var celda = document.getElementById(i + "/" + j);
         if (celda) {
           celda.classList.add('marca');
+          celda.classList.add('ganador');
         }
+        // ¡Ganaste!
+        haGanado = true;
+        parar();
+        mostrarGanador();
         break;
       }
     }
+    if (encontrado) break;
   }
 }
 
 /**
- * Genera el div donde se mostrará la bola
+ * Genera el div donde se mostrará el número ganador
  */
-function muestraBola() {
-	$("#derecho").append("<br><div id='bola'>?</div>");
+function muestraNumero() {
+	$("#derecho").append("<br><h2>Número Ganador</h2>");
+	$("#derecho").append("<div id='numero-ganador'>?</div>");
 	$("#derecho").append("<br><br>");
 }
 
 /**
- * Genera el array multidimensional con los numeros aleatorios y los huecos
- * @returns {Array} Contiene un array con los numeros de las filas y columnas y huecos
+ * Genera una tarjeta de lotería 5x5 con números aleatorios del 1 al 99
+ * @returns {Array} Contiene un array con los numeros de la tarjeta
  */
-function generaCarton() {
-	//Creo un array del carton donde voy a gardar las tres filas con sus columnas
-	var carton=[[],[],[]];
-		for (var j = 0; j < 9; j++) {
-			var columna;
-			if(j==0){
-				columna = aleatorio(10*j+1, 10*(j+1)-1, 3);}
-			else if(j==8){
-				columna = aleatorio(10*j, 10*(j+1), 3);}
-			else{
-				columna = aleatorio(10*j, 10*(j+1)-1, 3);}
-
-			columna.sort(function(a,b){return a-b;});
+function generaTarjeta() {
+	// Creo una tarjeta 5x5
+	var tarjeta = [[],[],[],[],[]];
+	var numerosUsados = [];
+	
+	// Generar 25 números únicos entre 1 y 99
+	for (var i = 0; i < 5; i++) {
+		for (var j = 0; j < 5; j++) {
+			var numero;
+			do {
+				numero = Math.floor(Math.random() * 99) + 1;
+			} while (numerosUsados.indexOf(numero) !== -1);
 			
-			for(var i = 0; i < 3; i++)
-			{
-				carton[i][j] = {
-					'valor': columna[i],
-					'marca' : false
-				}
-			}
-		};
-
-		for (var i = 0; i < 3; i++) {
-			var huecos = aleatorio(0,8,4);
-			while(huecos.length>0)
-			{
-				//Cogo el primer numero aleatorio generado y a esa columna le pongo el valor -1
-				carton[i][huecos.shift()].valor = -1;
-			}	
-		};
-	return carton;
+			numerosUsados.push(numero);
+			tarjeta[i][j] = {
+				'valor': numero,
+				'marca': false
+			};
+		}
 	}
+	
+	return tarjeta;
+}
 
 /**
- * Dibuja un cartón de un array pasado como parámetro
- * @param {Array} carton Contiene un array con los numeros de las filas y columnas y huecos
+ * Dibuja una tarjeta de lotería de un array pasado como parámetro
+ * @param {Array} tarjeta Contiene un array con los numeros de la tarjeta
  */
-function dibujaCarton(carton)
+function dibujaTarjeta(tarjeta)
 {
 	//Generamos la tabla
 	var tabla = document.createElement("table");
- 	tabla.setAttribute("id", "carton");
+ 	tabla.setAttribute("id", "tarjeta");
  	tabla.setAttribute("border", "3");
 	tabla.classList.add('carton');
 	//Genero las filas
-	for(var i=0;i<carton.length;i++){
+	for(var i=0;i<tarjeta.length;i++){
 		var fila = document.createElement("tr");
 		//Genero las columnas
-		for(var j=0;j<carton[i].length;j++){
+		for(var j=0;j<tarjeta[i].length;j++){
 			var celda = document.createElement("td");
 			celda.setAttribute("id", i + "/" + j);
-			
-			//Si la celda es -1 es que está hueca
-			if(carton[i][j].valor === -1){
-				celda.classList.add('hueco'); //Le asociamos la clase .hueco que tiene la imagen del bombo
-			}
-			else{
-				celda.innerHTML = carton[i][j].valor;
-				// Crear una función closure para mantener el contexto correcto
-				(function(row, col) {
-					celda.addEventListener("click", function(){marcar(row + "/" + col, carton);}, false);
-				})(i, j);
-			}
+			celda.innerHTML = tarjeta[i][j].valor;
 			fila.appendChild(celda); //Añadimos la celda a la fila		
 		}
-		tabla.appendChild(fila); //Añadimos la fila al carton
+		tabla.appendChild(fila); //Añadimos la fila a la tarjeta
 	}
-	//Agregamos la carton al div correspondiente
+	//Agregamos la tarjeta al div correspondiente
 	var sitio = document.getElementById("derecho");
 	sitio.appendChild(tabla);
 	
-	//Dibujo los botones del bingo
-	$("#derecho").append("<br><br><div id='bbingo'><button class='btn btn-default btn-lg'><b>¡Bingo!</b></button></div>");
-    $("#bbingo button").click(cantaBingo);
+	//Agregar botón de reiniciar
 	$("#datos").append("<button id='reset' class='btn btn-default'><b>REINICIAR</b></button>");
     $("#reset").click(resetear);
 }
 
-/**
- * Marca o desmarca un número del cartón
- * @param {String} id id del elemento a marcar
- * @param {Array} carton carton selecionado
- */
-function marcar(id, carton){
-	var celda = document.getElementById(id);
- 	var posicion = id.split('/');
-
- 	if(carton[posicion[0]][posicion[1]].marca){
- 		carton[posicion[0]][posicion[1]].marca = false;
- 		celda.classList.remove('marca');
- 	}
- 	else{
- 		carton[posicion[0]][posicion[1]].marca = true;
- 		celda.classList.add('marca');
- 	}
-}
+// Función marcar eliminada - ya no es necesaria, se marca automáticamente
 
 /**
- * Lee el carton que le pasa como parámetro y guarda en un array de manera ordenada los números de los cartones.
- * @param {Array} carton carton selecionado
+ * Lee la tarjeta y guarda en un array los números de la tarjeta
+ * @param {Array} tarjeta tarjeta seleccionada
  */
-function leerCarton(carton){
+function leerTarjeta(tarjeta){
 	var lista=[];
-		//Recorro las filas y las columnas
-		for (var i = 0; i < carton.length; i++) {
-			for (var j = 0; j < carton[i].length; j++) {
-				//Si la celda no está vacia, guardo en el array
-				if(carton[i][j].valor != -1){
-					lista.push(carton[i][j].valor);
-				}
-			};
-		};
-		return lista.sort(function(a,b){return a-b;}); //Ordenamos el resultado
-		//De esta forma guardo en un array la lista ordenada de numeros que tiene ese carton para que sea mas facil comprobarlo despues
+	//Recorro las filas y las columnas
+	for (var i = 0; i < tarjeta.length; i++) {
+		for (var j = 0; j < tarjeta[i].length; j++) {
+			lista.push(tarjeta[i][j].valor);
+		}
+	}
+	return lista.sort(function(a,b){return a-b;}); //Ordenamos el resultado
 }
 
 /**
