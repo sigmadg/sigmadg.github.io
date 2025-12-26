@@ -190,14 +190,14 @@ function animarNumero(elemento, numeroFinal) {
 
 /**
  * Verifica si el número está en la tarjeta y marca si existe
- * Probabilidad de ganar: 1 de 10 (10%)
+ * Probabilidad de ganar: 1 de 3 (33.33%)
  */
 function verificarGanador(numero) {
   if (!tarjeta || haGanado) return;
   
-  // Probabilidad de ganar: 1 de 10 (10%)
+  // Probabilidad de ganar: 1 de 3 (33.33%)
   var probabilidadGanar = Math.random();
-  var haGanadoPorProbabilidad = probabilidadGanar < 0.1; // 10% de probabilidad
+  var haGanadoPorProbabilidad = probabilidadGanar < (1/3); // 33.33% de probabilidad (1 de cada 3)
   
   var encontrado = false;
   var numeroEnTarjeta = false;
