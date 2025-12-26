@@ -43,7 +43,7 @@ function comenzar() {
 	
 		//Guardo en variables los datos del formulario lateral
 		apuesta = parseFloat(document.getElementById("apuesta").value);
-	    velocidad = parseInt(document.getElementById("velo").value);
+	    velocidad = 4000; // Velocidad fija en "Normal" (4000ms)
 	
 		// Validar valores
 		if (isNaN(apuesta) || apuesta <= 0) {
