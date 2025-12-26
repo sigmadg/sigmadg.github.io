@@ -282,7 +282,10 @@ function dibujaCarton(carton)
 			}
 			else{
 				celda.innerHTML = carton[i][j].valor;
-				celda.addEventListener("click", function(){marcar(this.id, carton);}, false); //Establecemos listener de tipo click 	
+				// Crear una función closure para mantener el contexto correcto
+				(function(row, col) {
+					celda.addEventListener("click", function(){marcar(row + "/" + col, carton);}, false);
+				})(i, j);
 			}
 			fila.appendChild(celda); //Añadimos la celda a la fila		
 		}
