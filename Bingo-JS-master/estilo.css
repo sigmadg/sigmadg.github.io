@@ -136,13 +136,14 @@ p {
 #datos{
   margin: 1rem;
   padding: 1.5rem;
-  padding-bottom: 2rem;
+  padding-bottom: 2.5rem;
   text-align: center;
   background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
   border-radius: 15px;
   box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
   border: 1px solid rgba(255, 255, 255, 0.05);
   min-height: auto;
+  position: relative;
 }
 
 #datos p {
