@@ -22,9 +22,10 @@ var numeros_cartones = []; // Array múltiple que guarda en un array numeros ya 
 function comenzar() {
 	
 		//Guardo en variables los datos del formulario lateral
-		jugadores = window.parent.document.getElementById("njugadores").value;
-		precio = window.parent.document.getElementById("valorc").value;
-	    velocidad = window.parent.document.getElementById("velo").value;
+		// Corregido: usar document en lugar de window.parent.document para que funcione sin iframe
+		jugadores = document.getElementById("njugadores").value;
+		precio = document.getElementById("valorc").value;
+	    velocidad = document.getElementById("velo").value;
 	
 		//Relleno array bombo con los numeros
 		llenarBombo();
