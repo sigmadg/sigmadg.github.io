@@ -2512,6 +2512,67 @@ a:focus {
   outline-offset: 2px;
 }
 
+/* Responsive Profile Image */
+.banner-inner .thumbnail img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .banner-inner .thumbnail img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-inner .thumbnail img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+/* Responsive Mobile Menu Profile Image */
+.popup-mobile-menu .menu-header .logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  .popup-mobile-menu .menu-header .logo img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+/* Responsive Lottery Game */
+.loteria-iframe {
+  width: 100% !important;
+  height: 900px !important;
+  max-height: 90vh !important;
+}
+
+@media (max-width: 991px) {
+  .loteria-iframe {
+    height: 800px !important;
+    max-height: 85vh !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .loteria-iframe {
+    height: 700px !important;
+    max-height: 80vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .loteria-iframe {
+    height: 600px !important;
+    max-height: 75vh !important;
+  }
+}
+
 /* Professional Responsive Improvements */
 @media (max-width: 991px) {
   .section-title {

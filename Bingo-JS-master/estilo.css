@@ -403,3 +403,141 @@ h4 {
         opacity: 1;
     }
 }
+
+/* Responsive Design for Lottery Game */
+@media (max-width: 991px) {
+    #izquierdo {
+        width: 30%;
+        min-height: auto;
+    }
+    
+    #derecho {
+        width: 70%;
+        padding: 15px;
+    }
+    
+    #espacio {
+        width: 30%;
+    }
+    
+    #titulo h1 {
+        font-size: 1.5em;
+    }
+    
+    #titulo img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    #numero-ganador {
+        font-size: 3em;
+        padding: 15px;
+    }
+    
+    #tarjeta {
+        font-size: 0.9em;
+    }
+    
+    #tarjeta td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    #izquierdo {
+        width: 100%;
+        float: none;
+        height: auto;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    #derecho {
+        width: 100%;
+        float: none;
+        padding: 15px;
+        max-height: none;
+    }
+    
+    #espacio {
+        display: none;
+    }
+    
+    #titulo {
+        padding: 15px;
+    }
+    
+    #titulo h1 {
+        font-size: 1.3em;
+    }
+    
+    #titulo img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    #datos {
+        padding: 15px;
+    }
+    
+    #numero-ganador {
+        font-size: 2.5em;
+        padding: 12px;
+        margin: 10px 0;
+    }
+    
+    #contador-sorteos {
+        font-size: 1em;
+    }
+    
+    #tarjeta {
+        font-size: 0.8em;
+        margin: 10px auto;
+    }
+    
+    #tarjeta td {
+        padding: 6px;
+        font-size: 0.9em;
+    }
+    
+    .btn-default {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    #titulo h1 {
+        font-size: 1.1em;
+    }
+    
+    #titulo img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #numero-ganador {
+        font-size: 2em;
+        padding: 10px;
+    }
+    
+    #tarjeta {
+        font-size: 0.7em;
+    }
+    
+    #tarjeta td {
+        padding: 4px;
+        font-size: 0.8em;
+    }
+    
+    #datos input[type="number"] {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+    
+    .btn-default {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+}
