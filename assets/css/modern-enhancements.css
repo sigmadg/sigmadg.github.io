@@ -2323,6 +2323,12 @@ a:hover::after {
   padding-bottom: 10px;
 }
 
+/* Reduce spacing for social media section */
+.rn-footer-area .footer-widget:has(.footer-social) .footer-title {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
 .rn-footer-area .footer-title::after {
   content: '';
   position: absolute;
@@ -2367,7 +2373,7 @@ a:hover::after {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .rn-footer-area .footer-social li {
