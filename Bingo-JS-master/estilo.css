@@ -613,36 +613,82 @@ h4 {
 }
 
 @media (max-width: 480px) {
-    #titulo h1 {
-        font-size: 1.1em;
+    #izquierdo #titulo {
+        padding: 10px 12px;
     }
     
-    #titulo img {
-        width: 40px;
-        height: 40px;
+    #izquierdo #titulo h1 {
+        font-size: 1em;
+    }
+    
+    #izquierdo #titulo img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    #izquierdo #datos {
+        padding: 15px 12px;
+    }
+    
+    #datos p {
+        font-size: 0.9em;
+    }
+    
+    #datos input[type="number"] {
+        font-size: 0.95em;
+        padding: 10px;
+        max-width: 160px;
+    }
+    
+    #datos hr {
+        margin: 15px auto;
+    }
+    
+    #derecho {
+        padding: 15px 10px;
+        gap: 15px;
+    }
+    
+    #derecho > div[style*="text-align: center"] {
+        padding: 15px;
+    }
+    
+    #derecho h2 {
+        font-size: 1.1em !important;
+        margin-bottom: 12px !important;
+    }
+    
+    #derecho #contador-sorteos {
+        font-size: 1em;
+        margin-bottom: 12px;
     }
     
     #numero-ganador {
         font-size: 2em;
-        padding: 10px;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        margin: 12px auto;
     }
     
     #tarjeta {
         font-size: 0.7em;
+        padding: 12px;
+        border-spacing: 4px;
+        width: 98%;
     }
     
     #tarjeta td {
-        padding: 4px;
-        font-size: 0.8em;
-    }
-    
-    #datos input[type="number"] {
-        font-size: 0.9em;
-        padding: 8px;
+        padding: 6px 3px;
+        font-size: 1em;
+        height: 45px;
+        width: 45px;
+        min-width: 40px;
     }
     
     .btn-default {
-        padding: 6px 12px;
-        font-size: 0.85em;
+        padding: 10px 20px;
+        font-size: 0.95em;
+        max-width: 200px;
     }
 }
