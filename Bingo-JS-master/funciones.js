@@ -273,9 +273,19 @@ function dibujaTarjeta(tarjeta)
 	var sitio = document.getElementById("derecho");
 	sitio.appendChild(tabla);
 	
-	//Agregar botón de reiniciar
-	$("#datos").append("<button id='reset' class='btn btn-default'><b>REINICIAR</b></button>");
-    $("#reset").click(resetear);
+	//Agregar botón de iniciar/reiniciar (solo si no existe)
+	if (document.getElementById("reset") === null) {
+		$("#datos").append("<hr><button id='reset' class='btn btn-default'><b>INICIAR</b></button>");
+		$("#reset").click(function() {
+			if (intervalo) {
+				// Si ya hay un intervalo, reiniciar
+				resetear();
+			} else {
+				// Si no hay intervalo, iniciar el juego
+				comenzar();
+			}
+		});
+	}
 }
 
 // Función marcar eliminada - ya no es necesaria, se marca automáticamente
