@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   
   app: {
+    baseURL: '/Colitas/',
+    buildAssetsDir: '_nuxt/',
     head: {
       title: 'Colitas Abandonadas',
       meta: [
@@ -12,12 +14,12 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Portal web para adopción responsable de mascotas' }
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+        { rel: 'icon', type: 'image/png', href: '/Colitas/favicon.png' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Dosis:300,400,600,700|Open+Sans:300,400,600,700' }
       ],
       script: [
-        { src: '/plugins/jquery/jquery.min.js', defer: true },
-        { src: '/plugins/bootstrap/js/bootstrap.bundle.min.js', defer: true }
+        { src: '/Colitas/plugins/jquery/jquery.min.js', defer: true },
+        { src: '/Colitas/plugins/bootstrap/js/bootstrap.bundle.min.js', defer: true }
       ]
     }
   },
@@ -43,5 +45,8 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/']
     }
-  }
+  },
+  
+  // SSG configuration
+  ssr: false
 })
