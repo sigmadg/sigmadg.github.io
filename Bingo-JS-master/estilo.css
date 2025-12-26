@@ -444,6 +444,11 @@ h4 {
 }
 
 @media (max-width: 768px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+    
     #izquierdo {
         width: 100%;
         float: none;
@@ -451,6 +456,20 @@ h4 {
         min-height: auto;
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        order: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ocultar título en responsive, solo mostrar datos (botón) */
+    #izquierdo #titulo {
+        display: none;
+    }
+    
+    #izquierdo #datos {
+        order: 1;
+        padding: 15px;
+        text-align: center;
     }
     
     #derecho {
@@ -458,6 +477,27 @@ h4 {
         float: none;
         padding: 15px;
         max-height: none;
+        order: 2;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Asegurar que el número ganador esté antes de la tabla */
+    #derecho > div[style*="text-align: center"] {
+        order: 1;
+    }
+    
+    #derecho #contador-sorteos {
+        order: 1;
+    }
+    
+    #derecho #numero-ganador {
+        order: 2;
+    }
+    
+    #derecho #tarjeta {
+        order: 3;
+        margin-top: 20px;
     }
     
     #espacio {
@@ -479,6 +519,18 @@ h4 {
     
     #datos {
         padding: 15px;
+    }
+    
+    #datos p {
+        margin-bottom: 10px;
+    }
+    
+    #datos input[type="number"] {
+        margin-bottom: 15px;
+    }
+    
+    #datos hr {
+        margin: 15px 0;
     }
     
     #numero-ganador {
@@ -504,6 +556,9 @@ h4 {
     .btn-default {
         padding: 8px 16px;
         font-size: 0.9em;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
     }
 }
 
