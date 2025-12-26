@@ -12716,6 +12716,36 @@ a:hover {
   color: #000;
   font-weight: 600;
 }
+/* Separadores en el menú de navegación */
+.navbar-nav .nav-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 30px;
+  background-color: #e0e0e0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav .nav-item:not(:last-child)::after {
+    display: block;
+  }
+  
+  /* Ajustar para items sin dropdown */
+  .navbar-nav .nav-item:not(.dropdown):not(:last-child)::after {
+    display: block;
+  }
+  
+  /* Ocultar separador antes de Veterinarios y Noticias (mismo color) */
+  .navbar-nav .nav-item.bg-purple:first-of-type::after {
+    display: none;
+  }
+}
+
+
 
 @media (min-width: 768px) {
   .navbar-nav .dropdown .nav-link span {

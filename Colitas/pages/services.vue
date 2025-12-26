@@ -1,0 +1,312 @@
+<template>
+  <div class="main-wrapper">
+
+
+
+  <!-- ====================================
+  ———	BREADCRUMB
+  ===================================== -->
+  <section class="breadcrumb-bg" style="background-image: url(/background/page-title-bg-img.jpg); ">
+    <div class="container">
+      <div class="breadcrumb-holder">
+        <div>
+          <h1 class="breadcrumb-title">Servicios</h1>
+          <ul class="breadcrumb breadcrumb-transparent">
+            <li class="breadcrumb-item">
+              <NuxtLink class="text-white" to="/">Inicio</NuxtLink>
+            </li>
+            <li class="breadcrumb-item text-white active" aria-current="page">Servicios</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ====================================
+———	SERVICE STYLE 1
+===================================== -->
+<section class="pt-9 pb-6">
+  <div class="container">
+    <div class="section-title justify-content-center mb-4 mb-md-8">
+      <span class="shape shape-left bg-info"></span>
+      <h2 class="text-danger">Servicios del Portal</h2>
+      <span class="shape shape-right bg-info"></span>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-6">
+					<div class="media-icon-large bg-warning rounded shadow-sm mr-4">
+						<i class="fa fa-heart" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-warning text-truncate">Adopción Responsable</h3>
+            <p>Sistema completo de adopción con cartas responsivas, identificación de adoptantes y seguimiento continuo del bienestar animal.</p>
+          </div>
+        </div>
+      </div>
+
+			<!-- Media -->
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-6">
+					<div class="media-icon-large bg-success rounded shadow-sm mr-4">
+						<i class="fa fa-camera" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-success text-truncate">Seguimiento con Fotos</h3>
+            <p>Sistema de seguimiento recurrente que requiere fotos periódicas para validar el estado y bienestar de las mascotas adoptadas.</p>
+          </div>
+        </div>
+      </div>
+
+			<!-- Media -->
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-6">
+					<div class="media-icon-large bg-danger rounded shadow-sm mr-4">
+						<i class="fa fa-heartbeat" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-danger text-truncate">Donaciones Transparentes</h3>
+            <p>Sistema de donaciones con seguimiento completo para asegurar que los recursos lleguen a los animales y no se lucre con su sufrimiento.</p>
+          </div>
+        </div>
+      </div>
+
+			<!-- Media -->
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-6">
+					<div class="media-icon-large bg-info rounded shadow-sm mr-4">
+						<i class="fa fa-shield" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-info text-truncate">Refugios Verificados</h3>
+            <p>Directorio completo de refugios y asociaciones verificadas que cumplen con estándares de bienestar animal y transparencia.</p>
+          </div>
+        </div>
+      </div>
+
+			<!-- Media -->
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-6">
+					<div class="media-icon-large bg-purple rounded shadow-sm mr-4">
+						<i class="fa fa-stethoscope" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-purple text-truncate">Directorio de Veterinarios</h3>
+            <p>Acceso a un directorio de veterinarios verificados especializados en el cuidado de animales de compañía y emergencias.</p>
+          </div>
+        </div>
+      </div>
+
+			<!-- Media -->
+      <div class="col-md-6 col-lg-4">
+        <div class="media mb-7">
+					<div class="media-icon-large bg-pink rounded shadow-sm mr-4">
+						<i class="fa fa-file-text" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-pink text-truncate">Cartas Responsivas</h3>
+            <p>Sistema de documentación legal que garantiza el compromiso del adoptante con el bienestar y cuidado adecuado del animal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
+———	SERVICE STYLE 2
+===================================== -->
+<section class="bg-info py-9" style="background-image: url(/background/avator-bg.png);">
+  <div class="container">
+    <div class="section-title justify-content-center mb-4 mb-md-8 wow fadeInUp">
+      <span class="shape shape-left bg-danger"></span>
+      <h2 class="text-white">Service Style 2</h2>
+      <span class="shape shape-right bg-danger"></span>
+    </div>
+
+    <div class="row wow fadeInUp">
+      <div class="col-md-4">
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-cutlery extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Delicious Food</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-heart extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Love & Care</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-shield extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Annual Sports</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-none d-md-block">
+        <div class="media-img">
+          <img class="mx-auto d-block lazyestload" data-src="/features/features-img5.png"
+            alt="services.png">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-car extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Transportation</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-graduation-cap extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Experienced Teachers</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+
+        <div class="media flex-md-column flex-lg-row mb-6">
+          <div class="media-icon-large shadow-none mr-4 p-0 mb-md-4 mr-md-0 mr-lg-4 mb-lg-0">
+            <i class="fa fa-leaf extra-large" aria-hidden="true"></i>
+          </div>
+          <div class="media-body">
+            <h3 class="text-white text-truncate">Physical Activity</h3>
+            <p class="text-white font-weight-light opacity-70">Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================
+———	SERVICE STYLE 3
+===================================== -->
+<section class="pt-10 pb-7 pb-md-9">
+  <div class="container">
+    <div class="section-title justify-content-center mb-4 mb-md-8">
+      <span class="shape shape-left bg-info"></span>
+      <h2 class="text-danger">Service Style 3</h2>
+      <span class="shape shape-right bg-info"></span>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
+        <div class="media text-right mb-6">
+          <div class="media-icon-large bg-warning rounded shadow-sm ml-auto mr-0 order-1">
+						<i class="fa fa-graduation-cap border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body mr-5">
+            <h3 class="text-warning text-truncate">Experienced Teachers</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="media mb-6">
+          <div class="media-icon-large bg-success rounded shadow-sm mr-5">
+						<i class="fa fa-leaf border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-success text-truncate">Physical Activity</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
+        <div class="media text-right mb-6">
+          <div class="media-icon-large bg-danger rounded shadow-sm ml-auto mr-0 order-1">
+						<i class="fa fa-car border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body mr-5">
+            <h3 class="text-danger text-truncate">Transportation</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="media mb-6">
+          <div class="media-icon-large bg-info rounded shadow-sm mr-5">
+						<i class="fa fa-cutlery border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-info text-truncate">Delicious Food</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
+        <div class="media text-right mb-6">
+          <div class="media-icon-large bg-purple rounded shadow-sm ml-auto mr-0 order-1">
+            <i class="fa fa-heart border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body mr-5">
+            <h3 class="text-purple text-truncate">Love & Care</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="media mb-6">
+          <div class="media-icon-large bg-pink rounded shadow-sm mr-5">
+						<i class="fa fa-shield border-0" aria-hidden="true"></i>
+					</div>
+          <div class="media-body">
+            <h3 class="text-pink text-truncate">Annual Sports</h3>
+            <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  </div>
+</template>
+
+<script setup>
+useHead({
+  title: 'Servicios - Colitas Abandonadas - Colitas Abandonadas'
+})
+
+onMounted(() => {
+  if (process.client) {
+    setTimeout(() => {
+      if (window.WOW) new window.WOW().init()
+    }, 100)
+  }
+})
+</script>
