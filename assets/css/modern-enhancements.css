@@ -123,6 +123,8 @@ h3, .h3 {
 .rn-blog-area,
 .rn-resume-area,
 .rn-about-area,
+#features,
+#portfolio,
 #blog {
   display: block !important;
   visibility: visible !important;
@@ -1357,8 +1359,14 @@ li, ul li, ol li {
 .rn-portfolio-area,
 .rn-blog-area,
 .rn-resume-area,
-.rn-about-area {
+.rn-about-area,
+#features,
+#portfolio,
+#blog {
   color: #c4cfde;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .rn-service-area *,
