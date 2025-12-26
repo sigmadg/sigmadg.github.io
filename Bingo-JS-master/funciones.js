@@ -293,33 +293,71 @@ function mostrarGanador(){
 	
 	// Mensajes chuscos aleatorios
 	var mensajes = [
-		"🎉 ¡FELICIDADES! ¡GANASTE! 🎉<br>¡Eres el campeón de la suerte! 🍀",
-		"🎊 ¡BINGO! ¡ACERTASTE! 🎊<br>¡La fortuna está de tu lado! 💰",
-		"🏆 ¡GANADOR! ¡GANADOR! 🏆<br>¡Tienes más suerte que un gato con 7 vidas! 🐱",
-		"🎰 ¡JACKPOT! ¡LO LOGASTE! 🎰<br>¡Eres más afortunado que un trébol de 4 hojas! ☘️",
-		"💎 ¡FELICIDADES! ¡TRIUNFASTE! 💎<br>¡Tienes la suerte de un leprechaun! 🍀",
-		"🌟 ¡ÉXITO TOTAL! ¡GANASTE! 🌟<br>¡Tu suerte brilla más que las estrellas! ⭐",
-		"🎁 ¡PREMIO GANADO! ¡FELICIDADES! 🎁<br>¡Eres el rey/la reina de la suerte! 👑",
-		"🎯 ¡BULLSEYE! ¡ACERTASTE! 🎯<br>¡Tienes puntería de francotirador! 🎪"
+		"🎉 ¡FELICIDADES! ¡GANASTE! 🎉",
+		"🎊 ¡BINGO! ¡ACERTASTE! 🎊",
+		"🏆 ¡GANADOR! ¡GANADOR! 🏆",
+		"🎰 ¡JACKPOT! ¡LO LOGASTE! 🎰",
+		"💎 ¡FELICIDADES! ¡TRIUNFASTE! 💎",
+		"🌟 ¡ÉXITO TOTAL! ¡GANASTE! 🌟",
+		"🎁 ¡PREMIO GANADO! ¡FELICIDADES! 🎁",
+		"🎯 ¡BULLSEYE! ¡ACERTASTE! 🎯"
+	];
+	
+	// Premios profesionales (saludos, abrazos, etc.)
+	var premios = [
+		"🤗 Un cálido abrazo virtual",
+		"👋 Un cordial saludo",
+		"🙏 Un sincero agradecimiento",
+		"💝 Un gesto de aprecio",
+		"🤝 Un apretón de manos amistoso",
+		"😊 Una sonrisa genuina",
+		"❤️ Un mensaje de cariño",
+		"✨ Un deseo de éxito",
+		"🌹 Un reconocimiento especial",
+		"🎖️ Una mención de honor",
+		"🏅 Un reconocimiento a tu suerte",
+		"💐 Un gesto de felicitación",
+		"🙌 Un reconocimiento a tu logro",
+		"👏 Una ovación por tu éxito",
+		"🌟 Un reconocimiento a tu brillantez"
 	];
 	
 	var mensajeAleatorio = mensajes[Math.floor(Math.random() * mensajes.length)];
-	var premio = calcularPremio();
+	var premioAleatorio = premios[Math.floor(Math.random() * premios.length)];
 	
-	// Crear mensaje en la página
+	// Crear overlay oscuro de fondo
+	var overlay = document.createElement("div");
+	overlay.id = "overlay-ganador";
+	overlay.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; " +
+		"background: rgba(0,0,0,0.7); z-index: 9999; backdrop-filter: blur(5px);";
+	overlay.onclick = function() {
+		document.getElementById("mensaje-ganador").remove();
+		overlay.remove();
+		resetear();
+	};
+	document.body.appendChild(overlay);
+	
+	// Crear mensaje en la página con mejor UI
 	var mensajeDiv = document.createElement("div");
 	mensajeDiv.id = "mensaje-ganador";
 	mensajeDiv.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); " +
 		"background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); " +
-		"padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); " +
-		"z-index: 10000; text-align: center; color: #1a1a1a; font-size: 1.5em; " +
-		"font-weight: bold; border: 4px solid #ffd700; max-width: 500px; animation: aparecerMensaje 0.5s ease-out;";
-	mensajeDiv.innerHTML = "<div style='font-size: 2em; margin-bottom: 20px;'>" + mensajeAleatorio + "</div>" +
-		"<div style='font-size: 1.2em; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;'>" +
-		"💰 Premio: " + premio + " 💰</div>" +
-		"<button onclick='document.getElementById(\"mensaje-ganador\").remove(); resetear();' " +
-		"style='margin-top: 20px; padding: 12px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); " +
-		"color: white; border: none; border-radius: 25px; font-size: 1em; font-weight: bold; cursor: pointer;'>Jugar de Nuevo</button>";
+		"padding: 30px 40px; border-radius: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,255,255,0.3); " +
+		"z-index: 10000; text-align: center; color: #1a1a1a; " +
+		"max-width: 450px; min-width: 350px; animation: aparecerMensaje 0.5s ease-out;";
+	
+	mensajeDiv.innerHTML = 
+		"<div style='font-size: 1.3em; margin-bottom: 15px; font-weight: bold; line-height: 1.4;'>" + mensajeAleatorio + "</div>" +
+		"<div style='font-size: 0.95em; margin: 15px 0; padding: 12px 20px; background: rgba(255,255,255,0.4); " +
+		"border-radius: 12px; border: 2px solid rgba(255,255,255,0.6); line-height: 1.5;'>" +
+		"<div style='font-size: 0.9em; margin-bottom: 8px; opacity: 0.9;'>Tu premio:</div>" +
+		"<div style='font-size: 1.1em; font-weight: 600;'>" + premioAleatorio + "</div></div>" +
+		"<button onclick='document.getElementById(\"mensaje-ganador\").remove(); document.getElementById(\"overlay-ganador\").remove(); resetear();' " +
+		"style='margin-top: 20px; padding: 10px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); " +
+		"color: white; border: none; border-radius: 20px; font-size: 0.9em; font-weight: 600; cursor: pointer; " +
+		"transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);' " +
+		"onmouseover='this.style.transform=\"scale(1.05)\"; this.style.boxShadow=\"0 6px 15px rgba(102, 126, 234, 0.6)\";' " +
+		"onmouseout='this.style.transform=\"scale(1)\"; this.style.boxShadow=\"0 4px 10px rgba(102, 126, 234, 0.4)\";'>Jugar de Nuevo</button>";
 	
 	document.body.appendChild(mensajeDiv);
 }
@@ -330,30 +368,38 @@ function mostrarGanador(){
 function mostrarFinJuego() {
 	if (haGanado) return; // Si ya ganó, no mostrar este mensaje
 	
+	// Crear overlay oscuro de fondo
+	var overlay = document.createElement("div");
+	overlay.id = "overlay-fin";
+	overlay.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; " +
+		"background: rgba(0,0,0,0.7); z-index: 9999; backdrop-filter: blur(5px);";
+	overlay.onclick = function() {
+		document.getElementById("mensaje-fin").remove();
+		overlay.remove();
+		resetear();
+	};
+	document.body.appendChild(overlay);
+	
 	var mensajeDiv = document.createElement("div");
 	mensajeDiv.id = "mensaje-fin";
 	mensajeDiv.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); " +
 		"background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); " +
-		"padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); " +
-		"z-index: 10000; text-align: center; color: white; font-size: 1.3em; " +
-		"font-weight: bold; border: 4px solid rgba(255,255,255,0.3); max-width: 500px; animation: aparecerMensaje 0.5s ease-out;";
-	mensajeDiv.innerHTML = "<div style='font-size: 1.8em; margin-bottom: 20px;'>😔 Se acabaron los sorteos</div>" +
-		"<div style='font-size: 1em; margin-top: 20px; opacity: 0.9;'>No te desanimes, ¡la próxima vez será! 🍀</div>" +
-		"<button onclick='document.getElementById(\"mensaje-fin\").remove(); resetear();' " +
-		"style='margin-top: 20px; padding: 12px 30px; background: rgba(255,255,255,0.2); " +
-		"color: white; border: 2px solid white; border-radius: 25px; font-size: 1em; font-weight: bold; cursor: pointer;'>Intentar de Nuevo</button>";
+		"padding: 30px 40px; border-radius: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,255,255,0.3); " +
+		"z-index: 10000; text-align: center; color: white; " +
+		"max-width: 450px; min-width: 350px; animation: aparecerMensaje 0.5s ease-out;";
+	mensajeDiv.innerHTML = 
+		"<div style='font-size: 1.2em; margin-bottom: 15px; font-weight: 600; line-height: 1.4;'>😔 Se acabaron los sorteos</div>" +
+		"<div style='font-size: 0.9em; margin-top: 15px; opacity: 0.95; line-height: 1.5;'>No te desanimes, ¡la próxima vez será! 🍀</div>" +
+		"<button onclick='document.getElementById(\"mensaje-fin\").remove(); document.getElementById(\"overlay-fin\").remove(); resetear();' " +
+		"style='margin-top: 20px; padding: 10px 25px; background: rgba(255,255,255,0.2); " +
+		"color: white; border: 2px solid rgba(255,255,255,0.5); border-radius: 20px; font-size: 0.9em; font-weight: 600; cursor: pointer; " +
+		"transition: all 0.3s ease;' " +
+		"onmouseover='this.style.background=\"rgba(255,255,255,0.3)\"; this.style.transform=\"scale(1.05)\";' " +
+		"onmouseout='this.style.background=\"rgba(255,255,255,0.2)\"; this.style.transform=\"scale(1)\";'>Intentar de Nuevo</button>";
 	
 	document.body.appendChild(mensajeDiv);
 }
 
-/**
- * Calcula el premio según la apuesta
- * @returns {number} resultado Devuelve el resultado del premio
- */
-function calcularPremio(){
-	// Premio = apuesta * 10 (puedes ajustar esta fórmula)
-	var resultado = apuesta * 10;
-	return resultado.toFixed(2);
-}
+// Función calcularPremio eliminada - ya no se usa dinero, solo saludos profesionales
 
 
