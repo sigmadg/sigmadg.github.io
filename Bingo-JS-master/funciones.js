@@ -53,6 +53,8 @@ function comenzar() {
 		var btnReset = document.getElementById("reset");
 		if (btnReset) {
 			btnReset.innerHTML = "<b>REINICIAR</b>";
+			// Cambiar el evento click para que siempre reinicie
+			$("#reset").off("click").click(resetear);
 		}
 		
 		iniciar();
