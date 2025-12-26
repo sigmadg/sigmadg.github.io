@@ -311,9 +311,19 @@ h4 {
 }
 
 #reset {
-    margin-top: 10px;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
     background: linear-gradient(135deg, rgba(255, 1, 79, 0.8) 0%, rgba(255, 1, 79, 0.6) 100%) !important;
     border: 1px solid rgba(255, 1, 79, 0.5) !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 200px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
 }
 
 #reset:hover {
