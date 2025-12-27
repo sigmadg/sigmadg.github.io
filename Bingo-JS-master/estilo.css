@@ -17,7 +17,7 @@ p {
     width: 25%;
     height: 100vh;
     min-height: 100vh;
-    max-height: 1200px;
+    max-height: 1400px;
     margin: 0 auto;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
@@ -33,12 +33,12 @@ p {
     width: 75%;
     height: 100vh;
     min-height: 100vh;
-    max-height: 1200px;
+    max-height: 1400px;
     background: transparent;
     backdrop-filter: blur(5px);
     overflow-y: hidden;
     overflow-x: hidden;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -111,18 +111,18 @@ p {
 }
 #titulo {
     text-align: center;
-    padding: 15px;
+    padding: 12px;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
     color: #ffffff;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     border-bottom: 2px solid rgba(255, 1, 79, 0.3);
     flex-shrink: 0;
 }
 
 #titulo h1 {
-    margin: 10px 0;
-    font-size: 2.5em;
+    margin: 8px 0;
+    font-size: 2.2em;
     text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);
     font-weight: bold;
     background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%);
@@ -139,9 +139,9 @@ p {
     border: 2px solid rgba(255, 1, 79, 0.3);
 }
 #datos{
-  margin: 1rem;
-  padding: 1.2rem;
-  padding-bottom: 1.5rem;
+  margin: 0.8rem;
+  padding: 1rem;
+  padding-bottom: 1.2rem;
   text-align: center;
   background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
   border-radius: 15px;
@@ -167,15 +167,15 @@ h4 {
     line-height: 2px;
 }
 #numero-ganador{
-    line-height: 100px;
+    line-height: 90px;
     background: linear-gradient(135deg, #ff014f 0%, #23f0ec 100%);
     color: white;
-    margin: 15px auto;
-    height: 100px;
-    width: 100px;
+    margin: 10px auto;
+    height: 90px;
+    width: 90px;
     border-radius: 50%;
     text-align: center;
-    font-size: 60px;
+    font-size: 55px;
     font-weight: bold;
     padding: 0;
     transition: all 0.3s ease;
@@ -224,11 +224,11 @@ h4 {
 #tarjeta {
     width: 90%;
     max-width: 500px;
-    margin: 15px auto;
+    margin: 10px auto;
     border-collapse: separate;
-    border-spacing: 6px;
+    border-spacing: 5px;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
-    padding: 15px;
+    padding: 12px;
     border-radius: 20px;
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -237,10 +237,10 @@ h4 {
 
 #tarjeta td {
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
-    height: 70px;
-    width: 70px;
+    height: 65px;
+    width: 65px;
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: bold;
     color: #c4cfde;
     border-radius: 12px;
@@ -248,7 +248,7 @@ h4 {
     box-shadow: 5px 5px 10px #1c1e22, -5px -5px 10px #262a2e;
     border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
-    padding: 5px;
+    padding: 4px;
 }
 
 #tarjeta td:hover {
