@@ -477,12 +477,20 @@ h4 {
     
     /* Título se mantiene igual */
     #izquierdo #titulo {
-        /* Sin cambios, mantener diseño original */
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+    
+    #izquierdo #titulo h1 {
+        font-size: 1.8em;
+        margin: 6px 0;
     }
     
     /* Datos se mantienen igual */
     #izquierdo #datos {
-        /* Sin cambios, mantener diseño original */
+        margin: 0.6rem;
+        padding: 0.8rem;
+        padding-bottom: 1rem;
     }
     
     /* Solo ajustar sección derecha - reducir tamaños proporcionalmente */
