@@ -287,9 +287,9 @@ function muestraNumero() {
 		return; // Ya existe, no crear duplicado
 	}
 	
-	$("#derecho").append("<div style='text-align: center; margin-top: 0; margin-bottom: 5px; flex-shrink: 0;'>");
-	$("#derecho").append("<h2 style='font-size: 1.6em; margin-bottom: 8px; background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);'>🎰 Número Ganador 🎰</h2>");
-	$("#derecho").append("<div id='contador-sorteos' style='color: #c4cfde; font-size: 1em; margin-bottom: 5px;'>Sorteos: 0 / " + sorteosTotales + "</div>");
+	$("#derecho").append("<div style='text-align: center; margin-top: 0; margin-bottom: 3px; flex-shrink: 0;'>");
+	$("#derecho").append("<h2 style='font-size: 1.3em; margin-bottom: 5px; background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);'>🎰 Número Ganador 🎰</h2>");
+	$("#derecho").append("<div id='contador-sorteos' style='color: #c4cfde; font-size: 0.9em; margin-bottom: 3px;'>Sorteos: 0 / " + sorteosTotales + "</div>");
 	$("#derecho").append("<div id='numero-ganador'>?</div>");
 	$("#derecho").append("</div>");
 }
