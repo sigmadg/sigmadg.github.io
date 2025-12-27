@@ -2570,27 +2570,27 @@ a:focus {
 /* Responsive Lottery Game */
 .loteria-iframe {
   width: 100% !important;
-  height: 1400px !important;
+  height: 1000px !important;
   max-height: none !important;
 }
 
 @media (max-width: 991px) {
   .loteria-iframe {
-    height: 1300px !important;
+    height: 950px !important;
     max-height: none !important;
   }
 }
 
 @media (max-width: 768px) {
   .loteria-iframe {
-    height: 1200px !important;
+    height: 900px !important;
     max-height: none !important;
   }
 }
 
 @media (max-width: 480px) {
   .loteria-iframe {
-    height: 1100px !important;
+    height: 850px !important;
     max-height: none !important;
   }
 }

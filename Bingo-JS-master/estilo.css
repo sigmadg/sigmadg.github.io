@@ -17,7 +17,7 @@ p {
     width: 25%;
     height: 100vh;
     min-height: 100vh;
-    max-height: 1400px;
+    max-height: 1000px;
     margin: 0 auto;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
@@ -33,14 +33,15 @@ p {
     width: 75%;
     height: 100vh;
     min-height: 100vh;
-    max-height: 1400px;
+    max-height: 1000px;
     background: transparent;
     backdrop-filter: blur(5px);
     overflow-y: hidden;
     overflow-x: hidden;
-    padding: 15px;
+    padding: 10px 15px 5px 15px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 #espacio {
 	width: 25%;
@@ -170,7 +171,7 @@ h4 {
     line-height: 90px;
     background: linear-gradient(135deg, #ff014f 0%, #23f0ec 100%);
     color: white;
-    margin: 10px auto;
+    margin: 5px auto 8px auto;
     height: 90px;
     width: 90px;
     border-radius: 50%;
@@ -224,7 +225,7 @@ h4 {
 #tarjeta {
     width: 90%;
     max-width: 500px;
-    margin: 10px auto;
+    margin: 5px auto 0 auto;
     border-collapse: separate;
     border-spacing: 5px;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
