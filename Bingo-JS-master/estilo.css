@@ -489,12 +489,16 @@ h4 {
     #derecho {
         width: 100%;
         float: none;
-        padding: 20px 15px;
+        padding: 15px 10px;
         max-height: none;
+        height: auto;
+        min-height: auto;
         order: 2;
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
     
     /* Reducir tamaño del contenedor del número ganador */
