@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "mkdir -p public && cp templates/index.html public/index.html",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/generate-stream", "destination": "/api/generate_stream" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/generate_stream.py": {
+      "maxDuration": 60
+    }
+  }
+}

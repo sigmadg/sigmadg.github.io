@@ -1,0 +1,31 @@
+# Servicio systemd para que la app esté siempre en ejecución.
+# Instalación (Linux):
+#   1. Edita las rutas abajo (User, WorkingDirectory, ExecStart).
+#   2. Copia el archivo:
+#        sudo cp datasets-generator.service /etc/systemd/system/
+#   3. Recarga y activa:
+#        sudo systemctl daemon-reload
+#        sudo systemctl enable datasets-generator
+#        sudo systemctl start datasets-generator
+#   4. Ver estado: sudo systemctl status datasets-generator
+#   5. Ver logs:   journalctl -u datasets-generator -f
+
+[Unit]
+Description=Generador de dataset desde transcripciones YouTube
+After=network.target
+
+[Service]
+Type=simple
+User=TU_USUARIO
+Group=TU_USUARIO
+WorkingDirectory=/home/sigmadg/Documentos/Proyectos_Gaby/Datasets
+
+# Arrancar con el venv del proyecto
+Environment="PATH=/home/sigmadg/Documentos/Proyectos_Gaby/Datasets/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/sigmadg/Documentos/Proyectos_Gaby/Datasets/.venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 1 --threads 4 --timeout 300 app:app
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

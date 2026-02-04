@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenAPI YAML → PDF | Documentación de API</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --border: #2d3a4f;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --success: #3fb950;
+      --error: #f85149;
+      --container-padding: clamp(0.75rem, 4vw, 2rem);
+      --panel-padding: clamp(1rem, 3vw, 1.5rem);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      overflow-x: hidden;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--container-padding);
+    }
+    h1 {
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      word-wrap: break-word;
+    }
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: clamp(1rem, 4vw, 2rem);
+      font-size: clamp(0.875rem, 2vw, 1rem);
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: clamp(8px, 2vw, 12px);
+      padding: var(--panel-padding);
+      margin-bottom: 1.5rem;
+      width: 100%;
+      min-width: 0;
+    }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--muted);
+      font-size: clamp(0.875rem, 2vw, 1rem);
+    }
+    textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: min(320px, 50vh);
+      max-height: 80vh;
+      padding: clamp(0.75rem, 2vw, 1rem);
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: clamp(12px, 1.5vw, 14px);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      resize: vertical;
+    }
+    textarea::placeholder {
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      gap: clamp(0.5rem, 2vw, 1rem);
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    button {
+      padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
+      font-size: clamp(0.875rem, 1.5vw, 1rem);
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      background: #3d4d66;
+    }
+    .error-box {
+      background: rgba(248, 81, 73, 0.15);
+      border: 1px solid var(--error);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      color: var(--error);
+      display: none;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .error-box.visible {
+      display: block;
+    }
+    .success-msg {
+      color: var(--success);
+      margin-left: 0.5rem;
+      display: none;
+      font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    }
+    .success-msg.visible {
+      display: inline;
+    }
+    .hint {
+      font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+      color: var(--muted);
+      margin-top: 0.5rem;
+      word-wrap: break-word;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0.75rem;
+      }
+      .panel {
+        padding: 1rem;
+      }
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .actions button {
+        width: 100%;
+      }
+      .success-msg {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        display: block;
+      }
+      .success-msg.visible {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>OpenAPI YAML → PDF</h1>
+    <p class="subtitle">Pega un YAML OpenAPI (como los de ejemplo) y genera un PDF con nombre de API, recursos, headers, body (tipo y regex) y códigos de respuesta.</p>
+
+    <div class="panel">
+      <label for="yaml">YAML OpenAPI</label>
+      <textarea id="yaml" placeholder="Pega aquí el contenido de tu archivo .yaml (OpenAPI 3.x)…"></textarea>
+      <p class="hint">Soporta OpenAPI 3.0. Puedes usar los YAML de ejemplo de esta carpeta (adizes-*-v1.yaml).</p>
+      <div class="actions">
+        <button type="button" class="btn-primary" id="btnGenerate">Generar PDF</button>
+        <button type="button" class="btn-secondary" id="btnSample">Cargar ejemplo (users)</button>
+        <span class="success-msg" id="successMsg">PDF generado correctamente.</span>
+      </div>
+      <div class="error-box" id="errorBox"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const yamlEl = document.getElementById('yaml');
+      const btnGenerate = document.getElementById('btnGenerate');
+      const btnSample = document.getElementById('btnSample');
+      const errorBox = document.getElementById('errorBox');
+      const successMsg = document.getElementById('successMsg');
+
+      function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.classList.add('visible');
+        successMsg.classList.remove('visible');
+      }
+      function clearError() {
+        errorBox.classList.remove('visible');
+        successMsg.classList.add('visible');
+      }
+
+      function resolveRef(spec, ref) {
+        if (!ref || !ref.startsWith('#/')) return null;
+        const path = ref.replace('#/', '').split('/');
+        let o = spec;
+        for (const p of path) {
+          o = o && o[p];
+        }
+        return o;
+      }
+
+      function resolveSchema(spec, schema) {
+        if (!schema) return null;
+        if (schema.$ref) return resolveSchema(spec, resolveRef(spec, schema.$ref));
+        return schema;
+      }
+
+      function regexFromDef(def) {
+        if (!def) return '';
+        if (def.pattern) return String(def.pattern);
+        var format = (def.format && String(def.format)) || '';
+        var type = (def.type && String(def.type)) || 'string';
+        var ex = def.example;
+        if (format === 'email') return '^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$';
+        if (format === 'uuid') return '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$';
+        if (format === 'date') return '^\\d{4}-\\d{2}-\\d{2}$';
+        if (format === 'date-time') return '^[0-9TZ:.:+-]+$';
+        if (format === 'uri') return '^https?://.+';
+        if (type === 'integer') return '^-?\\d+$';
+        if (type === 'number') return '^-?\\d+(\\.\\d+)?$';
+        if (type === 'boolean') return '^(true|false)$';
+        if (type === 'string') {
+          if (ex != null && typeof ex === 'string') {
+            if (ex.indexOf('@') !== -1 && ex.indexOf('.') !== -1 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ex)) return '^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$';
+            if (/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(ex)) return '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$';
+            if (/^\d{4}-\d{2}-\d{2}$/.test(ex)) return '^\\d{4}-\\d{2}-\\d{2}$';
+          }
+          return '^.*$';
+        }
+        if (type === 'array') return '';
+        return '';
+      }
+
+      function collectBodyAttributes(spec, schema, prefix, out, visited) {
+        if (!schema) return;
+        if (schema.$ref) {
+          var ref = schema.$ref;
+          if (visited[ref]) return;
+          visited[ref] = true;
+          schema = resolveRef(spec, ref);
+          if (!schema) return;
+        }
+        schema = resolveSchema(spec, schema);
+        if (!schema || !schema.properties) return;
+        var props = schema.properties;
+        for (var name in props) {
+          if (!props.hasOwnProperty(name)) continue;
+          var def = props[name];
+          var path = prefix ? prefix + '.' + name : name;
+          var type = (def && def.type) ? String(def.type) : (def && def.$ref ? 'object' : 'string');
+          var regex = regexFromDef(def);
+          var description = (def && def.description) ? String(def.description).slice(0, 80) : '';
+          out.push({ name: '$.' + path, type: type, regex: regex || '-', description: description });
+
+          if (def && def.type === 'object') {
+            var inner = resolveSchema(spec, def);
+            if (inner && inner.properties) collectBodyAttributes(spec, inner, path, out, visited);
+          } else if (def && def.$ref) {
+            var inner = resolveRef(spec, def.$ref);
+            if (inner && inner.properties) collectBodyAttributes(spec, inner, path, out, visited);
+          } else if (def && def.type === 'array' && def.items) {
+            var itemSchema = def.items.$ref ? resolveRef(spec, def.items.$ref) : def.items;
+            if (itemSchema && (itemSchema.properties || itemSchema.$ref)) {
+              collectBodyAttributes(spec, itemSchema, path + '[*]', out, visited);
+            } else {
+              var itemType = (itemSchema && itemSchema.type) ? itemSchema.type : 'object';
+              var itemRegex = itemSchema ? regexFromDef(itemSchema) : '';
+              out.push({ name: '$.' + path + '[*]', type: 'array<' + itemType + '>', regex: itemRegex || '-', description: '' });
+            }
+          }
+        }
+      }
+
+      function getSchemaProperties(spec, schema) {
+        if (!schema) return [];
+        if (schema.$ref) schema = resolveRef(spec, schema.$ref);
+        if (!schema) return [];
+        var out = [];
+        collectBodyAttributes(spec, schema, '', out, {});
+        return out;
+      }
+
+      var HTTP_METHODS = ['get', 'post', 'put', 'delete', 'patch', 'head', 'trace', 'options'];
+
+      function getHeadersFromParams(parameters) {
+        if (!Array.isArray(parameters)) return [];
+        return parameters
+          .filter(p => p && p.in === 'header')
+          .map(p => ({
+            name: p.name,
+            required: !!p.required,
+            type: (p.schema && p.schema.type) ? p.schema.type : 'string'
+          }));
+      }
+
+      function getRequestBodySchema(operation) {
+        const body = operation.requestBody;
+        if (!body || !body.content || !body.content['application/json']) return null;
+        return body.content['application/json'].schema || null;
+      }
+
+      function getResponseBodySchema(responseValue) {
+        if (!responseValue || !responseValue.content || !responseValue.content['application/json']) return null;
+        return responseValue.content['application/json'].schema || null;
+      }
+
+      var ALLOWED_RESPONSE_CODES = ['200', '201', '204'];
+
+      function getResponseCodes(spec, operation) {
+        const resp = operation.responses || {};
+        return Object.entries(resp)
+          .filter(function (entry) { return ALLOWED_RESPONSE_CODES.indexOf(entry[0]) !== -1; })
+          .map(function ([code, val]) {
+            var schema = getResponseBodySchema(val);
+            var bodyAttrs = getSchemaProperties(spec, schema);
+            return {
+              code: code,
+              description: (val && val.description) ? val.description : '',
+              bodyAttrs: bodyAttrs
+            };
+          });
+      }
+
+      function extractResources(spec) {
+        const paths = spec.paths || {};
+        const resources = [];
+        for (const [path, pathItem] of Object.entries(paths)) {
+          if (!pathItem || typeof pathItem !== 'object') continue;
+          var pathParams = Array.isArray(pathItem.parameters) ? pathItem.parameters : [];
+          for (const methodKey of Object.keys(pathItem)) {
+            var methodLower = methodKey.toLowerCase();
+            if (HTTP_METHODS.indexOf(methodLower) === -1) continue;
+            var op = pathItem[methodKey];
+            if (!op || typeof op !== 'object' || Array.isArray(op)) continue;
+            if (!op.responses && !op.summary && !op.description && !op.operationId) continue;
+            var opParams = Array.isArray(op.parameters) ? op.parameters : [];
+            var paramsByName = {};
+            pathParams.forEach(function (p) { if (p && p.name) paramsByName[p.name] = p; });
+            opParams.forEach(function (p) { if (p && p.name) paramsByName[p.name] = p; });
+            var mergedParams = Object.values(paramsByName);
+            var headers = getHeadersFromParams(mergedParams);
+            var bodySchema = getRequestBodySchema(op);
+            var bodyAttrs = getSchemaProperties(spec, bodySchema);
+            var responseCodes = getResponseCodes(spec, op);
+            resources.push({
+              name: methodKey.toUpperCase() + ' ' + path,
+              path: path,
+              method: methodKey.toUpperCase(),
+              summary: (op.summary || op.description || ''),
+              headers: headers,
+              bodyAttrs: bodyAttrs,
+              responseCodes: responseCodes
+            });
+          }
+        }
+        return resources;
+      }
+
+      function buildDocData(spec) {
+        const apiName = (spec.info && spec.info.title) ? spec.info.title : 'API sin nombre';
+        const resources = extractResources(spec);
+        return { apiName, resources };
+      }
+
+      function generatePDF(data) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('l', 'mm', 'a4');
+        const pageW = doc.internal.pageSize.getWidth();
+        const pageH = doc.internal.pageSize.getHeight();
+        const margin = 18;
+        const topMargin = 20;
+        const bottomMargin = 25;
+        var pageHeightMm = 210;
+        var maxY = pageHeightMm - bottomMargin;
+        let y = topMargin;
+        const lineH = 6;
+        const smallH = 6;
+
+        function ensureSpace(linesNeeded) {
+          var need = (linesNeeded || 1) * smallH;
+          if (y + need > maxY) {
+            doc.addPage('a4', 'l');
+            y = topMargin;
+          }
+        }
+
+        function textLine(text) {
+          ensureSpace(1);
+          doc.text(text, margin, y);
+          y += smallH;
+        }
+
+        doc.setFontSize(18);
+        doc.setFont(undefined, 'bold');
+        ensureSpace(1);
+        doc.text('Nombre de la API', margin, y);
+        y += lineH + 2;
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'normal');
+        ensureSpace(1);
+        doc.text(data.apiName, margin, y);
+        y += lineH + 8;
+
+        for (const res of data.resources) {
+          ensureSpace(4);
+          doc.setFontSize(14);
+          doc.setFont(undefined, 'bold');
+          doc.text('Recurso: ' + res.name, margin, y);
+          y += lineH + 2;
+
+          doc.setFontSize(10);
+          doc.setFont(undefined, 'normal');
+          if (res.summary) {
+            ensureSpace(1);
+            doc.text(res.summary, margin, y);
+            y += lineH;
+          }
+
+          doc.setFont(undefined, 'bold');
+          ensureSpace(1);
+          doc.text('Headers', margin, y);
+          y += lineH;
+          doc.setFont(undefined, 'normal');
+          if (res.headers.length) {
+            res.headers.forEach(function (h) {
+              textLine('  • ' + h.name + ' (' + h.type + ')' + (h.required ? ' [requerido]' : ''));
+            });
+          } else {
+            textLine('  (ninguno)');
+          }
+          y += 2;
+
+          doc.setFont(undefined, 'bold');
+          ensureSpace(1);
+          doc.text('Atributos del body', margin, y);
+          y += lineH;
+          doc.setFont(undefined, 'normal');
+          if (res.bodyAttrs.length) {
+            var lineW = pageW - margin * 2;
+            res.bodyAttrs.forEach(function (b) {
+              var line = '  • ' + b.name + ' — tipo: ' + b.type;
+              var lines = doc.splitTextToSize(line, lineW);
+              lines.forEach(function (l) {
+                ensureSpace(1);
+                doc.text(l, margin, y);
+                y += smallH;
+              });
+            });
+          } else {
+            textLine('  (sin body)');
+          }
+          y += 2;
+
+          doc.setFont(undefined, 'bold');
+          ensureSpace(1);
+          doc.text('Códigos de respuesta', margin, y);
+          y += lineH;
+          doc.setFont(undefined, 'normal');
+          var lineW = pageW - margin * 2;
+          res.responseCodes.forEach(function (r) {
+            ensureSpace(1);
+            doc.text('  • ' + r.code + ' — ' + (r.description || '-'), margin, y);
+            y += smallH;
+            if (r.bodyAttrs && r.bodyAttrs.length) {
+              r.bodyAttrs.forEach(function (b) {
+                var line = '      • ' + b.name + ' — tipo: ' + b.type;
+                var lines = doc.splitTextToSize(line, lineW);
+                lines.forEach(function (l) {
+                  ensureSpace(1);
+                  doc.text(l, margin, y);
+                  y += smallH;
+                });
+              });
+            }
+          });
+          y += 10;
+        }
+
+        doc.save((data.apiName || 'api-doc') + '.pdf');
+      }
+
+      btnGenerate.addEventListener('click', function () {
+        const raw = yamlEl.value.trim();
+        if (!raw) {
+          showError('Escribe o pega un YAML OpenAPI.');
+          return;
+        }
+        let spec;
+        try {
+          spec = jsyaml.load(raw);
+        } catch (e) {
+          showError('YAML inválido: ' + e.message);
+          return;
+        }
+        if (!spec || !spec.paths) {
+          showError('El YAML no parece un OpenAPI válido (falta "paths").');
+          return;
+        }
+        clearError();
+        const data = buildDocData(spec);
+        successMsg.textContent = 'PDF generado. ' + data.resources.length + ' recursos incluidos.';
+        generatePDF(data);
+      });
+
+      btnSample.addEventListener('click', function () {
+        const sample = `openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: "adizes-users-management-v1"
+  description: API for user management
+paths:
+  /status:
+    get:
+      summary: Consulta el estado del backend.
+      tags: ["Estatus"]
+      responses:
+        "200":
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+        "500":
+          description: Internal Server Error
+  /users:
+    post:
+      summary: Crear un nuevo usuario
+      tags: ["Users"]
+      parameters:
+        - in: header
+          name: x-access-id
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-user-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userPost"
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+components:
+  schemas:
+    userPost:
+      type: object
+      properties:
+        roleId:
+          type: string
+        email:
+          type: string
+          pattern: "^[\\\\w.-]+@[\\\\w.-]+\\\\.[a-zA-Z]{2,}$"
+        fullName:
+          type: string
+        password:
+          type: string
+`;
+        yamlEl.value = sample;
+        errorBox.classList.remove('visible');
+        successMsg.classList.remove('visible');
+      });
+    })();
+  </script>
+</body>
+</html>

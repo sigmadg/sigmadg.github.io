@@ -1,0 +1,63 @@
+
+        <!-- Modal Portfolio Body area Start - Herramientas -->
+        <div class="modal fade" id="herramientas" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i data-feather="x"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <div class="text-content">
+                                    <h3>
+                                        Herramientas
+                                    </h3>
+                                    <p class="mb--30">Colección de herramientas de desarrollo y utilidades web que he creado para facilitar tareas comunes en desarrollo de software.</p>
+                                    
+                                    <!-- Lista de herramientas -->
+                                    <div class="herramientas-list mt--30">
+                                        <div class="herramienta-item mb--20" style="padding: 20px; background: var(--background-color-1); border-radius: 10px; border: 1px solid var(--color-border);">
+                                            <h4 style="margin-bottom: 10px; color: var(--color-heading);">
+                                                <i data-feather="file-text" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>
+                                                API Doc Generator
+                                            </h4>
+                                            <p style="margin-bottom: 15px; color: var(--color-body);">Generador de documentación PDF desde archivos OpenAPI YAML. Convierte especificaciones OpenAPI en documentos PDF listos para compartir.</p>
+                                            <a href="Herramientas/api-doc-generator/index.html" target="_blank" rel="noopener noreferrer" class="rn-btn">
+                                                <span>Abrir herramienta</span>
+                                                <i data-feather="external-link"></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="herramienta-item mb--20" style="padding: 20px; background: var(--background-color-1); border-radius: 10px; border: 1px solid var(--color-border);">
+                                            <h4 style="margin-bottom: 10px; color: var(--color-heading);">
+                                                <i data-feather="database" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>
+                                                Datasets Generator
+                                            </h4>
+                                            <p style="margin-bottom: 15px; color: var(--color-body);">Generador de datasets JSONL desde transcripciones de YouTube. Extrae y normaliza transcripciones de listas de reproducción para entrenamiento de modelos.</p>
+                                            <a href="Herramientas/Datasets/docs/index.html" target="_blank" rel="noopener noreferrer" class="rn-btn">
+                                                <span>Abrir herramienta</span>
+                                                <i data-feather="external-link"></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="herramienta-item mb--20" style="padding: 20px; background: var(--background-color-1); border-radius: 10px; border: 1px solid var(--color-border);">
+                                            <h4 style="margin-bottom: 10px; color: var(--color-heading);">
+                                                <i data-feather="tool" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>
+                                                Próximamente
+                                            </h4>
+                                            <p style="margin-bottom: 15px; color: var(--color-body);">Más herramientas estarán disponibles pronto.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End of .text-content -->
+                            </div>
+                        </div>
+                        <!-- End of .row Body-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Portfolio area -->        
