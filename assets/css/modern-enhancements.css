@@ -2649,3 +2649,113 @@ a:focus {
   }
 }
 
+/* ============================================
+   Modal Herramientas - UI mejorada
+   ============================================ */
+#variosProyectos .modal-content {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#variosProyectos .modal-body .text-content {
+  padding-left: 0;
+}
+
+#variosProyectos .modal-herramientas .modal-herramientas-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-lightn, #fff);
+}
+
+#variosProyectos .modal-herramientas .modal-herramientas-title svg {
+  width: 32px;
+  height: 32px;
+  color: var(--color-primary, #ff014f);
+  flex-shrink: 0;
+}
+
+#variosProyectos .modal-herramientas .modal-herramientas-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-body, #b5b5b5);
+  margin-bottom: 28px;
+  padding-right: 1rem;
+}
+
+#variosProyectos .herramientas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#variosProyectos .herramienta-item {
+  padding: 20px 22px;
+  background: var(--background-color-1, #1e2024);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+#variosProyectos .herramienta-item:hover {
+  border-color: rgba(255, 1, 79, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#variosProyectos .herramienta-item h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-heading, #fff);
+}
+
+#variosProyectos .herramienta-item h4 svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary, #ff014f);
+  flex-shrink: 0;
+}
+
+#variosProyectos .herramienta-item p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-body, #b5b5b5);
+}
+
+#variosProyectos .herramienta-item .rn-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#variosProyectos .herramienta-item .rn-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 1, 79, 0.35);
+}
+
+#variosProyectos .herramienta-item .rn-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+#variosProyectos .herramienta-item.herramienta-soon {
+  opacity: 0.85;
+}
+
+#variosProyectos .herramienta-item.herramienta-soon .rn-btn {
+  pointer-events: none;
+  opacity: 0.7;
+}
+

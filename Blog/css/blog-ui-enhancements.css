@@ -1,0 +1,252 @@
+/*
+ * Blog UI Enhancements - SigmaDG
+ * Mejoras de interfaz para el blog
+ */
+
+/* Variables locales para consistencia */
+:root {
+  --blog-accent: #c18f59;
+  --blog-accent-hover: #a67a47;
+  --blog-bg-dark: #1a1b1e;
+  --blog-card-bg: #f8f9fa;
+  --blog-text: #333;
+  --blog-text-muted: #555;
+  --blog-radius: 12px;
+  --blog-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --blog-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --blog-transition: 0.25s ease;
+}
+
+/* Enlace a inicio en el banner */
+.blog-back-home {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background var(--blog-transition), border-color var(--blog-transition), transform 0.2s ease;
+}
+.blog-back-home:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Banner: mejor legibilidad y espaciado */
+.fh5co-top-banner .top-banner__text p {
+  font-size: 17px;
+  letter-spacing: 0.3px;
+  opacity: 0.95;
+}
+
+/* Sección Temas: tarjetas más modernas */
+.fh5co-books .books {
+  gap: 24px;
+}
+.single-book {
+  background: #fff;
+  border-radius: var(--blog-radius);
+  overflow: hidden;
+  box-shadow: var(--blog-shadow);
+  transition: transform var(--blog-transition), box-shadow var(--blog-transition);
+  padding: 0 0 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.single-book:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--blog-shadow-hover);
+}
+.single-book .single-book__img {
+  border-radius: var(--blog-radius) var(--blog-radius) 0 0;
+  overflow: hidden;
+}
+.single-book .single-book__img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.single-book:hover .single-book__img img {
+  transform: scale(1.03);
+}
+.single-book .single-book__title {
+  margin: 16px 16px 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blog-text);
+}
+.single-book .single-book__price {
+  margin: 0 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--blog-text-muted);
+}
+
+/* Títulos de sección */
+.universal-h2 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.universal-h2-bckg {
+  background-size: 120px 6px;
+  padding-bottom: 24px !important;
+}
+
+/* Counter: más aire y claridad */
+.fh5co-counter .single-count {
+  padding: 16px;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+.fh5co-counter .single-count:hover {
+  transform: scale(1.02);
+}
+.single-count .count {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* Proyectos (blog slider): tarjetas y botones */
+.single-blog {
+  border-radius: var(--blog-radius);
+  overflow: hidden;
+  box-shadow: var(--blog-shadow);
+  transition: box-shadow var(--blog-transition);
+}
+.single-blog:hover {
+  box-shadow: var(--blog-shadow-hover);
+}
+.single-blog .single-blog__img {
+  overflow: hidden;
+}
+.single-blog .single-blog__img img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.single-blog:hover .single-blog__img img {
+  transform: scale(1.03);
+}
+.single-blog .single-blog__text {
+  border: 1px solid #eee;
+  border-left: 0;
+  border-radius: 0 var(--blog-radius) var(--blog-radius) 0;
+  padding: 24px 28px !important;
+}
+.single-blog .single-blog__text h4 {
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--blog-text);
+}
+.single-blog .single-blog__text span {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.single-blog .single-blog__text p {
+  margin-bottom: 16px;
+  line-height: 1.55;
+  color: var(--blog-text-muted);
+}
+
+/* Botones de proyecto: enlace como botón (estructura correcta) */
+.blog-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--blog-accent);
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--blog-transition), transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 10px rgba(193, 143, 89, 0.3);
+}
+.blog-btn:hover {
+  background: var(--blog-accent-hover);
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(193, 143, 89, 0.4);
+}
+.single-blog__text .blog-btn-wrap {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+/* Quotes: cita principal más destacada */
+.fh5co-quotes p {
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fh5co-quotes h4 {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Social: iconos más grandes y hover */
+.fh5co-social .social h5 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.social-icons a {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.social-icons a:hover {
+  transform: scale(1.1);
+}
+
+/* Footer */
+.site-footer .footer-bottom {
+  padding: 28px 0;
+}
+.footer-bottom-inner p {
+  font-size: 14px;
+  margin: 0;
+}
+.blog-footer-home {
+  color: var(--blog-accent);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 12px;
+  transition: color 0.2s ease;
+}
+.blog-footer-home:hover {
+  color: var(--blog-accent-hover);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-back-home {
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .single-book .single-book__img img {
+    height: 160px;
+  }
+  .single-blog .single-blog__text {
+    padding: 18px 20px !important;
+  }
+}
