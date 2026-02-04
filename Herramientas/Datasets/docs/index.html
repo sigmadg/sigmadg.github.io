@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de dataset · Transcripciones YouTube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #18181c;
+      --border: #2a2a30;
+      --text: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --danger: #ef4444;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .page.has-results {
+      max-width: 960px;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group:last-of-type {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="url"],
+    input[type="number"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="url"]:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.15);
+    }
+
+    input[type="number"] {
+      max-width: 8rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+    }
+
+    .form-group-inline {
+      flex: 0 0 auto;
+      margin-bottom: 0;
+    }
+
+    .form-group-inline label {
+      margin-bottom: 0.35rem;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f0f12;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 1.5rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .info-box {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .info-box strong {
+      color: var(--text);
+    }
+
+    .info-box ul {
+      margin-top: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .info-box li {
+      margin-bottom: 0.25rem;
+    }
+
+    .error-msg {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #fca5a5;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+    }
+
+    .loading {
+      pointer-events: none;
+    }
+
+    .loading .btn-text {
+      opacity: 0;
+    }
+
+    .loading .btn-spinner {
+      position: absolute;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid rgba(15, 15, 18, 0.3);
+      border-top-color: #0f0f12;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .btn-wrap {
+      position: relative;
+    }
+
+    .btn .btn-spinner {
+      display: none;
+    }
+
+    .loading .btn-spinner {
+      display: block;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .form-actions .btn {
+      margin-top: 0;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: #36363d;
+    }
+
+    .results-section {
+      margin-top: 2.5rem;
+      display: none;
+    }
+
+    .results-section.visible {
+      display: block;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .results-section h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .results-meta {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .results-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .doc-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .doc-meta .tag {
+      background: var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      color: var(--text);
+    }
+
+    .doc-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-title a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .doc-title a:hover {
+      text-decoration: underline;
+    }
+
+    .doc-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .doc-text.collapsed {
+      max-height: 6em;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .doc-text.collapsed::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2.5em;
+      background: linear-gradient(transparent, var(--surface));
+    }
+
+    .doc-toggle {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .doc-toggle:hover {
+      text-decoration: underline;
+    }
+
+    .link-download-jsonl {
+      font-size: 0.875rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .link-download-jsonl:hover {
+      text-decoration: underline;
+    }
+
+    .log-panel {
+      margin-top: 1.5rem;
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .log-panel.visible {
+      display: block;
+    }
+
+    .log-panel h3 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .log-content {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .log-content .log-line {
+      margin-bottom: 0.2em;
+    }
+
+    .log-content .log-line.ok {
+      color: var(--accent);
+    }
+
+    .log-content .log-line.skip {
+      color: var(--text-muted);
+      opacity: 0.9;
+    }
+
+    .card-normalize {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .card-normalize h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .card-normalize .hint {
+      margin-top: 0.25rem;
+    }
+
+    .file-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .file-input-wrap input[type="file"] {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: var(--border);
+    }
+  </style>
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Generador de dataset</h1>
+      <p class="subtitle">Transcripciones de listas de reproducción de YouTube → JSONL normalizado</p>
+    </header>
+
+    <main class="card">
+      <div class="static-notice" id="staticNotice" style="display: none; margin-bottom: 1rem; padding: 0.75rem 1rem; background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; font-size: 0.875rem; color: var(--text-muted);">
+        <strong style="color: var(--text);">Versión cliente (100% en el navegador).</strong> Esta versión funciona completamente en tu navegador sin servidor usando proxies CORS públicos. <strong>Nota:</strong> Puede tener limitaciones debido a políticas CORS de YouTube o cambios en su estructura. Si encuentras problemas, usa la sección <strong>«Solo normalizar»</strong> o ejecuta la app en local (<code>python app.py</code>) / Vercel para máxima compatibilidad.
+      </div>
+      <form id="form" action="/api/generate" method="post" target="_blank">
+        <div class="form-group">
+          <label for="playlist_url">URL de la lista de reproducción</label>
+          <input
+            type="url"
+            id="playlist_url"
+            name="playlist_url"
+            placeholder="https://www.youtube.com/playlist?list=..."
+            required
+            autocomplete="url"
+          />
+          <p class="hint">Pega el enlace completo de la playlist (YouTube).</p>
+        </div>
+
+        <div class="form-group">
+          <label for="max_videos">Máximo de videos a procesar</label>
+          <input
+            type="number"
+            id="max_videos"
+            name="max_videos"
+            value="50"
+            min="1"
+            max="200"
+            step="1"
+          />
+          <p class="hint">Entre 1 y 200. Por defecto 50. Se usa si no indicas rango.</p>
+        </div>
+
+        <div class="form-group form-row">
+          <div class="form-group-inline">
+            <label for="start_video">Desde video</label>
+            <input
+              type="number"
+              id="start_video"
+              name="start_video"
+              min="1"
+              placeholder="1"
+              step="1"
+            />
+          </div>
+          <div class="form-group-inline">
+            <label for="end_video">Hasta video</label>
+            <input
+              type="number"
+              id="end_video"
+              name="end_video"
+              min="1"
+              placeholder="—"
+              step="1"
+            />
+          </div>
+          <p class="hint">Opcional: rango en la lista (1 = primer video). Deja vacío para usar los primeros “Máximo” videos.</p>
+        </div>
+
+        <div class="form-actions btn-wrap">
+          <button type="button" class="btn" id="btnDownload">
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <span class="btn-text">Descargar JSONL</span>
+          </button>
+          <button type="button" class="btn btn-secondary" id="btnViewWeb">
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <span class="btn-text">Ver en página web</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="error-msg" id="errorMsg" role="alert"></div>
+
+      <div class="log-panel" id="logPanel" aria-live="polite">
+        <h3>Log de descarga y procesamiento</h3>
+        <div class="log-content" id="logContent"></div>
+      </div>
+
+      <div class="card-normalize">
+        <h3>Solo normalizar (100% en el navegador, sin servidor)</h3>
+        <p class="hint">Sube un JSONL con líneas <code>{"text": "..."}</code>. Se limpiará PII y se etiquetará regional_hint en tu navegador. No se envía nada a ningún servidor.</p>
+        <div class="form-group" style="margin-top: 0.75rem;">
+          <div class="file-input-wrap">
+            <input type="file" id="fileNormalize" accept=".jsonl,.json,text/plain" />
+            <button type="button" class="btn btn-outline" id="btnNormalizeOnly">
+              <span class="btn-text">Normalizar y descargar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Qué hace esta herramienta</strong>
+        <ul>
+          <li>Obtiene los videos de la playlist (sin descargar el audio).</li>
+          <li>Descarga las transcripciones disponibles (subtítulos/CC).</li>
+          <li>Limpia el texto (espacios, PII: emails y teléfonos).</li>
+          <li>Normaliza cada documento: idioma, regional_hint (es-MX), license, chunk_id, source_url.</li>
+          <li>Devuelve un archivo <code>dataset_transcripciones.jsonl</code> listo para entrenar o analizar.</li>
+        </ul>
+      </div>
+    </main>
+
+    <section class="results-section card" id="resultsSection" aria-live="polite">
+      <div class="results-header">
+        <h2>Dataset generado</h2>
+        <span class="results-meta" id="resultsMeta"></span>
+        <a href="#" class="link-download-jsonl" id="linkDownloadJsonl" style="display: none;">Descargar JSONL</a>
+      </div>
+      <div id="resultsList"></div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      // Mostrar aviso en todas las versiones estáticas
+      var el = document.getElementById("staticNotice");
+      if (el) el.style.display = "block";
+    })();
+    const form = document.getElementById("form");
+    const btnDownload = document.getElementById("btnDownload");
+    const btnViewWeb = document.getElementById("btnViewWeb");
+    const errorMsg = document.getElementById("errorMsg");
+    const resultsSection = document.getElementById("resultsSection");
+    const resultsMeta = document.getElementById("resultsMeta");
+    const resultsList = document.getElementById("resultsList");
+    const linkDownloadJsonl = document.getElementById("linkDownloadJsonl");
+    const page = document.querySelector(".page");
+
+    let lastBlob = null;
+
+    function showError(text) {
+      errorMsg.textContent = text;
+      errorMsg.classList.add("visible");
+    }
+
+    function hideError() {
+      errorMsg.classList.remove("visible");
+    }
+
+    function setLoading(btn, loading) {
+      btn.disabled = loading;
+      btn.classList.toggle("loading", loading);
+    }
+
+    function parseJsonl(text) {
+      const docs = [];
+      const lines = text.trim().split("\n");
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        try {
+          const doc = JSON.parse(line);
+          if (doc.error) return { error: doc.error };
+          docs.push(doc);
+        } catch (_) {}
+      }
+      return docs;
+    }
+
+    function renderDoc(doc, index) {
+      const text = doc.text || "";
+      const long = text.length > 400;
+      const div = document.createElement("div");
+      div.className = "results-card";
+      div.innerHTML =
+        '<div class="doc-meta">' +
+        '<span class="tag">' + (doc.language || "—") + '</span>' +
+        '<span class="tag">' + (doc.regional_hint || "—") + '</span>' +
+        (doc.video_title ? '<span title="Título del video">' + escapeHtml(doc.video_title) + '</span>' : "") +
+        '</div>' +
+        (doc.source_url
+          ? '<div class="doc-title"><a href="' + escapeHtml(doc.source_url) + '" target="_blank" rel="noopener">Ver video en YouTube</a></div>'
+          : "") +
+        '<div class="doc-text' + (long ? " collapsed" : "") + '">' + escapeHtml(long ? text.slice(0, 400) : text) + '</div>' +
+        (long ? '<button type="button" class="doc-toggle" data-expanded="false">Ver más</button>' : "");
+      const toggle = div.querySelector(".doc-toggle");
+      if (toggle) {
+        const fullText = text;
+        toggle.addEventListener("click", function () {
+          const textEl = div.querySelector(".doc-text");
+          const expanded = toggle.getAttribute("data-expanded") === "true";
+          if (expanded) {
+            textEl.textContent = fullText.length > 400 ? fullText.slice(0, 400) : fullText;
+            textEl.classList.add("collapsed");
+            toggle.textContent = "Ver más";
+            toggle.setAttribute("data-expanded", "false");
+          } else {
+            textEl.textContent = fullText;
+            textEl.classList.remove("collapsed");
+            toggle.textContent = "Ver menos";
+            toggle.setAttribute("data-expanded", "true");
+          }
+        });
+      }
+      return div;
+    }
+
+    function escapeHtml(s) {
+      const el = document.createElement("span");
+      el.textContent = s;
+      return el.innerHTML;
+    }
+
+    function escapeAttr(s) {
+      return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+    }
+
+    const logPanel = document.getElementById("logPanel");
+    const logContent = document.getElementById("logContent");
+
+    function appendLog(msg, kind) {
+      const line = document.createElement("div");
+      line.className = "log-line" + (kind ? " " + kind : "");
+      line.textContent = msg;
+      logContent.appendChild(line);
+      logPanel.scrollTop = logPanel.scrollHeight;
+    }
+
+    function clearLog() {
+      logContent.innerHTML = "";
+      logPanel.classList.add("visible");
+    }
+
+    // ——— Funciones para trabajar completamente en el cliente ———
+    function extractPlaylistId(url) {
+      const match = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+      return match ? match[1] : null;
+    }
+
+    async function getPlaylistVideos(playlistId, maxVideos) {
+      appendLog("Obteniendo lista de videos de la playlist…");
+      const videoIds = [];
+
+      // Usar proxy CORS para obtener el HTML de la playlist
+      const playlistUrl = `https://www.youtube.com/playlist?list=${playlistId}`;
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(playlistUrl)}`;
+
+      try {
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error("Failed to fetch playlist");
+
+        const data = await response.json();
+        const html = data.contents;
+
+        // Extraer IDs de videos del HTML usando regex
+        // YouTube almacena los IDs en el atributo data-video-id o en enlaces
+        const videoIdRegex = /"videoId":"([a-zA-Z0-9_-]{11})"/g;
+        const titleRegex = /"title":\{"runs":\[\{"text":"([^"]+)"\}\]/g;
+        
+        const ids = [];
+        const titles = [];
+        let match;
+
+        while ((match = videoIdRegex.exec(html)) !== null && ids.length < maxVideos) {
+          ids.push(match[1]);
+        }
+
+        while ((match = titleRegex.exec(html)) !== null && titles.length < ids.length) {
+          titles.push(match[1]);
+        }
+
+        // Combinar IDs con títulos
+        for (let i = 0; i < ids.length && i < maxVideos; i++) {
+          videoIds.push({
+            id: ids[i],
+            title: titles[i] || ""
+          });
+        }
+
+        if (videoIds.length === 0) {
+          throw new Error("No se encontraron videos en la playlist. Verifica que la playlist sea pública.");
+        }
+
+        return videoIds;
+      } catch (err) {
+        appendLog("Error al obtener playlist: " + err.message, "skip");
+        throw new Error("No se pudo obtener la playlist. Esto puede deberse a restricciones CORS o que la playlist sea privada. Intenta usar la versión con servidor (python app.py) o Vercel.");
+      }
+    }
+
+    async function getVideoTranscript(videoId) {
+      // Intentar múltiples idiomas
+      const languages = ["es", "es-419", "en", "en-US"];
+      
+      for (const lang of languages) {
+        try {
+          // Intentar obtener transcripción usando el endpoint público de YouTube
+          const transcriptUrl = `https://www.youtube.com/api/timedtext?v=${videoId}&lang=${lang}&fmt=json3`;
+          
+          // Usar proxy CORS
+          const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(transcriptUrl)}`;
+          
+          const response = await fetch(proxyUrl);
+          if (!response.ok) continue;
+
+          const data = await response.json();
+          if (!data || !data.events) continue;
+
+          // Extraer texto de los eventos
+          let text = "";
+          for (const event of data.events) {
+            if (event.segs) {
+              for (const seg of event.segs) {
+                if (seg.utf8) {
+                  text += seg.utf8 + " ";
+                }
+              }
+            }
+          }
+          const cleaned = text.trim().replace(/\s+/g, " ");
+          if (cleaned.length > 10) {
+            return cleaned;
+          }
+        } catch (err) {
+          // Continuar con el siguiente idioma
+          continue;
+        }
+      }
+      return null;
+    }
+
+    function detectLanguage(text) {
+      // Detección simple de idioma (puede mejorarse)
+      const spanishWords = ["el", "la", "de", "que", "y", "a", "en", "un", "es", "se", "no", "te", "lo", "le", "da", "su", "por", "son", "con", "para"];
+      const englishWords = ["the", "be", "to", "of", "and", "a", "in", "that", "have", "i", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at"];
+      const lowerText = text.toLowerCase();
+      const spanishCount = spanishWords.filter(w => lowerText.includes(" " + w + " ")).length;
+      const englishCount = englishWords.filter(w => lowerText.includes(" " + w + " ")).length;
+      return spanishCount > englishCount ? "es" : "en";
+    }
+
+    function normalizeYouTubeDoc(text, videoId, playlistId, chunkIdx, title) {
+      if (!text || text.length < 10) return null;
+      
+      text = scrubPii(text);
+      const language = detectLanguage(text);
+      const regionalHint = tagRegionalHint(text);
+      const sourceSlug = `youtube_playlist_${playlistId}`.replace(/-/g, "_");
+      const sourceUrl = `https://www.youtube.com/watch?v=${videoId}`;
+      const chunkId = `${sourceSlug}_${videoId}_${chunkIdx}`;
+
+      return {
+        text: text,
+        source_url: sourceUrl,
+        timestamp: new Date().toISOString(),
+        license: "youtube-terms",
+        regional_hint: regionalHint,
+        language: language,
+        source: sourceSlug,
+        chunk_id: chunkId,
+        video_id: videoId,
+        video_title: title || ""
+      };
+    }
+
+    async function generate(viewInPage) {
+      hideError();
+      const playlistUrl = document.getElementById("playlist_url").value.trim();
+      const maxVideos = parseInt(document.getElementById("max_videos").value) || 50;
+      
+      if (!playlistUrl) {
+        showError("Introduce la URL de la playlist.");
+        return;
+      }
+
+      const playlistId = extractPlaylistId(playlistUrl);
+      if (!playlistId) {
+        showError("URL de playlist inválida. Debe contener 'list='.");
+        return;
+      }
+
+      setLoading(btnDownload, true);
+      setLoading(btnViewWeb, true);
+      clearLog();
+      const docs = [];
+
+      try {
+        const startVideo = parseInt(document.getElementById("start_video").value) || null;
+        const endVideo = parseInt(document.getElementById("end_video").value) || null;
+
+        // Obtener lista de videos
+        let videoList = await getPlaylistVideos(playlistId, 9999);
+        
+        // Aplicar rango si se especificó
+        if (startVideo || endVideo) {
+          const start = startVideo ? Math.max(1, startVideo) - 1 : 0;
+          const end = endVideo ? Math.min(endVideo, videoList.length) : videoList.length;
+          videoList = videoList.slice(start, end);
+        } else {
+          videoList = videoList.slice(0, maxVideos);
+        }
+
+        const total = videoList.length;
+        appendLog(`Encontrados ${total} videos para procesar.`);
+
+        // Procesar cada video
+        for (let i = 0; i < videoList.length; i++) {
+          const { id: videoId, title } = videoList[i];
+          const shortTitle = title.length > 50 ? title.substring(0, 50) + "…" : title;
+          appendLog(`[${i + 1}/${total}] Descargando transcripción: ${shortTitle || videoId}`);
+
+          const text = await getVideoTranscript(videoId);
+          if (!text || text.length < 10) {
+            appendLog("  → Sin transcripción o texto muy corto, se omite.", "skip");
+            continue;
+          }
+
+          appendLog(`  → OK (${text.length} caracteres). Normalizando…`, "ok");
+          const doc = normalizeYouTubeDoc(text, videoId, playlistId, docs.length, title);
+          if (doc) {
+            docs.push(doc);
+          }
+        }
+
+        appendLog(`Procesamiento terminado. ${docs.length} documento(s) generado(s).`, "ok");
+
+        if (docs.length > 0) {
+          const blob = new Blob(
+            docs.map(function (d) { return JSON.stringify(d) + "\n"; }),
+            { type: "application/x-ndjson" }
+          );
+          lastBlob = blob;
+          if (viewInPage) {
+            page.classList.add("has-results");
+            resultsSection.classList.add("visible");
+            resultsMeta.textContent = docs.length + " documento(s)";
+            linkDownloadJsonl.style.display = "inline";
+            linkDownloadJsonl.href = URL.createObjectURL(blob);
+            linkDownloadJsonl.download = "dataset_transcripciones.jsonl";
+            resultsList.innerHTML = "";
+            docs.forEach(function (doc, i) {
+              resultsList.appendChild(renderDoc(doc, i));
+            });
+            resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "dataset_transcripciones.jsonl";
+            a.click();
+            URL.revokeObjectURL(url);
+          }
+        } else {
+          showError("No se pudieron generar documentos. Verifica que los videos tengan transcripciones disponibles.");
+        }
+      } catch (err) {
+        showError(err.message || "Error al generar el dataset. Revisa la URL e inténtalo de nuevo.");
+        appendLog("Error: " + err.message, "skip");
+      } finally {
+        setLoading(btnDownload, false);
+        setLoading(btnViewWeb, false);
+      }
+    }
+
+    btnDownload.addEventListener("click", function () { generate(false); });
+    btnViewWeb.addEventListener("click", function () { generate(true); });
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+
+    // ——— Normalización 100% en el navegador (sin servidor) ———
+    function scrubPii(text) {
+      if (!text) return text;
+      text = text.replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/gi, "[EMAIL]");
+      text = text.replace(/\b\d{2}[\s-]?\d{4}[\s-]?\d{4}\b/g, "[PHONE]");
+      return text;
+    }
+    function tagRegionalHint(text) {
+      var kw = ["méxico", "mexico", "mexicano", "mexicana", "cdmx", "df", "guadalajara", "monterrey", "puebla", "tijuana", "mérida", "yucatán", "jalisco", "nuevo león", "veracruz", "gob.mx"];
+      var t = text.toLowerCase();
+      var n = 0;
+      for (var i = 0; i < kw.length; i++) if (t.indexOf(kw[i]) !== -1) n++;
+      if (n >= 3) return "high";
+      if (n >= 1) return "med";
+      return "low";
+    }
+    function normalizeDocInBrowser(doc, idx) {
+      var text = (doc.text || "").trim();
+      if (!text) return null;
+      text = scrubPii(text);
+      var source = (doc.source || "uploaded").replace(/\//g, "_").replace(/-/g, "_");
+      return {
+        text: text,
+        source_url: doc.source_url || "",
+        timestamp: new Date().toISOString(),
+        license: doc.license || "unknown",
+        regional_hint: tagRegionalHint(text),
+        language: doc.language || "es",
+        source: source,
+        chunk_id: source + "_" + idx,
+        video_id: doc.video_id || "",
+        video_title: doc.video_title || ""
+      };
+    }
+    var fileNormalize = document.getElementById("fileNormalize");
+    var btnNormalizeOnly = document.getElementById("btnNormalizeOnly");
+    btnNormalizeOnly.addEventListener("click", function () {
+      if (!fileNormalize.files || !fileNormalize.files[0]) {
+        showError("Elige un archivo JSONL para normalizar.");
+        return;
+      }
+      hideError();
+      var file = fileNormalize.files[0];
+      var reader = new FileReader();
+      reader.onload = function () {
+        var text = reader.result;
+        var lines = text.trim().split("\n");
+        var out = [];
+        for (var i = 0; i < lines.length; i++) {
+          if (!lines[i].trim()) continue;
+          try {
+            var doc = JSON.parse(lines[i]);
+            var norm = normalizeDocInBrowser(doc, out.length);
+            if (norm) out.push(norm);
+          } catch (_) {}
+        }
+        if (out.length === 0) {
+          showError("No se encontraron líneas JSON válidas con campo 'text'.");
+          return;
+        }
+        var blob = new Blob(out.map(function (d) { return JSON.stringify(d) + "\n"; }), { type: "application/x-ndjson" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "dataset_normalizado.jsonl";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      };
+      reader.readAsText(file, "UTF-8");
+    });
+  </script>
+</body>
+</html>
