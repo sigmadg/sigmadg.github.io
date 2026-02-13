@@ -1,0 +1,172 @@
+{
+  "name": "Aeroespacial - Telemetría y alertas de mantenimiento",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 15
+            }
+          ]
+        }
+      },
+      "id": "a1-trigger",
+      "name": "Cada 15 min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.ejemplo-telemetria.com/v1/readings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "a2-http",
+      "name": "Obtener telemetría",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": ""
+          },
+          "conditions": [
+            {
+              "id": "cond-1",
+              "leftValue": "={{ $json.temperature }}",
+              "rightValue": 85,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "a3-if",
+      "name": "¿Supera umbral?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4-1",
+              "name": "alerta",
+              "value": "Alerta mantenimiento",
+              "type": "string"
+            },
+            {
+              "id": "a4-2",
+              "name": "mensaje",
+              "value": "=Equipo {{ $json.equipmentId }}: temp {{ $json.temperature }}°C",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4-set",
+      "name": "Formatear alerta",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#mantenimiento-aero",
+        "text": "={{ $json.mensaje }}",
+        "otherOptions": {}
+      },
+      "id": "a5-slack",
+      "name": "Notificar Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "Cada 15 min": {
+      "main": [
+        [
+          {
+            "node": "Obtener telemetría",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener telemetría": {
+      "main": [
+        [
+          {
+            "node": "¿Supera umbral?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Supera umbral?": {
+      "main": [
+        [
+          {
+            "node": "Formatear alerta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Formatear alerta": {
+      "main": [
+        [
+          {
+            "node": "Notificar Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "aero-1"
+}

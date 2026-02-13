@@ -1,0 +1,192 @@
+{
+  "name": "Fintech - Conciliación de pagos y anomalías",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "id": "f1-trigger",
+      "name": "Diario 02:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.pagos.com/v1/transactions",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "date",
+              "value": "={{ $now.format('yyyy-MM-dd') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f2-api-pagos",
+      "name": "Transacciones proveedor",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, amount, created_at FROM transactions WHERE date = '{{ $now.format('yyyy-MM-dd') }}'",
+        "options": {}
+      },
+      "id": "f3-db",
+      "name": "Transacciones internas",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const externas = $input.first().json.data || [];\nconst internas = $input.all()[1]?.json ?? [];\nconst setInt = new Set(internas.map(i => i.id));\nconst faltantes = externas.filter(e => !setInt.has(e.id));\nreturn [{ json: { hayDiscrepancias: faltantes.length > 0, faltantes, total: faltantes.length } }];"
+      },
+      "id": "f4-code",
+      "name": "Conciliar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.hayDiscrepancias }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "f5-if",
+      "name": "¿Hay discrepancias?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "finanzas@empresa.com",
+        "toEmail": "compliance@empresa.com",
+        "subject": "Conciliación: discrepancias detectadas",
+        "text": "=Se encontraron {{ $json.total }} transacciones sin conciliar. Revisar dashboard."
+      },
+      "id": "f6-email",
+      "name": "Notificar Finanzas",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "Diario 02:00": {
+      "main": [
+        [
+          {
+            "node": "Transacciones proveedor",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Transacciones internas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transacciones proveedor": {
+      "main": [
+        [
+          {
+            "node": "Conciliar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transacciones internas": {
+      "main": [
+        [
+          {
+            "node": "Conciliar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Conciliar": {
+      "main": [
+        [
+          {
+            "node": "¿Hay discrepancias?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay discrepancias?": {
+      "main": [
+        [
+          {
+            "node": "Notificar Finanzas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "fin-1"
+}

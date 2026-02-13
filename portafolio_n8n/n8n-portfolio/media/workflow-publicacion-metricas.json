@@ -1,0 +1,156 @@
+{
+  "name": "Media - Publicación programada y métricas",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "m1-trigger",
+      "name": "Diario 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, content, channel, image_url FROM scheduled_posts WHERE scheduled_for::date = CURRENT_DATE AND published = false",
+        "options": {}
+      },
+      "id": "m2-db",
+      "name": "Posts de hoy",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.linkedin.com/v2/ugcPosts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "author",
+              "value": "=urn:li:person/{{ $json.author_urn }}"
+            },
+            {
+              "name": "lifecycleState",
+              "value": "PUBLISHED"
+            },
+            {
+              "name": "specificContent[com.linkedin.ugc.ShareContent][shareCommentary][text]",
+              "value": "={{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "m3-linkedin",
+      "name": "Publicar LinkedIn",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE scheduled_posts SET published = true, external_id = '{{ $json.id }}', published_at = NOW() WHERE id = '{{ $('Posts de hoy').item.json.id }}'"
+      },
+      "id": "m4-update",
+      "name": "Marcar publicado",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#social",
+        "text": "=Post publicado en {{ $('Posts de hoy').item.json.channel }}. ID: {{ $json.id }}"
+      },
+      "id": "m5-slack",
+      "name": "Aviso al equipo",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Diario 09:00": {
+      "main": [
+        [
+          {
+            "node": "Posts de hoy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Posts de hoy": {
+      "main": [
+        [
+          {
+            "node": "Publicar LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publicar LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "Marcar publicado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar publicado": {
+      "main": [
+        [
+          {
+            "node": "Aviso al equipo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "media-1"
+}

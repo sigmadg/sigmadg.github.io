@@ -1,0 +1,151 @@
+{
+  "name": "Automotriz - Recordatorios de servicio y feedback",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "au1-trigger",
+      "name": "Cada lunes 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT v.id, v.plate, v.model, v.current_km, c.email, c.name FROM vehicles v JOIN customers c ON v.customer_id = c.id WHERE v.next_service_km - v.current_km <= 3000 OR v.next_service_date <= CURRENT_DATE + 30"
+      },
+      "id": "au2-db",
+      "name": "Vehículos por revisión",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "au3-1",
+              "name": "subject",
+              "value": "=Recordatorio: revisión para tu {{ $json.model }}",
+              "type": "string"
+            },
+            {
+              "id": "au3-2",
+              "name": "body",
+              "value": "=Hola {{ $json.name }}, tu {{ $json.model }} ({{ $json.plate }}) está próximo a revisión ({{ $json.current_km }} km). Agenda tu cita: https://citas.concesionario.com",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "au3-set",
+      "name": "Mensaje recordatorio",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "servicio@concesionario.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "={{ $json.subject }}",
+        "text": "={{ $json.body }}"
+      },
+      "id": "au4-email",
+      "name": "Enviar recordatorio",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=INSERT INTO reminder_log (vehicle_id, sent_at) VALUES ('{{ $('Vehículos por revisión').item.json.id }}', NOW())"
+      },
+      "id": "au5-log",
+      "name": "Registrar envío",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1120,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Cada lunes 08:00": {
+      "main": [
+        [
+          {
+            "node": "Vehículos por revisión",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vehículos por revisión": {
+      "main": [
+        [
+          {
+            "node": "Mensaje recordatorio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensaje recordatorio": {
+      "main": [
+        [
+          {
+            "node": "Enviar recordatorio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar recordatorio": {
+      "main": [
+        [
+          {
+            "node": "Registrar envío",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "auto-1"
+}

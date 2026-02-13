@@ -1,0 +1,188 @@
+{
+  "name": "EdTech - Inscripciones y envío de certificados",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "curso-completado",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "e1-webhook",
+      "name": "Webhook curso completado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2-1",
+              "name": "user_id",
+              "value": "={{ $json.body.user_id }}",
+              "type": "string"
+            },
+            {
+              "id": "e2-2",
+              "name": "course_id",
+              "value": "={{ $json.body.course_id }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "e2-set",
+      "name": "Extraer datos",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT u.email, u.full_name, c.title as course_name FROM users u JOIN completions co ON u.id = co.user_id JOIN courses c ON c.id = co.course_id WHERE co.user_id = '{{ $json.user_id }}' AND co.course_id = '{{ $json.course_id }}'"
+      },
+      "id": "e3-db",
+      "name": "Datos alumno y curso",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.pdf-service.com/generate",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "template",
+              "value": "certificate"
+            },
+            {
+              "name": "student_name",
+              "value": "={{ $json.full_name }}"
+            },
+            {
+              "name": "course_name",
+              "value": "={{ $json.course_name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e4-pdf",
+      "name": "Generar PDF certificado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "certificados@academia.com",
+        "toEmail": "={{ $('Datos alumno y curso').item.json.email }}",
+        "subject": "=Tu certificado: {{ $('Datos alumno y curso').item.json.course_name }}",
+        "text": "=Felicidades. Adjunto tu certificado del curso {{ $('Datos alumno y curso').item.json.course_name }}."
+      },
+      "id": "e5-email",
+      "name": "Enviar certificado",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE completions SET certificate_issued = true, certificate_issued_at = NOW() WHERE user_id = '{{ $('Extraer datos').item.json.user_id }}' AND course_id = '{{ $('Extraer datos').item.json.course_id }}'"
+      },
+      "id": "e6-update",
+      "name": "Marcar certificado emitido",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1340,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook curso completado": {
+      "main": [
+        [
+          {
+            "node": "Extraer datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer datos": {
+      "main": [
+        [
+          {
+            "node": "Datos alumno y curso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos alumno y curso": {
+      "main": [
+        [
+          {
+            "node": "Generar PDF certificado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar PDF certificado": {
+      "main": [
+        [
+          {
+            "node": "Enviar certificado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar certificado": {
+      "main": [
+        [
+          {
+            "node": "Marcar certificado emitido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "ed-1"
+}

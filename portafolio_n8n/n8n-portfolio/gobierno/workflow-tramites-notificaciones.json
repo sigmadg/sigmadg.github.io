@@ -1,0 +1,210 @@
+{
+  "name": "GovTech - Trámites y notificaciones oficiales",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "estado-tramite",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "g1-webhook",
+      "name": "Webhook cambio estado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "g2-1",
+              "name": "expediente_id",
+              "value": "={{ $json.body.expediente_id }}",
+              "type": "string"
+            },
+            {
+              "id": "g2-2",
+              "name": "nuevo_estado",
+              "value": "={{ $json.body.estado }}",
+              "type": "string"
+            },
+            {
+              "id": "g2-3",
+              "name": "tramite_tipo",
+              "value": "={{ $json.body.tipo }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "g2-set",
+      "name": "Extraer datos",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE tramites SET estado = '{{ $json.nuevo_estado }}', updated_at = NOW() WHERE expediente_id = '{{ $json.expediente_id }}' RETURNING ciudadano_email, ciudadano_phone"
+      },
+      "id": "g3-update",
+      "name": "Actualizar trámite",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=INSERT INTO auditoria_tramites (expediente_id, estado, created_at) VALUES ('{{ $('Extraer datos').item.json.expediente_id }}', '{{ $('Extraer datos').item.json.nuevo_estado }}', NOW())"
+      },
+      "id": "g4-audit",
+      "name": "Registro auditoría",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "g5-1",
+              "name": "mensaje",
+              "value": "=Su trámite {{ $('Extraer datos').item.json.expediente_id }} ha pasado a estado: {{ $json.nuevo_estado }}. Consulte el portal para más detalles.",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "g5-set",
+      "name": "Mensaje ciudadano",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notificaciones@gobierno.gob",
+        "toEmail": "={{ $('Actualizar trámite').item.json.ciudadano_email }}",
+        "subject": "=Actualización de trámite {{ $('Extraer datos').item.json.expediente_id }}",
+        "text": "={{ $json.mensaje }}"
+      },
+      "id": "g6-email",
+      "name": "Notificar ciudadano",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"ok\": true, \"expediente\": $('Extraer datos').item.json.expediente_id } }}"
+      },
+      "id": "g7-respond",
+      "name": "Responder webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook cambio estado": {
+      "main": [
+        [
+          {
+            "node": "Extraer datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer datos": {
+      "main": [
+        [
+          {
+            "node": "Actualizar trámite",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar trámite": {
+      "main": [
+        [
+          {
+            "node": "Registro auditoría",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registro auditoría": {
+      "main": [
+        [
+          {
+            "node": "Mensaje ciudadano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensaje ciudadano": {
+      "main": [
+        [
+          {
+            "node": "Notificar ciudadano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar ciudadano": {
+      "main": [
+        [
+          {
+            "node": "Responder webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "gov-1"
+}

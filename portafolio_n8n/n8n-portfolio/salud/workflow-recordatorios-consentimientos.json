@@ -1,0 +1,227 @@
+{
+  "name": "Salud - Recordatorios de citas y consentimientos",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "s1-trigger",
+      "name": "Cada día 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, patient_email, patient_phone, appointment_at, consent_sent FROM appointments WHERE appointment_at::date = CURRENT_DATE + 1 AND reminder_sent = false",
+        "options": {}
+      },
+      "id": "s2-db",
+      "name": "Citas mañana",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.consent_sent }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "s3-if",
+      "name": "¿Enviar consentimiento?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s4-1",
+              "name": "body",
+              "value": "=Recordatorio: su cita es mañana a las {{ $json.appointment_at }}. Enlace consentimiento: https://form.ejemplo.com/c/{{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "s4-set",
+      "name": "Mensaje con enlace",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        900,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "s5-1",
+              "name": "body",
+              "value": "=Recordatorio: su cita es mañana a las {{ $json.appointment_at }}.",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "s5-set2",
+      "name": "Solo recordatorio",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        900,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "citas@clinica.com",
+        "toEmail": "={{ $json.patient_email }}",
+        "subject": "Recordatorio de cita",
+        "text": "={{ $json.body }}"
+      },
+      "id": "s6-email",
+      "name": "Enviar Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE appointments SET reminder_sent = true, consent_sent = {{ $json.consent_sent }} WHERE id = '{{ $json.id }}'",
+        "options": {}
+      },
+      "id": "s7-update",
+      "name": "Marcar enviado",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1340,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Cada día 08:00": {
+      "main": [
+        [
+          {
+            "node": "Citas mañana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Citas mañana": {
+      "main": [
+        [
+          {
+            "node": "¿Enviar consentimiento?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Enviar consentimiento?": {
+      "main": [
+        [
+          {
+            "node": "Mensaje con enlace",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Solo recordatorio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensaje con enlace": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solo recordatorio": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Email": {
+      "main": [
+        [
+          {
+            "node": "Marcar enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "salud-1"
+}

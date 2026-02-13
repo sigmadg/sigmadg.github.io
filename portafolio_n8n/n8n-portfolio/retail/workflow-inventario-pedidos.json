@@ -1,0 +1,236 @@
+{
+  "name": "Retail - Inventario y notificaciones de pedidos",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "nuevo-pedido",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "r1-webhook",
+      "name": "Webhook nuevo pedido",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "r2-1",
+              "name": "order_id",
+              "value": "={{ $json.body.order_id }}",
+              "type": "string"
+            },
+            {
+              "id": "r2-2",
+              "name": "items",
+              "value": "={{ $json.body.items }}",
+              "type": "array"
+            },
+            {
+              "id": "r2-3",
+              "name": "total",
+              "value": "={{ $json.body.total }}",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "id": "r2-set",
+      "name": "Extraer pedido",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT sku, quantity FROM inventory WHERE sku IN ('{{ $json.items.map(i => i.sku).join(\"','\") }}')",
+        "options": {}
+      },
+      "id": "r3-db",
+      "name": "Consultar stock",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const order = $('Extraer pedido').first().json;\nconst stock = $input.first().json;\nconst suficiente = order.items.every(i => (stock.find(s => s.sku === i.sku)?.quantity || 0) >= i.quantity);\nreturn [{ json: { ...order, hayStock: suficiente } }];"
+      },
+      "id": "r4-code",
+      "name": "¿Stock suficiente?",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.hayStock }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "r5-if",
+      "name": "IF hay stock",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#pedidos",
+        "text": "=Pedido #{{ $json.order_id }} - Total {{ $json.total }}. Preparar envío."
+      },
+      "id": "r6-slack",
+      "name": "Notificar almacén",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"received\": true, \"order_id\": $json.order_id } }}"
+      },
+      "id": "r7-respond",
+      "name": "Responder webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#alertas",
+        "text": "=Pedido #{{ $json.order_id }} sin stock suficiente. Revisar inventario."
+      },
+      "id": "r8-slack-no",
+      "name": "Alerta sin stock",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook nuevo pedido": {
+      "main": [
+        [
+          {
+            "node": "Extraer pedido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer pedido": {
+      "main": [
+        [
+          {
+            "node": "Consultar stock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar stock": {
+      "main": [
+        [
+          {
+            "node": "¿Stock suficiente?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Stock suficiente?": {
+      "main": [
+        [
+          {
+            "node": "IF hay stock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF hay stock": {
+      "main": [
+        [
+          {
+            "node": "Notificar almacén",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Alerta sin stock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar almacén": {
+      "main": [
+        [
+          {
+            "node": "Responder webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "retail-1"
+}

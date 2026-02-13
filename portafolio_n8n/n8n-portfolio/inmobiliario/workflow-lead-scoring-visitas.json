@@ -1,0 +1,338 @@
+{
+  "name": "Real Estate - Lead scoring y seguimiento de visitas",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "visita-completada",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "i1-webhook",
+      "name": "Webhook visita",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "i2-1",
+              "name": "lead_id",
+              "value": "={{ $json.body.lead_id }}",
+              "type": "string"
+            },
+            {
+              "id": "i2-2",
+              "name": "property_id",
+              "value": "={{ $json.body.property_id }}",
+              "type": "string"
+            },
+            {
+              "id": "i2-3",
+              "name": "rating",
+              "value": "={{ $json.body.rating }}",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "id": "i2-set",
+      "name": "Extraer visita",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT id, visit_count, budget, agent_id FROM leads WHERE id = '{{ $json.lead_id }}'"
+      },
+      "id": "i3-db",
+      "name": "Datos lead",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const visita = $('Extraer visita').first().json;\nconst lead = $input.first().json;\nconst visitCount = (lead.visit_count || 0) + 1;\nconst score = visitCount * 10 + (visita.rating || 0) * 5;\nconst hot = score >= 25;\nreturn [{ json: { lead_id: visita.lead_id, score, hot, visit_count: visitCount, agent_id: lead.agent_id } }];"
+      },
+      "id": "i4-code",
+      "name": "Calcular score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.hot }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "i5-if",
+      "name": "¿Lead caliente?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE leads SET visit_count = {{ $json.visit_count }}, score = {{ $json.score }}, updated_at = NOW() WHERE id = '{{ $json.lead_id }}' RETURNING id"
+      },
+      "id": "i6-update",
+      "name": "Actualizar lead",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "i6b-1",
+              "name": "lead_id",
+              "value": "={{ $('Calcular score').item.json.lead_id }}",
+              "type": "string"
+            },
+            {
+              "id": "i6b-2",
+              "name": "score",
+              "value": "={{ $('Calcular score').item.json.score }}",
+              "type": "number"
+            },
+            {
+              "id": "i6b-3",
+              "name": "hot",
+              "value": "={{ $('Calcular score').item.json.hot }}",
+              "type": "boolean"
+            }
+          ]
+        }
+      },
+      "id": "i6b-set",
+      "name": "Mantener hot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.hot }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "i6c-if",
+      "name": "¿Notificar agente?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1580,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#ventas-inmobiliario",
+        "text": "=Lead {{ $json.lead_id }} con score {{ $json.score }}. Asignar seguimiento."
+      },
+      "id": "i7-slack",
+      "name": "Notificar agente",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"ok\": true, \"lead_id\": $json.lead_id, \"score\": $json.score } }}"
+      },
+      "id": "i8-respond",
+      "name": "Responder webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1800,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook visita": {
+      "main": [
+        [
+          {
+            "node": "Extraer visita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer visita": {
+      "main": [
+        [
+          {
+            "node": "Datos lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos lead": {
+      "main": [
+        [
+          {
+            "node": "Calcular score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular score": {
+      "main": [
+        [
+          {
+            "node": "¿Lead caliente?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Lead caliente?": {
+      "main": [
+        [
+          {
+            "node": "Actualizar lead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Actualizar lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar lead": {
+      "main": [
+        [
+          {
+            "node": "Mantener hot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mantener hot": {
+      "main": [
+        [
+          {
+            "node": "¿Notificar agente?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Notificar agente?": {
+      "main": [
+        [
+          {
+            "node": "Notificar agente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar agente": {
+      "main": [
+        [
+          {
+            "node": "Responder webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "re-1"
+}

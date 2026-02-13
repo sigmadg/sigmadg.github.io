@@ -1,0 +1,216 @@
+{
+  "name": "AgTech - Sensores de suelo y pronóstico para riego",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */6 * * *"
+            }
+          ]
+        }
+      },
+      "id": "ag1-trigger",
+      "name": "Cada 6 horas",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.iot-agriculture.com/sensors/readings",
+        "options": {}
+      },
+      "id": "ag2-sensors",
+      "name": "Lecturas sensores",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.openweathermap.org/data/2.5/forecast?lat={{ $json.lat }}&lon={{ $json.lon }}&appid=YOUR_KEY",
+        "options": {}
+      },
+      "id": "ag3-weather",
+      "name": "Pronóstico tiempo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sensor = $('Lecturas sensores').first().json;\nconst forecast = $input.first().json;\nconst humidity = sensor.soil_humidity || 0;\nconst rainNext12h = (forecast.list || []).slice(0, 4).some(p => (p.rain || {}).['3h'] > 0);\nconst recommend = humidity < 30 && !rainNext12h ? 'regar' : 'no_regar';\nreturn [{ json: { sector: sensor.sector_id, humidity, recommend, reason: recommend === 'regar' ? 'Humedad baja y sin lluvia' : 'Humedad OK o lluvia próxima' } }];"
+      },
+      "id": "ag4-code",
+      "name": "Decidir riego",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.recommend }}",
+              "rightValue": "regar",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "ag5-if",
+      "name": "¿Recomendar riego?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.irrigation.com/valves/activate",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "sector_id",
+              "value": "={{ $json.sector }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ag6-api",
+      "name": "Activar riego (opcional)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1340,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "#agtech",
+        "text": "=Sector {{ $json.sector }}: {{ $json.reason }}. Acción: {{ $json.recommend }}."
+      },
+      "id": "ag7-slack",
+      "name": "Notificar agricultor",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1340,
+        400
+      ]
+    }
+  ],
+  "connections": {
+    "Cada 6 horas": {
+      "main": [
+        [
+          {
+            "node": "Lecturas sensores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lecturas sensores": {
+      "main": [
+        [
+          {
+            "node": "Pronóstico tiempo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pronóstico tiempo": {
+      "main": [
+        [
+          {
+            "node": "Decidir riego",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decidir riego": {
+      "main": [
+        [
+          {
+            "node": "¿Recomendar riego?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Recomendar riego?": {
+      "main": [
+        [
+          {
+            "node": "Activar riego (opcional)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notificar agricultor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Activar riego (opcional)": {
+      "main": [
+        [
+          {
+            "node": "Notificar agricultor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "ag-1"
+}

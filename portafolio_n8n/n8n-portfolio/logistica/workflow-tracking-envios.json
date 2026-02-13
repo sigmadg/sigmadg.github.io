@@ -1,0 +1,240 @@
+{
+  "name": "Logística - Tracking de envíos y estados",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 60
+            }
+          ]
+        }
+      },
+      "id": "l1-trigger",
+      "name": "Cada hora",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, tracking_number, customer_email, status FROM shipments WHERE status IN ('in_transit', 'out_for_delivery')",
+        "options": {}
+      },
+      "id": "l2-db",
+      "name": "Envíos en tránsito",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.transportista.com/track",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "tracking",
+              "value": "={{ $json.tracking_number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "l3-http",
+      "name": "Consultar transportista",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "l4-1",
+              "name": "shipment_id",
+              "value": "={{ $('Envíos en tránsito').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "l4-2",
+              "name": "new_status",
+              "value": "={{ $json.status === 'delivered' ? 'delivered' : $json.status }}",
+              "type": "string"
+            },
+            {
+              "id": "l4-3",
+              "name": "customer_email",
+              "value": "={{ $('Envíos en tránsito').item.json.customer_email }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "l4-set",
+      "name": "Mapear estado",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.new_status }}",
+              "rightValue": "delivered",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "l5-if",
+      "name": "¿Entregado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE shipments SET status = '{{ $json.new_status }}', updated_at = NOW() WHERE id = '{{ $json.shipment_id }}'",
+        "options": {}
+      },
+      "id": "l6-update",
+      "name": "Actualizar BD",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "envios@empresa.com",
+        "toEmail": "={{ $json.customer_email }}",
+        "subject": "Tu pedido ha sido entregado",
+        "text": "=Tu envío ha sido entregado. Gracias por tu compra."
+      },
+      "id": "l7-email",
+      "name": "Email al cliente",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1560,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "Cada hora": {
+      "main": [
+        [
+          {
+            "node": "Envíos en tránsito",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envíos en tránsito": {
+      "main": [
+        [
+          {
+            "node": "Consultar transportista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar transportista": {
+      "main": [
+        [
+          {
+            "node": "Mapear estado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapear estado": {
+      "main": [
+        [
+          {
+            "node": "¿Entregado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Entregado?": {
+      "main": [
+        [
+          {
+            "node": "Actualizar BD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Actualizar BD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar BD": {
+      "main": [
+        [
+          {
+            "node": "Email al cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "versionId": "log-1"
+}
