@@ -1,51 +1,58 @@
 html, body {
     height: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 	font-family: 'Poppins', 'Montserrat', sans-serif;
-	background: #000000 !important;
+	background: #1e2024 !important;
 	background-image: none !important;
 	background-attachment: fixed;
 	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
 }
 p {
 	font: 1.1em/2 Arial, Helvetica, sans-serif;
 	font-weight: 600;
 }
+#espacio {
+	display: none;
+}
 #izquierdo {
-    float: left;
+    float: none;
     width: 25%;
-    height: 550px;
-    min-height: 550px;
-    max-height: 550px;
-    margin: 0 auto;
+    min-width: 220px;
+    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     backdrop-filter: blur(10px);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 #derecho {
-    float: left;    
+    float: none;
+    flex: 1;
     width: 75%;
-    height: 550px;
-    min-height: 550px;
-    max-height: 550px;
-    background: transparent;
+    min-width: 0;
+    height: 100vh;
+    min-height: 100vh;
+    background: linear-gradient(145deg, rgba(30, 32, 36, 0.98), rgba(35, 39, 43, 0.98));
     backdrop-filter: blur(5px);
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
-    padding: 5px 10px 3px 10px;
+    padding: 6px 8px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-}
-#espacio {
-	width: 25%;
-	height: 10%;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
 }
 #izquierdo input[type="number"] {
     box-sizing: border-box;
@@ -153,7 +160,6 @@ p {
   min-height: auto;
   position: relative;
   flex-shrink: 0;
-  flex-grow: 0;
 }
 
 #datos p {
@@ -170,15 +176,15 @@ h4 {
     line-height: 2px;
 }
 #numero-ganador{
-    line-height: 60px;
+    line-height: 1;
     background: linear-gradient(135deg, #ff014f 0%, #23f0ec 100%);
     color: white;
-    margin: 2px auto 3px auto;
-    height: 60px;
-    width: 60px;
+    margin: 2px auto;
+    height: clamp(44px, 10vmin, 56px);
+    width: clamp(44px, 10vmin, 56px);
     border-radius: 50%;
     text-align: center;
-    font-size: 36px;
+    font-size: clamp(22px, 5vmin, 32px);
     font-weight: bold;
     padding: 0;
     transition: all 0.3s ease;
@@ -225,14 +231,14 @@ h4 {
     }
 }
 #tarjeta {
-    width: 90%;
-    max-width: 450px;
-    margin: 2px auto 0 auto;
+    width: auto;
+    max-width: min(95%, 85vmin, 420px);
+    margin: 0 auto;
     border-collapse: separate;
-    border-spacing: 3px;
+    border-spacing: 2px;
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
-    padding: 6px;
-    border-radius: 15px;
+    padding: 4px;
+    border-radius: 12px;
     box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
     border: 1px solid rgba(255, 255, 255, 0.05);
     flex-shrink: 1;
@@ -240,18 +246,22 @@ h4 {
 
 #tarjeta td {
     background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
-    height: 42px;
-    width: 42px;
+    width: clamp(32px, 9vmin, 48px);
+    height: clamp(32px, 9vmin, 48px);
     text-align: center;
-    font-size: 18px;
+    font-size: clamp(11px, 3vmin, 16px);
     font-weight: bold;
     color: #c4cfde;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.3s ease;
     box-shadow: 5px 5px 10px #1c1e22, -5px -5px 10px #262a2e;
     border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
     padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 #tarjeta td:hover {
@@ -262,7 +272,7 @@ h4 {
 .hueco{
 	background-image: url(img/bombo.png);
 	background-position: center;
-	background-size: 62px;
+	background-size: 80%;
 }
 .marca {
     background: linear-gradient(135deg, rgba(35, 240, 236, 0.3) 0%, rgba(35, 240, 236, 0.2) 100%) !important;
@@ -379,9 +389,9 @@ h4 {
 #derecho h2 {
     text-align: center;
     color: #ffffff;
-    font-size: 1.5em;
+    font-size: clamp(1em, 2.5vmin, 1.4em);
     text-shadow: 0 0 20px rgba(255, 1, 79, 0.5);
-    margin: 8px 0;
+    margin: 2px 0 4px 0;
     font-weight: bold;
     background: linear-gradient(90deg, #ff014f 0%, #23f0ec 100%);
     -webkit-background-clip: text;
@@ -424,38 +434,37 @@ h4 {
 @media (max-width: 991px) {
     #izquierdo {
         width: 30%;
-        min-height: auto;
+        min-width: 200px;
+        height: 100vh;
+        min-height: 100vh;
     }
     
     #derecho {
         width: 70%;
-        padding: 15px;
-    }
-    
-    #espacio {
-        width: 30%;
+        min-width: 0;
+        height: 100vh;
+        min-height: 100vh;
+        padding: 6px 8px;
+        gap: 4px;
     }
     
     #titulo h1 {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
     
     #titulo img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    #numero-ganador {
-        font-size: 3em;
-        padding: 15px;
+        width: 55px;
+        height: 55px;
     }
     
     #tarjeta {
-        font-size: 0.9em;
+        max-width: min(95%, 80vmin, 380px);
     }
     
     #tarjeta td {
-        padding: 8px;
+        width: clamp(28px, 8vmin, 44px);
+        height: clamp(28px, 8vmin, 44px);
+        font-size: clamp(10px, 2.8vmin, 15px);
     }
 }
 
@@ -496,128 +505,100 @@ h4 {
         padding-bottom: 1rem;
     }
     
-    /* Solo ajustar sección derecha - reducir tamaños proporcionalmente */
+    /* Sección derecha más compacta */
     #derecho {
         width: 100%;
         float: none;
-        padding: 10px 8px;
+        padding: 6px 8px;
         max-height: none;
         height: auto;
         min-height: auto;
         order: 2;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        overflow-y: hidden;
+        gap: 4px;
+        overflow-y: auto;
         overflow-x: hidden;
+        justify-content: center;
     }
     
-    /* Reducir tamaño del contenedor del número ganador */
     #derecho > div[style*="text-align: center"] {
         order: 1;
-        background: linear-gradient(145deg, rgba(30, 32, 36, 0.8), rgba(35, 39, 43, 0.8));
-        padding: 10px;
-        border-radius: 15px;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 6px 8px;
+        margin-bottom: 0;
     }
     
     #derecho h2 {
-        font-size: 1.1em !important;
-        margin-bottom: 8px !important;
+        font-size: 1.05em !important;
+        margin: 2px 0 4px 0 !important;
     }
     
     #derecho #contador-sorteos {
         order: 1;
-        font-size: 0.9em;
-        margin-bottom: 8px;
+        font-size: 0.85em;
+        margin-bottom: 2px;
         color: #23f0ec;
         font-weight: 600;
     }
     
-    /* Reducir tamaño del número ganador */
     #derecho #numero-ganador {
         order: 2;
-        margin: 8px auto;
-        width: 80px;
-        height: 80px;
-        font-size: 2em;
-        line-height: 80px;
+        margin: 4px auto;
     }
     
-    /* Reducir tamaño de la tabla */
     #derecho #tarjeta {
         order: 3;
         margin: 0 auto;
-        width: 95%;
-        max-width: 100%;
-        padding: 10px;
-        border-spacing: 3px;
+        max-width: min(96%, 75vmin);
+        padding: 4px;
+        border-spacing: 2px;
     }
     
     #espacio {
         display: none;
     }
     
-    /* Reducir tamaño de celdas de la tabla */
     #tarjeta td {
-        padding: 5px 2px;
-        font-size: 0.85em;
-        height: 42px;
-        width: 42px;
-        min-width: 38px;
+        width: clamp(28px, 7.5vmin, 42px);
+        height: clamp(28px, 7.5vmin, 42px);
+        font-size: clamp(10px, 2.6vmin, 14px);
+        padding: 2px;
     }
     
-    /* Mejorar espaciado general */
     #derecho > * {
-        margin-bottom: 15px;
+        margin-bottom: 4px;
     }
 }
 
 @media (max-width: 480px) {
-    /* Sección izquierda se mantiene intacta, sin cambios */
-    
-    /* Solo reducir más los componentes de la derecha */
     #derecho {
-        padding: 15px 10px;
-        gap: 15px;
+        padding: 6px 6px;
+        gap: 2px;
     }
     
     #derecho > div[style*="text-align: center"] {
-        padding: 12px;
+        padding: 6px;
     }
     
     #derecho h2 {
-        font-size: 1em !important;
-        margin-bottom: 10px !important;
+        font-size: 0.95em !important;
+        margin: 2px 0 2px 0 !important;
     }
     
     #derecho #contador-sorteos {
-        font-size: 0.9em;
-        margin-bottom: 10px;
+        font-size: 0.8em;
+        margin-bottom: 0;
     }
     
-    /* Reducir más el número ganador */
-    #derecho #numero-ganador {
-        width: 80px;
-        height: 80px;
-        font-size: 1.8em;
-        line-height: 80px;
-        margin: 10px auto;
-    }
-    
-    /* Reducir más la tabla */
     #derecho #tarjeta {
-        padding: 10px;
-        border-spacing: 3px;
-        width: 98%;
+        max-width: min(98%, 72vmin);
+        padding: 4px;
+        border-spacing: 2px;
     }
     
     #derecho #tarjeta td {
-        padding: 5px 2px;
-        font-size: 0.85em;
-        height: 40px;
-        width: 40px;
-        min-width: 35px;
+        width: clamp(26px, 7vmin, 38px);
+        height: clamp(26px, 7vmin, 38px);
+        font-size: clamp(9px, 2.4vmin, 13px);
     }
 }
