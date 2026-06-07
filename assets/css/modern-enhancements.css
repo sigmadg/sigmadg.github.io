@@ -2176,6 +2176,13 @@ a:hover::after {
   visibility: visible !important;
 }
 
+.social-share li.threads a svg,
+.social-share li.twitter a svg,
+.social-share li.patreon a svg {
+  fill: currentColor;
+  stroke: none;
+}
+
 /* Ensure Fiverr and Upwork icons are visible */
 .social-share li.fiverr,
 .social-share li.upwork {
@@ -2402,7 +2409,19 @@ a:hover::after {
 }
 
 .rn-footer-area .footer-social li.twitter a:hover {
-  background: #1da1f2;
+  background: #000000;
+}
+
+.rn-footer-area .footer-social li.threads a:hover {
+  background: #000000;
+}
+
+.rn-footer-area .footer-social li.youtube a:hover {
+  background: #ff0000;
+}
+
+.rn-footer-area .footer-social li.patreon a:hover {
+  background: #ff424d;
 }
 
 .rn-footer-area .footer-social li.linkedin a:hover {
@@ -2411,6 +2430,10 @@ a:hover::after {
 
 .rn-footer-area .footer-social li.github a:hover {
   background: #333;
+}
+
+.rn-footer-area .footer-social li.instagram a:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
 }
 
 .rn-footer-area .footer-social li.fiverr a:hover {
