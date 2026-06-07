@@ -3255,3 +3255,52 @@ a:focus {
   }
 }
 
+/* Botón flotante de Telegram (estilo badge Calendly) */
+.telegram-contact-btn {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #26a5e4;
+  border: none;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 24px rgba(38, 165, 228, 0.45);
+  transition: all var(--transition-base);
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.telegram-contact-btn i {
+  font-size: 28px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.telegram-contact-btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  background: #1f95d0;
+  box-shadow: 0 8px 28px rgba(38, 165, 228, 0.55);
+  color: #ffffff !important;
+}
+
+@media (max-width: 767px) {
+  .telegram-contact-btn {
+    bottom: 16px !important;
+    right: 16px !important;
+    width: 56px;
+    height: 56px;
+  }
+
+  .telegram-contact-btn i {
+    font-size: 26px;
+  }
+}
+
