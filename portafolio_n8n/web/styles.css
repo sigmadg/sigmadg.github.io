@@ -163,6 +163,38 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.grid-featured {
+  grid-template-columns: 1fr;
+}
+
+.card-featured .card-image-wrap {
+  aspect-ratio: 16 / 9;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-tags li {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  color: var(--text-muted);
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.card-featured .card-desc strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* Main */
 .main {
   flex: 1;

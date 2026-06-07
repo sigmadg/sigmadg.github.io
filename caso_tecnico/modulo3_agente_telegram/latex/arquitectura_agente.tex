@@ -1,0 +1,46 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{margin=2.2cm}
+\title{Módulo 3 --- Agente y Telegram}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Qué hace (en orden)}
+\begin{enumerate}
+  \item Se consulta el tiempo (\texttt{Open-Meteo}) para cada zona.
+  \item El \textbf{motor del Módulo 2} decide riesgo, umbrales de lluvia, ratio operativo, cuánto subir los earnings (MXN), etc. Todo eso queda en un \textbf{único bloque de datos} (JSON) que pasa al siguiente paso.
+  \item El modelo de lenguaje \textbf{no busca en internet ni en PDFs}. Solo recibe ese bloque (por eso se llama RAG-lite) y lo convierte en un mensaje claro.
+  \item Puedes usar \textbf{Ollama} en tu máquina o \textbf{OpenAI} en la nube. Con OpenAI, por defecto se usa \textbf{LangChain}; si pones \texttt{USE\_LANGCHAIN=0}, se usa el SDK directo. Si el modelo falla, hay un \textbf{texto de respaldo} fijo con los mismos números.
+  \item El mensaje se envía con \texttt{python-telegram-bot}.
+\end{enumerate}
+
+\section*{Monitor que corre solo}
+Si dejas corriendo \texttt{monitor\_loop.py}, cada cierto tiempo se repite el mismo proceso (Open-Meteo $\rightarrow$ motor $\rightarrow$ mensaje si toca). Ese bucle está \textbf{enlazado} con una pequeña cadena LangChain solo para organizar los pasos y escribir el log (\texttt{.monitor\_ticks.jsonl}). \textbf{Quién manda} sigue siendo el motor: no manda spam gracias al debounce (tiempo de espera entre avisos parecidos), salvo que el riesgo \textbf{suba de nivel} y entonces sí puede avisar antes.
+
+\section*{Cómo debe ser el mensaje (unos 10 segundos de lectura)}
+Que el operador vea de un vistazo: \textbf{qué zona}, \textbf{qué tan grave es}, \textbf{qué lluvia se espera}, \textbf{un paralelo con el histórico}, \textbf{cómo va el ratio} respecto a la zona ``saturada'' (referencia tipo 1.8 en la calibración), \textbf{qué hacer con los pesos} (de X a Y MXN en Z minutos) y \textbf{qué otras zonas vigilar}.
+
+\section*{Costes aproximados}
+\begin{itemize}
+  \item \textbf{Open-Meteo y Telegram:} gratis para las pruebas habituales.
+  \item \textbf{Ollama} en tu PC: sin coste de API; solo luz o desgaste del equipo.
+  \item \textbf{OpenAI} (\texttt{gpt-4o-mini}): muy barato por mensaje (orden de \textbf{milésimas de dólar} según longitud; mira la tabla actual de OpenAI).
+  \item \textbf{LangChain:} no es un coste aparte; son librerías. El gasto es el del modelo. Para no usar LangChain con OpenAI: \texttt{USE\_LANGCHAIN=0}.
+\end{itemize}
+
+\section*{Preguntas rápidas}
+\textbf{¿Y si el clima no es tan malo?} Conviene cruzar con otra fuente si hace falta. El sistema evita repetir el mismo tipo de alerta en la misma zona hasta que pase un tiempo; si el riesgo sube de categoría, puede avisar antes.
+
+\textbf{¿Muchas notificaciones?} Solo cuando el motor dice que se pasó el umbral de esa zona. Hay resumen diario opcional.
+
+\textbf{¿Dónde queda registro?} Archivos de texto bajo \texttt{modulo2\_motor\_alertas/} (auditoría y alertas enviadas); no van al repositorio.
+
+\textbf{¿Otra ciudad?} Hay que cambiar mapas, centroides y volver a generar \texttt{calibration.json} para esa ciudad.
+
+\end{document}

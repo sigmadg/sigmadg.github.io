@@ -1,0 +1,272 @@
+% Presentación demo — Caso técnico Rappi (Módulos 1, 2 y 3)
+% Estructura: Problema → Métrica → Diagnóstico (M1) → Insight → Acción → Limitaciones → Extensión → observabilidad → cierre.
+% Compilar: pdflatex presentacion_demo.tex (dos veces para TOC)
+\documentclass[aspectratio=169,spanish]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\definecolor{rappiaccent}{HTML}{9B2222}
+\setbeamercolor{structure}{fg=rappiaccent}
+\setbeamercolor{palette primary}{fg=white,bg=rappiaccent}
+\setbeamercolor{palette secondary}{fg=white,bg=rappiaccent!85!black}
+\setbeamercolor{frametitle}{fg=white,bg=rappiaccent}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white!92}
+\setbeamertemplate{navigation symbols}{}
+% Numeración: diapositiva actual / total (misma convención que Beamer para handout).
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex,leftskip=1em,rightskip=1em]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+      \usebeamercolor[fg]{author in head/foot}%
+      \hfill\insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+}
+
+\newenvironment{piegrafica}{%
+  \par\vspace{0.5em}%
+  \noindent
+  \begin{minipage}[t]{\linewidth}%
+  \raggedright
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.42em plus 0.12em minus 0.06em}%
+  \scriptsize
+}{%
+  \end{minipage}\par
+}
+
+\newenvironment{piegraficafoot}{%
+  \par\vspace{0.5em}%
+  \noindent
+  \begin{minipage}[t]{\linewidth}%
+  \raggedright
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.42em plus 0.12em minus 0.06em}%
+  \footnotesize
+}{%
+  \end{minipage}\par
+}
+
+\newcommand{\pizoneread}{%
+  \begin{piegrafica}
+  Frecuencia por hora del \texttt{ratio} en \emph{esta} zona (histórico del panel).
+
+  Complementa los gráficos P1 agregados y muestra en qué franjas aparecen colas o picos.
+  \end{piegrafica}%
+}
+
+\title[Sistema de alertas]{Alertas cuando llueve y la operación intensifica.}
+\subtitle{Caso Rappi · Datos + reglas por zona + mensaje en Telegram}
+\author{Demo técnica}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Qué vamos a ver}
+  \tableofcontents
+\end{frame}
+
+% ---------------------------------------------------------------------------
+\section{Problema}
+
+\begin{frame}{Rappi pierde eficiencia por desbalance dinámico}
+  \begin{itemize}
+    \item La \textbf{oferta} (repartidores conectados) y la \textbf{demanda} (pedidos) \emph{no} se equilibran de forma estable: cambian por \textbf{zona}, \textbf{hora} y \textbf{contexto} (clima, día, incentivos).
+    \item Ese desbalance se manifiesta en colas, saturación puntual y decisiones tarde: hacen falta \textbf{avisos a tiempo} y \textbf{números concretos} (zona, gravedad, cuánto subir incentivos).
+    \item La solución del caso no es un ``modelo mágico'' a ciegas: primero se \textbf{aprende del histórico} (Excel + notebook) y luego el código aplica \textbf{reglas claras} y parámetros versionados (\texttt{calibration.json}).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tres bloques, una idea cada uno}
+  \begin{description}
+    \item[Módulo 1] \textbf{Diagnóstico:} con el Excel y el notebook se entiende cómo reacciona cada zona; de ahí salen sensibilidades y umbrales.
+    \item[Módulo 2] \textbf{Motor:} mira el \textbf{clima en vivo} (Open-Meteo), aplica las reglas por zona y dice riesgo e incentivos.
+    \item[Módulo 3] \textbf{Mensaje:} convierte ese resultado en \textbf{texto para humanos} (modelo de lenguaje o plantilla de respaldo) y lo manda a \textbf{Telegram}.
+  \end{description}
+\end{frame}
+
+\begin{frame}{Arquitectura del pipeline}
+  \centering
+  \includegraphics[width=\linewidth,height=0.80\textheight,keepaspectratio]{figures/pipeline_arquitectura.png}
+
+\end{frame}
+
+% ---------------------------------------------------------------------------
+\section{Métrica clave: ratio pedidos/repartidor}
+
+\begin{frame}{Qué mide el \texttt{ratio} y cómo se etiqueta el panel}
+  \begin{itemize}
+    \item \textbf{Definición:} \texttt{ratio} $=$ pedidos entre repartidores conectados en esa celda (zona $\times$ hora); resume el \textbf{apretón} operativo relativo.
+    \item \textbf{Saturación:} si el \texttt{ratio} supera \textbf{1{,}8} la celda se trata como saturada en el diagnóstico.
+    \item \textbf{Otras bandas:} sobre-oferta si ${<}\,0{,}5$; ``saludable'' entre $0{,}9$ y $1{,}2$; el resto es intermedio.
+    \item \textbf{Panel:} 30 días $\times$ 24 h $\times$ 14 zonas $=$ 10\,080 filas en el Excel de referencia.
+  \end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------------------
+\section{Diagnóstico: zonas y horas críticas}
+
+\begin{frame}{Variables que se utilizan para calibrar el motor}
+  \small
+  \begin{itemize}
+    \item \textbf{\texttt{precip\_coef}} — cuánto sube el ``apretón'' operativo cuando sube un poco la lluvia (estimado como en el notebook).
+    \item \textbf{\texttt{sensitivity\_index}} — qué tan ``nerviosa'' es la zona frente a lluvia, comparada con el resto (número entre 0 y 1).
+    \item \textbf{\texttt{alert\_precip\_mm\_hr}} — a partir de cuánta lluvia (mm/h) tiene sentido considerar alerta, según el histórico de horas ``malas''.
+    \item \textbf{\texttt{mm\_precip\_healthy\_to\_saturation\_linear}} — orden de magnitud de lluvia para pasar de ``normal'' a ``muy cargado'' en esa zona.
+    \item \textbf{\texttt{base\_earnings\_mxn}} — mediana histórica de pagos en la zona.
+    \item \textbf{\texttt{recommended\_earnings\_mxn}} — media cuando ya llovía por encima del umbral (M1); el motor interpola entre base y recomendado según el ratio proyectado (tope global 35\,\%).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cosas que el diagnóstico deja en claro}
+  \footnotesize
+  \begin{enumerate}
+    \item El panel tiene \textbf{30 días $\times$ 24 h $\times$ 14 zonas} (10\,080 filas). 
+    \item La lluvia \textbf{sí se asocia} con más presión operativa.
+    \item Hay una asociación con patrones temporales específicos, en ciertos horarios del día (Comida y Cena).
+    \item Se observan incrementos en días festivos, así como en días particulares de la semana como jueves y martes.
+    \item Existe una posible influencia de eventos locales, que podrían intensificar la demanda y elevar saturación.
+    \item Si en una hora hay más de \textbf{0{,}5 mm/h} de lluvia, la probabilidad de saturación es unas \textbf{8 veces} mayor que con lluvia muy suave o nula.
+    \item \textbf{Cada zona es distinta:} por ejemplo Santiago reacciona antes que Mitras.
+    \item \textbf{Mapas:} la mayoría de polígonos vienen bien; donde falta, se usan centroides. 
+    \item Los resultados deben interpretarse con cautela, ya que pueden estar afectados por variables de confusión.
+    \item Es necesario validar si los efectos observados son causales o circunstanciales.
+    \item Se recomienda incorporar variables como el tipo de zona (urbana vs. rural).
+  \end{enumerate}
+  \vspace{0.25em}
+  \tiny Más detalle: \texttt{modulo1\_diagnostico/HALLAZGOS\_M1.md}
+\end{frame}
+
+\input{presentacion_diagnostico_m1.tex}
+
+
+% ---------------------------------------------------------------------------
+\section{Insight clave: no es solo demanda}
+
+\begin{frame}{Síntesis exploratoria (panel por zonas)}
+  \small
+  \textbf{Lectura exploratoria (Excel + notebook)}\\[0.6em]
+  \begin{itemize}
+    \item \textbf{Al parecer}, las zonas con perfil más \textbf{rural o periférico} concentran con mayor frecuencia \textbf{anomalías tipo saturación}: distribuciones más anchas y picos extremos (ratio muy alto en ciertas horas), coherentes con episodios de mucha demanda relativa frente a reparto disponible.
+    \item Las zonas \textbf{urbanas y residenciales} tienden, en cambio, a que su \textbf{valor máximo habitual} quede \textbf{dentro del rango esperado} antes del umbral de saturación del panel: menos cola hacia valores extremos en el histórico mostrado.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Es contexto + tiempo}
+  \begin{itemize}
+    \item El estrés operativo no se reduce a ``hubo muchos pedidos'': importan \textbf{cuándo} (franja, festivo), \textbf{dónde} (zona) y \textbf{qué pasaba afuera} (lluvia) y con \textbf{qué incentivos} se operaba.
+    \item El \texttt{ratio} resume desbalance oferta--demanda, pero su interpretación válida es \textbf{condicional} a hora y territorio.
+    \item Por eso el caso calibra \textbf{por zona} y el motor mira \textbf{ventanas cortas} de clima, en lugar de una sola regla global.
+  \end{itemize}
+\end{frame}
+
+% ---------------------------------------------------------------------------
+\section{Acción: sistema de alertas y umbrales operativos}
+
+\begin{frame}{Clima en vivo}
+  \begin{itemize}
+    \item \textbf{Open-Meteo:} pronóstico horario de lluvia, \textbf{sin API key} en el caso.
+    \item Las unidades encajan con el Excel (mm por hora como intensidad).
+    \item Zona horaria: \texttt{America/Monterrey}.
+    \item Por defecto se miran unas \textbf{2 horas} hacia adelante (balance entre precisión y tiempo para reaccionar).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Qué hace el motor (pasos sencillos)}
+  \small
+  \begin{enumerate}
+    \item Por zona: mira la lluvia máxima esperada frente al \textbf{umbral de esa zona}.
+    \item Elige la zona \textbf{más preocupante} (mayor exceso sobre el umbral).
+    \item Calcula cómo podría moverse el \textbf{ratio} con la lluvia prevista.
+    \item Asigna \textbf{riesgo:} BAJO, MEDIO, ALTO o CRÍTICO.
+    \item Propone \textbf{cuánto subir incentivos} y qué otras zonas vigilar.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Para no ahogar al coordinador (debounce)}
+  \begin{itemize}
+    \item Se guarda un \textbf{estado por zona} (archivo local).
+    \item No se repite el \textbf{mismo tipo de aviso} en poco tiempo (por defecto unos \textbf{45 minutos}), salvo que la situación \textbf{empeore de verdad} o suba mucho el \textbf{nivel de riesgo}.
+    \item \textbf{Extra:} deduplicación del mismo ``evento'' de lluvia y, si se configura, tiempo mínimo entre alertas de \textbf{cualquier} zona (\texttt{ALERT\_GLOBAL\_MIN\_INTERVAL\_SEC}).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Cómo probar el motor solo}
+  \texttt{modulo2\_motor\_alertas/run\_alert\_engine.py}
+  \vspace{0.5em}
+  \begin{itemize}
+    \item \texttt{python run\_alert\_engine.py} — usa clima real, resultado en consola.
+    \item \texttt{python run\_alert\_engine.py --demo} — simula lluvia fuerte en Santiago sin internet.
+    \item \texttt{python run\_alert\_engine.py --recalibrate} — vuelve a armar \texttt{calibration.json} desde el Excel y ejecuta.
+  \end{itemize}
+  \vspace{0.3em}
+  \small Reglas explicadas en lenguaje llano: \texttt{motor\_reglas/motor\_reglas.tex} $\rightarrow$ PDF.
+\end{frame}
+
+\begin{frame}{Módulo 3 — Telegram: mismo motor, texto para humanos}
+  \begin{itemize}
+    \item Mismo clima y \textbf{mismo motor} que el M2.
+    \item El programa arma un \textbf{resumen en JSON} (zona, riesgo, números); el modelo de lenguaje solo \textbf{redacta} el mensaje.
+    \item Puede usarse \textbf{Ollama} en local o \textbf{OpenAI}; con OpenAI, por defecto entra \textbf{LangChain}. Si el modelo falla, hay \textbf{texto fijo} con los mismos datos.
+    \item El envío es con \textbf{python-telegram-bot}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Qué debe verse en el mensaje (unos 10 segundos)}
+  \begin{itemize}
+    \item Zona y \textbf{qué tan grave} es.
+    \item Qué lluvia se espera y en qué ventana.
+    \item Una frase de \textbf{contexto histórico} (guiada por el sistema).
+    \item \textbf{Acción clara:} subir pagos de X a Y pesos en Z minutos.
+    \item Otras \textbf{zonas a vigilar}.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Dos tiempos distintos}
+  \begin{itemize}
+    \item \textbf{Cada cuánto se mira el clima} (monitor): p.\,ej. cada 10 min.
+    \item \textbf{Cada cuánto se puede repetir} un aviso parecido en la misma zona: p.\,ej. $\sim$45 min.
+    \item Si el \textbf{riesgo sube de nivel}, puede avisarse antes aunque no haya pasado el tiempo largo.
+  \end{itemize}
+\end{frame}
+
+
+% ---------------------------------------------------------------------------
+\section{Extensión futura}
+
+\begin{frame}{Próximos pasos posibles}
+  \begin{itemize}
+    \item \textbf{ML predictivo:} modelo de \texttt{ratio} o de probabilidad de saturación en ventanas cortas (features: lluvia prevista, hora, zona, histórico reciente), en paralelo a reglas interpretables.
+    \item \textbf{Optimización logística:} acoplar sugerencias de incentivos con restricciones reales de flota, costo marginal y políticas comerciales; cerrar el ciclo con experimentación controlada.
+    \item \textbf{Más señales:} demanda prevista, eventos locales, integración con despacho en vivo.
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{}
+  \centering
+  {\Huge Gracias}
+
+\end{frame}
+
+\end{document}

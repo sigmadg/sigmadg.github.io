@@ -1,0 +1,108 @@
+{
+  "name": "Caso Rappi — pipeline unificado (M2+M3 vía /tick)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Pipeline M2+M3 (`POST /tick`)\n\nMisma pasada operativa que `monitor_loop.py --once`: Open-Meteo → motor M2 → debounce → M3 / Telegram.\n\n### Puente HTTP\n- **Manual (dev):** desde la raíz del repo: `./scripts/run_n8n_bridge.sh`\n- **Contenedor único del repo:** `docker compose up --build` → puente **8090** en el host: `http://127.0.0.1:8090/tick`.\n- **Recomendado:** `docker compose --profile n8n up --build` (n8n + app en la misma red) → abre la **UI en el navegador** en **http://127.0.0.1:15678** (puerto host por defecto; si ya tenías otro n8n en 5678, no choca). El nodo HTTP del canvas usa **`http://caso-tecnico:8090/tick`** (no confundir con la URL del editor).\n\n### URL del nodo (importante)\nEl campo **URL** del HTTP Request es: `{{ $env.CASO_TICK_URL || 'http://caso-tecnico:8090/tick' }}`.\n- **Por defecto** apunta al servicio Docker **`caso-tecnico`** puerto **8090** (misma red que `docker compose --profile n8n`). Ahí está el puente FastAPI (`POST /tick`).\n- **No uses `127.0.0.1` dentro del contenedor n8n:** en el contenedor, localhost eres tú mismo, no la app.\n- **n8n con npm en el PC** (puente en el host): cambia la URL del nodo a **`http://127.0.0.1:8090/tick`** (o pon en el entorno `CASO_TICK_URL` si tu n8n lo expone a `$env`).\n- **Solo n8n en Docker** (`n8n/docker-compose.yml`, app en otro compose): URL **`http://host.docker.internal:PUERTO/tick`** donde PUERTO es el **mapeo del host** (p. ej. 8090 o 8091 si usaste `CASO_HOST_BRIDGE`).\n\n### Query (`dry_run`, `demo`, `force_send`)\n| Parámetro | Valor en este workflow | Notas |\n|-----------|------------------------|--------|\n| `dry_run` | `true` | No envía alerta larga a Telegram. Para envío real: `false` y `.env` con `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID`. |\n| `demo` | `false` | `true` = serie demo Santiago (sin Open-Meteo real en esa zona). |\n| `force_send` | `false` | `true` ignora debounce (solo pruebas). |\n\n`TELEGRAM_MONITOR_PING`, `MONITOR_INTERVAL_SEC`, etc. **no** son query: van en `caso_tecnico/.env` (Python los lee al ejecutar `/tick`).\n\n### Schedule\n**Cada 10 min** es orientativo; alinéalo con tu `MONITOR_INTERVAL_SEC` si comparas con `monitor_loop.py` nativo.",
+        "height": 560,
+        "width": 520,
+        "color": 4
+      },
+      "id": "sticky-instrucciones",
+      "name": "Instrucciones",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-120, 120]
+    },
+    {
+      "parameters": {},
+      "id": "manual-unificado",
+      "name": "Prueba manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [440, 320]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 10
+            }
+          ]
+        }
+      },
+      "id": "schedule-unificado",
+      "name": "Cada 10 minutos",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [440, 520]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.CASO_TICK_URL || 'http://caso-tecnico:8090/tick' }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dry_run",
+              "value": "true"
+            },
+            {
+              "name": "demo",
+              "value": "false"
+            },
+            {
+              "name": "force_send",
+              "value": "false"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-tick-unificado",
+      "name": "POST /tick (pipeline Python)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [760, 420]
+    }
+  ],
+  "connections": {
+    "Prueba manual": {
+      "main": [
+        [
+          {
+            "node": "POST /tick (pipeline Python)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cada 10 minutos": {
+      "main": [
+        [
+          {
+            "node": "POST /tick (pipeline Python)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "active": false
+}

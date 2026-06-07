@@ -1,0 +1,116 @@
+{% extends "viz/base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">Panel de visualización</h1>
+<p class="text-muted mb-4">Explora el dataset del <strong>Módulo 1</strong> (diagnóstico y figuras), la calibración y auditoría del <strong>Módulo 2</strong>, y el monitor / Telegram del <strong>Módulo 3</strong> (LangChain + <code>python-telegram-bot</code>).</p>
+
+{% if not monitor_telegram_live %}
+<div class="alert alert-info" role="alert">
+  <strong>Monitor M3 (Docker / entrypoint):</strong> con <code>MONITOR_DRY_RUN=1</code> (valor por defecto), el bucle <code>monitor_loop.py</code> <em>no</em> envía mensajes a Telegram (solo simula). Para envíos automáticos del monitor, pon <code>MONITOR_DRY_RUN=0</code> en tu <code>.env</code> y reinicia el contenedor. El formulario <strong>Forzar alerta Telegram</strong> más abajo ejecuta el agente sin ese modo y puede enviar igualmente si las credenciales son válidas.
+</div>
+{% endif %}
+
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted">M1 · RAW_DATA</h2>
+        {% if n_rows %}
+        <p class="display-6 mb-0">{{ n_rows|floatformat:0 }}</p>
+        <small class="text-muted">filas · {{ n_zones }} zonas (Excel <code>data/rappi_delivery_case_data.xlsx</code>)</small>
+        {% else %}
+        <p class="text-warning mb-0">Sin datos</p>
+        <small class="text-muted">{{ data_error }}</small>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted">M2 · calibration.json</h2>
+        {% if calibration_ok %}
+        <p class="mb-1"><span class="badge bg-success">Disponible</span></p>
+        {% if n_cal_zones %}<small class="text-muted d-block">{{ n_cal_zones }} zonas calibradas</small>{% endif %}
+        {% if calibration_mtime %}<small class="text-muted d-block">última modificación: {{ calibration_mtime }}</small>{% endif %}
+        {% else %}
+        <p class="mb-0"><span class="badge bg-secondary">No encontrado</span></p>
+        <small class="text-muted">Genera con <code>export_calibration_from_m1.py</code> o el notebook M1.</small>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h2 class="h6 text-uppercase text-muted">M1 · Figuras</h2>
+        <p class="display-6 mb-0">{{ n_figures }}</p>
+        <small class="text-muted"><code>modulo1_diagnostico/figures</code> (salida del notebook)</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <div class="card h-100 border-secondary">
+      <div class="card-body py-3">
+        <h2 class="h6 text-uppercase text-muted mb-2">M2 · Auditoría operativa</h2>
+        {% if has_audit_log %}
+        <p class="mb-0"><span class="badge bg-info text-dark">.ops_audit.jsonl</span> <span class="small text-muted">decisiones del motor, debounce, fallos de clima</span></p>
+        {% else %}
+        <p class="mb-0 small text-muted">Aún no hay <code>.ops_audit.jsonl</code>. Aparece al ejecutar <code>run_alert_engine.py</code> o el pipeline M3.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100 border-secondary">
+      <div class="card-body py-3">
+        <h2 class="h6 text-uppercase text-muted mb-2">M3 · Monitor</h2>
+        <p class="mb-0 small" style="color:#c5d0e0;">Ticks en <code>modulo2_motor_alertas/.monitor_ticks.jsonl</code> · estado en <code>.monitor_status.json</code>. Ver <a href="{% url 'monitor' %}">Monitor</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">Raíz del proyecto (lectura)</div>
+  <div class="card-body">
+    <code>{{ project_root }}</code>
+  </div>
+</div>
+
+<div class="card mb-4 border" style="border-color: var(--accent) !important;">
+  <div class="card-header" style="background: rgba(255,48,8,0.12);">Módulo 3 — Enviar a Telegram (forzar)</div>
+  <div class="card-body">
+    <p class="small mb-3" style="color:#c5d0e0;">
+      Ejecuta <code>run_agent.py --force-send</code>: <strong>ignora debounce</strong> (huella de evento + intervalo global / TTL por zona) y envía el mensaje al canal en <code>caso_tecnico/.env</code>.
+      El texto pasa por el mismo flujo que el monitor: <strong>motor M2 → RAG/LLM</strong> (Ollama/OpenAI según <code>LLM_PROVIDER</code>) o plantilla si el LLM falla.
+      Requiere <code>TELEGRAM_BOT_TOKEN</code> y <code>TELEGRAM_CHAT_ID</code>. En Docker, Ollama en el host: <code>OLLAMA_HOST=0.0.0.0</code> y revisa el aviso tras enviar: línea <code>used_llm=True/False</code>.
+    </p>
+    <form method="post" action="{% url 'telegram_force_alert' %}" class="d-flex flex-wrap gap-2 align-items-center">
+      {% csrf_token %}
+      <button type="submit" name="mode" value="demo" class="btn btn-danger">
+        Forzar envío (demo Santiago)
+      </button>
+      <button type="submit" name="mode" value="live" class="btn btn-outline-light">
+        Forzar envío (clima en vivo)
+      </button>
+    </form>
+    <p class="small mt-2 mb-0" style="color:#8b9bb4;">
+      <strong>Demo:</strong> siempre genera alerta simulada en Santiago y la envía.<br>
+      <strong>En vivo:</strong> usa Open-Meteo real; si ninguna zona supera umbral, se envía un <strong>aviso corto</strong> a Telegram al forzar (para confirmar canal y credenciales). Las alertas largas solo si el motor dispara riesgo.
+    </p>
+  </div>
+</div>
+
+<div class="d-flex flex-wrap gap-2">
+  <a class="btn btn-primary" href="{% url 'monitor' %}">Monitor M3</a>
+  <a class="btn btn-primary" href="{% url 'pipeline' %}">Ver pipeline</a>
+  <a class="btn btn-outline-light" href="{% url 'datos' %}">Tablas y gráficos</a>
+  <a class="btn btn-outline-light" href="{% url 'calibracion' %}">Parámetros por zona</a>
+  <a class="btn btn-outline-light" href="{% url 'figuras' %}">Galería M1</a>
+  <a class="btn btn-outline-secondary" href="{% url 'api_resumen' %}">api/resumen.json</a>
+</div>
+{% endblock %}

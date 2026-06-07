@@ -6,7 +6,7 @@
   <title>Datos y análisis · Portafolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,19 +15,48 @@
       <a href="index.html" class="back-link">← Portafolio</a>
       <div>
         <h1 class="hero-title">Datos y análisis</h1>
-        <p class="hero-subtitle">ETL, reportes, dashboards y ciencia de datos.</p>
+        <p class="hero-subtitle">ETL, reportes, dashboards, ciencia de datos y casos técnicos aplicados.</p>
       </div>
     </div>
   </header>
+
   <main class="main">
-    <section class="container">
-      <p class="coming-soon">Próximamente: proyectos de datos y análisis.</p>
-      <p><a href="index.html" class="btn btn-primary">Volver al portafolio</a></p>
+    <section class="projects container">
+      <h2 class="section-title">Proyectos</h2>
+      <div class="grid grid-featured">
+        <article class="card card-featured">
+          <div class="card-image-wrap">
+            <img class="card-image" src="../../caso_tecnico/demo_caso_tecnico/figures/pipeline_arquitectura.png" alt="Arquitectura del caso técnico Rappi — pipeline de alertas operacionales" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-sector">Delivery · Logística</div>
+            <h3 class="card-title">Caso técnico Rappi — Sistema de alertas operacionales</h3>
+            <p class="card-desc">
+              Proyecto data-driven con tres módulos: <strong>diagnóstico operacional</strong> (ratios por zona y hora),
+              <strong>motor de reglas</strong> con pronóstico Open-Meteo y debounce anti-fatiga, y
+              <strong>agente Telegram</strong> con salida estructurada (RAG-lite). Stack: Python, n8n, Prometheus, Grafana y Django.
+            </p>
+            <ul class="card-tags">
+              <li>Módulo 1 · Diagnóstico</li>
+              <li>Módulo 2 · Motor de alertas</li>
+              <li>Módulo 3 · Agente Telegram</li>
+              <li>Open-Meteo</li>
+              <li>n8n</li>
+            </ul>
+            <div class="card-actions">
+              <a href="../../caso_tecnico/modulo1_diagnostico/notebooks/01_diagnostico_operacional.html" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Ver caso técnico</a>
+              <a href="../../caso_tecnico/README.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Documentación</a>
+              <a href="https://t.me/examen_rappi" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Demo Telegram</a>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
   </main>
+
   <footer class="footer">
     <div class="container">
-      <p><a href="index.html" class="footer-link">Portafolio</a></p>
+      <p><a href="index.html" class="footer-link">Portafolio</a> · Datos y análisis</p>
     </div>
   </footer>
 </body>

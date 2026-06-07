@@ -1,0 +1,138 @@
+{
+  "zones": {
+    "Apodaca Centro": {
+      "precip_coef": 0.22602334563607385,
+      "sensitivity_index": 0.6323,
+      "mm_precip_healthy_to_saturation_linear": 2.65,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 328.0,
+      "recommended_earnings_mxn": 355.737
+    },
+    "Carretera Nacional": {
+      "precip_coef": 0.33182271609156827,
+      "sensitivity_index": 0.9282,
+      "mm_precip_healthy_to_saturation_linear": 1.81,
+      "alert_precip_mm_hr": 2.5,
+      "base_earnings_mxn": 326.0,
+      "recommended_earnings_mxn": 359.11
+    },
+    "Centro": {
+      "precip_coef": 0.18018517007740986,
+      "sensitivity_index": 0.504,
+      "mm_precip_healthy_to_saturation_linear": 3.33,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 330.4,
+      "recommended_earnings_mxn": 352.104
+    },
+    "Cumbres Poniente": {
+      "precip_coef": 0.24089543491998466,
+      "sensitivity_index": 0.6739,
+      "mm_precip_healthy_to_saturation_linear": 2.49,
+      "alert_precip_mm_hr": 6.55,
+      "base_earnings_mxn": 324.8,
+      "recommended_earnings_mxn": 373.52
+    },
+    "Escobedo": {
+      "precip_coef": 0.26266101850856066,
+      "sensitivity_index": 0.7348,
+      "mm_precip_healthy_to_saturation_linear": 2.28,
+      "alert_precip_mm_hr": 1.0,
+      "base_earnings_mxn": 323.3,
+      "recommended_earnings_mxn": 370.134
+    },
+    "Independencia": {
+      "precip_coef": 0.28804842832869204,
+      "sensitivity_index": 0.8058,
+      "mm_precip_healthy_to_saturation_linear": 2.08,
+      "alert_precip_mm_hr": 6.55,
+      "base_earnings_mxn": 331.3,
+      "recommended_earnings_mxn": 381.0
+    },
+    "La Fe": {
+      "precip_coef": 0.3304874736012182,
+      "sensitivity_index": 0.9245,
+      "mm_precip_healthy_to_saturation_linear": 1.82,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 318.1,
+      "recommended_earnings_mxn": 346.082
+    },
+    "MTY_Apodaca_Huinalá": {
+      "precip_coef": 0.34318082299505354,
+      "sensitivity_index": 0.96,
+      "mm_precip_healthy_to_saturation_linear": 1.75,
+      "alert_precip_mm_hr": 1.0,
+      "base_earnings_mxn": 324.4,
+      "recommended_earnings_mxn": 301.514
+    },
+    "MTY_Guadalupe": {
+      "precip_coef": 0.1967962525287641,
+      "sensitivity_index": 0.5505,
+      "mm_precip_healthy_to_saturation_linear": 3.05,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 327.15,
+      "recommended_earnings_mxn": 345.828
+    },
+    "Mitras Centro": {
+      "precip_coef": 0.2626350906583287,
+      "sensitivity_index": 0.7347,
+      "mm_precip_healthy_to_saturation_linear": 2.28,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 331.2,
+      "recommended_earnings_mxn": 352.606
+    },
+    "San Nicolás": {
+      "precip_coef": 0.357481796562616,
+      "sensitivity_index": 1.0,
+      "mm_precip_healthy_to_saturation_linear": 1.68,
+      "alert_precip_mm_hr": 2.5,
+      "base_earnings_mxn": 315.55,
+      "recommended_earnings_mxn": 325.1
+    },
+    "San Pedro": {
+      "precip_coef": 0.2896800245385305,
+      "sensitivity_index": 0.8103,
+      "mm_precip_healthy_to_saturation_linear": 2.07,
+      "alert_precip_mm_hr": 0.5,
+      "base_earnings_mxn": 322.7,
+      "recommended_earnings_mxn": 373.609
+    },
+    "Santa Catarina": {
+      "precip_coef": 0.30691695024105325,
+      "sensitivity_index": 0.8586,
+      "mm_precip_healthy_to_saturation_linear": 1.95,
+      "alert_precip_mm_hr": 2.5,
+      "base_earnings_mxn": 320.9,
+      "recommended_earnings_mxn": 370.634
+    },
+    "Tec": {
+      "precip_coef": 0.31261074030810737,
+      "sensitivity_index": 0.8745,
+      "mm_precip_healthy_to_saturation_linear": 1.92,
+      "alert_precip_mm_hr": 6.55,
+      "base_earnings_mxn": 333.5,
+      "recommended_earnings_mxn": 383.52
+    }
+  },
+  "global": {
+    "healthy_ratio_max": 1.2,
+    "saturation_ratio": 1.8,
+    "incentive_cap_pct": 0.35,
+    "local_timezone": "America/Monterrey",
+    "hour_risk_windows": [
+      {
+        "start_hour": 12,
+        "end_hour": 15,
+        "label": "comida",
+        "threshold_factor": 0.88,
+        "risk_rank_boost": 0
+      },
+      {
+        "start_hour": 19,
+        "end_hour": 21,
+        "label": "cena",
+        "threshold_factor": 0.9,
+        "risk_rank_boost": 0
+      }
+    ]
+  }
+}
