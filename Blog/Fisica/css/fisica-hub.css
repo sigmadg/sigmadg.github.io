@@ -1,0 +1,444 @@
+/* Física — cursos propedéuticos */
+
+.fisica-hub {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.fisica-viz-section {
+  margin-bottom: 48px;
+  padding: 28px;
+  background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
+  border: 1px solid var(--section-border);
+  border-radius: 16px;
+}
+
+.fisica-section-head {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.fisica-section-head--row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: left;
+}
+
+.fisica-section-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.fisica-section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, var(--hero-primary), var(--hero-accent));
+  border-radius: 2px;
+}
+
+.fisica-section-head--row .fisica-section-title::after {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.fisica-section-hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--hero-accent);
+  font-weight: 600;
+}
+
+.fisica-section-head--row .fisica-section-hint {
+  margin-top: 4px;
+}
+
+.fisica-section-desc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--section-muted);
+  line-height: 1.55;
+}
+
+.fisica-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.fisica-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--section-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--section-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.25s ease;
+}
+
+.fisica-chip:hover {
+  border-color: var(--chip-color, var(--hero-primary));
+  color: #fff;
+}
+
+.fisica-chip.active {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--chip-color, var(--hero-primary));
+  color: #fff;
+}
+
+.fisica-courses-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.fisica-course-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(20, 22, 28, 0.85);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fisica-course-card:hover,
+.fisica-course-card.active {
+  transform: translateY(-2px);
+  border-color: var(--course-color, var(--hero-primary));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.fisica-course-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.fisica-course-card__count {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--course-color, var(--hero-primary));
+  margin-bottom: 6px;
+}
+
+.fisica-course-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.fisica-course-card__desc {
+  font-size: 13px;
+  color: var(--section-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.catalog-search-wrap {
+  flex: 1;
+  min-width: min(100%, 320px);
+}
+
+.catalog-search {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--section-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.catalog-search:focus {
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+.catalog-search::placeholder {
+  color: #6b7280;
+}
+
+.fisica-catalog-stats {
+  margin: 0;
+  font-size: 13px;
+  color: var(--section-muted);
+}
+
+.fisica-course-block {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--section-border);
+}
+
+.fisica-course-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.fisica-course-block__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.fisica-course-block__icon {
+  font-size: 1.5rem;
+}
+
+.fisica-course-block__title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.fisica-course-block__badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--course-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.fisica-course-note {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--section-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid var(--course-color, var(--hero-primary));
+  line-height: 1.55;
+}
+
+.fisica-units {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fisica-unit {
+  border-radius: 12px;
+  border: 1px solid var(--section-border);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.fisica-unit__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.fisica-unit__summary::-webkit-details-marker {
+  display: none;
+}
+
+.fisica-unit__summary::before {
+  content: '▸';
+  color: var(--course-color, var(--hero-accent));
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.fisica-unit[open] .fisica-unit__summary::before {
+  transform: rotate(90deg);
+}
+
+.fisica-unit__num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--course-color, var(--hero-primary));
+  min-width: 1.5rem;
+}
+
+.fisica-unit__optional {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--section-muted);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fisica-unit__topics {
+  margin: 0;
+  padding: 0 18px 14px 2.5rem;
+  list-style: none;
+}
+
+.fisica-unit__topics li {
+  position: relative;
+  padding: 6px 0 6px 14px;
+  font-size: 13px;
+  color: var(--section-muted);
+  line-height: 1.45;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fisica-unit__topics li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--course-color, var(--hero-accent));
+  transform: translateY(-50%);
+  opacity: 0.7;
+}
+
+.fisica-unit__topics li.optional {
+  opacity: 0.75;
+}
+
+.fisica-topic-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fisica-topic-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.fisica-topic-link:hover {
+  color: #fff;
+}
+
+.fisica-topic-link:hover .fisica-topic-link__lab {
+  color: var(--hero-accent);
+}
+
+.fisica-topic-link__text {
+  font-size: 13px;
+  color: #d1d5db;
+  line-height: 1.45;
+  flex: 1;
+  min-width: 180px;
+}
+
+.fisica-topic-link:hover .fisica-topic-link__text {
+  color: #fff;
+}
+
+.fisica-topic-link__lab {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hero-accent);
+  white-space: nowrap;
+}
+
+.fisica-unit__topics li::before {
+  display: none;
+}
+
+.fisica-biblio {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--section-border);
+}
+
+.fisica-biblio h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--section-muted);
+}
+
+.fisica-biblio ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.fisica-biblio li {
+  font-size: 12px;
+  color: var(--section-muted);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.fisica-catalog-empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--section-muted);
+  font-size: 14px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .fisica-viz-section {
+    padding: 20px 16px;
+  }
+
+  .fisica-section-head--row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,152 @@
+/* Hub compartido — Matemáticas, Física y secciones similares */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body.section-hub {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--section-bg);
+  background-image:
+    radial-gradient(at 15% 20%, var(--hero-glow-1) 0px, transparent 45%),
+    radial-gradient(at 85% 75%, var(--hero-glow-2) 0px, transparent 45%);
+  background-attachment: fixed;
+  color: var(--section-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+.hub-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.hub-section {
+  margin-bottom: 48px;
+}
+
+.hub-section-head {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.hub-section-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.hub-section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, var(--hero-primary), var(--hero-accent));
+  border-radius: 2px;
+}
+
+.hub-section-desc {
+  margin: 0 auto;
+  max-width: 560px;
+  font-size: 14px;
+  color: var(--section-muted);
+  line-height: 1.55;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.hub-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
+  border: 1px solid var(--section-border);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.theme-math .hub-card:hover { border-color: rgba(129, 140, 248, 0.5); }
+.theme-physics .hub-card:hover { border-color: rgba(245, 158, 11, 0.5); }
+
+.hub-card--soon {
+  opacity: 0.65;
+  cursor: default;
+  pointer-events: none;
+}
+
+.hub-card__icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.hub-card__tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--hero-primary);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hub-card__tag--muted {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--section-muted);
+  border-color: var(--section-border);
+}
+
+.hub-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hub-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--section-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.hub-card__link {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hero-accent);
+}
+
+.hub-notice {
+  padding: 28px;
+  border-radius: 16px;
+  text-align: center;
+  background: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
+  border: 1px dashed var(--section-border);
+}
+
+.hub-notice p {
+  margin: 0;
+  color: var(--section-muted);
+  font-size: 15px;
+}

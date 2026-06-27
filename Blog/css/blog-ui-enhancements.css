@@ -3,10 +3,10 @@
  * Mejoras de interfaz para el blog
  */
 
-/* Variables locales para consistencia */
+/* Variables locales — alineadas con el portafolio (sin kaki) */
 :root {
-  --blog-accent: #c18f59;
-  --blog-accent-hover: #a67a47;
+  --blog-accent: #ff014f;
+  --blog-accent-hover: #cc0039;
   --blog-bg-dark: #1a1b1e;
   --blog-card-bg: #f8f9fa;
   --blog-text: #333;
@@ -177,13 +177,13 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background var(--blog-transition), transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 10px rgba(193, 143, 89, 0.3);
+  box-shadow: 0 2px 10px rgba(255, 1, 79, 0.3);
 }
 .blog-btn:hover {
   background: var(--blog-accent-hover);
   color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(193, 143, 89, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 1, 79, 0.4);
 }
 .single-blog__text .blog-btn-wrap {
   margin-top: 8px;

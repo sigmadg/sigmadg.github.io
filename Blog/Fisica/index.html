@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Física — Cursos propedéuticos | SigmaDG</title>
+  <link rel="stylesheet" href="../css/section-hero.css">
+  <link rel="stylesheet" href="../css/section-hub.css">
+  <link rel="stylesheet" href="css/fisica-hub.css">
+</head>
+<body class="section-hub theme-physics">
+  <header class="section-hero">
+    <div class="section-hero__media" aria-hidden="true">
+      <img class="section-hero__img" src="../images/books-4.jpg" alt="">
+      <div class="section-hero__overlay"></div>
+    </div>
+    <div class="section-hero__glow section-hero__glow--1" aria-hidden="true"></div>
+    <div class="section-hero__glow section-hero__glow--2" aria-hidden="true"></div>
+    <nav class="section-nav">
+      <a href="../index.html">← Blog</a>
+      <span class="nav-sep">|</span>
+      <a href="../../index.html#blog">Portafolio</a>
+      <span class="nav-sep">|</span>
+      <a href="../Matematicas/index.html">Matemáticas</a>
+    </nav>
+    <div class="section-hero__inner">
+      <p class="section-hero__eyebrow">SigmaDG · Cursos propedéuticos</p>
+      <h1 class="section-hero__title">Física</h1>
+      <p class="section-hero__desc">Programa de cursos propedéuticos con teoría, ejemplos resueltos y simulaciones interactivas por tema — mecánica, métodos matemáticos, termodinámica y electromagnetismo.</p>
+      <div class="section-hero__stats" id="fisicaHeroStats">
+        <div class="section-stat"><strong>4</strong><span>Cursos</span></div>
+        <div class="section-stat"><strong>24</strong><span>Unidades</span></div>
+        <div class="section-stat"><strong>115</strong><span>Laboratorios</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="fisica-hub">
+    <section class="fisica-viz-section" aria-labelledby="mapHeading">
+      <div class="fisica-section-head">
+        <h2 class="fisica-section-title" id="mapHeading">Mapa de cursos</h2>
+        <p class="fisica-section-desc">Selecciona un curso para filtrar el programa o explora los cuatro cursos propedéuticos.</p>
+      </div>
+      <div class="fisica-filter-chips" id="fisicaCourseFilters" role="tablist" aria-label="Filtrar por curso"></div>
+      <div class="fisica-courses-map" id="fisicaCoursesMap"></div>
+    </section>
+
+    <section class="fisica-viz-section" aria-labelledby="programaHeading">
+      <div class="fisica-section-head fisica-section-head--row">
+        <div>
+          <h2 class="fisica-section-title" id="programaHeading">Programa por curso</h2>
+          <p class="fisica-section-desc" id="fisicaCatalogStats"></p>
+        <p class="fisica-section-hint">Cada tema incluye teoría, ejemplo, razonamiento para examen y simulación interactiva.</p>
+        </div>
+        <label class="catalog-search-wrap">
+          <span class="sr-only">Buscar tema</span>
+          <input type="search" id="fisicaCatalogSearch" class="catalog-search" placeholder="Buscar unidad o tema…" autocomplete="off">
+        </label>
+      </div>
+      <div id="fisicaCatalog"></div>
+      <p class="fisica-catalog-empty" id="fisicaCatalogEmpty" hidden>No hay resultados. Prueba otro término o quita el filtro de curso.</p>
+    </section>
+  </main>
+
+  <script src="js/propedeuticos-data.js"></script>
+  <script src="js/exam-reasoning.js"></script>
+  <script src="js/topic-registry.js"></script>
+  <script src="js/fisica-catalog-ui.js"></script>
+</body>
+</html>

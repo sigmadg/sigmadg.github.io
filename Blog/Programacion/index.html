@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programación — Catálogo de algoritmos ML | SigmaDG</title>
+  <link rel="stylesheet" href="../css/section-hero.css">
+  <link rel="stylesheet" href="css/algo-lab.css">
+</head>
+<body class="algo-lab theme-algo">
+  <header class="section-hero">
+    <div class="section-hero__media" aria-hidden="true">
+      <img class="section-hero__img" src="../images/books-3.jpg" alt="">
+      <div class="section-hero__overlay"></div>
+    </div>
+    <div class="section-hero__glow section-hero__glow--1" aria-hidden="true"></div>
+    <div class="section-hero__glow section-hero__glow--2" aria-hidden="true"></div>
+    <nav class="section-nav">
+      <a href="../index.html">← Blog</a>
+      <span class="nav-sep">|</span>
+      <a href="../../index.html#blog">Portafolio</a>
+    </nav>
+    <div class="section-hero__inner">
+      <p class="section-hero__eyebrow">SigmaDG · Machine Learning</p>
+      <h1 class="section-hero__title">Programación</h1>
+      <p class="section-hero__desc">Mapa visual interactivo, línea de tiempo histórica y catálogo completo. Explora 228 algoritmos y abre simulaciones paso a paso.</p>
+      <div class="section-hero__stats">
+        <div class="section-stat"><strong>228</strong><span>Algoritmos</span></div>
+        <div class="section-stat"><strong>18</strong><span>Categorías</span></div>
+        <div class="section-stat"><strong>228</strong><span>Simulaciones</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="algo-hub">
+    <div class="catalog-toolbar">
+      <label class="catalog-search-wrap">
+        <span class="sr-only">Buscar algoritmo</span>
+        <input type="search" id="catalogSearch" class="catalog-search" placeholder="Buscar algoritmo, categoría o técnica…" autocomplete="off">
+      </label>
+      <p class="catalog-stats" id="catalogStats"></p>
+    </div>
+    <!-- Mapa visual gigante -->
+    <section class="viz-section" aria-labelledby="mapHeading">
+      <div class="viz-section-head">
+        <div>
+          <h2 class="catalog-heading" id="mapHeading">Mapa visual de algoritmos</h2>
+          <p class="viz-section-desc">Explora los <span id="mapNodeCount"></span> en un grafo interactivo. Arrastra para moverte, rueda del ratón para zoom, clic en categoría para resaltar.</p>
+        </div>
+        <div class="map-toolbar">
+          <input type="search" id="mapSearch" class="catalog-search map-search" placeholder="Buscar en el mapa…" autocomplete="off">
+          <div class="map-controls">
+            <button type="button" id="mapZoomIn" title="Acercar">+</button>
+            <button type="button" id="mapZoomOut" title="Alejar">−</button>
+            <button type="button" id="mapReset" title="Restablecer vista">⟲</button>
+          </div>
+        </div>
+      </div>
+      <div id="algoMapWrap" class="algo-map-wrap">
+        <canvas id="algoMapCanvas" aria-label="Mapa visual interactivo de algoritmos de machine learning"></canvas>
+        <div id="algoMapTooltip" class="algo-map-tooltip" hidden></div>
+      </div>
+      <div class="map-legend" id="algoMapLegend" aria-label="Leyenda de categorías"></div>
+    </section>
+
+    <!-- Línea de tiempo histórica -->
+    <section class="viz-section viz-section--timeline" aria-labelledby="timelineHeading">
+      <div class="viz-section-head">
+        <div>
+          <h2 class="catalog-heading" id="timelineHeading">Línea de tiempo histórica</h2>
+          <p class="viz-section-desc">Hitos clave del machine learning desde 1950 hasta hoy. Desplázate horizontalmente o usa el slider para navegar por la historia.</p>
+        </div>
+      </div>
+      <div class="tl-filters" id="timelineFilters"></div>
+      <div class="tl-range-wrap">
+        <label for="timelineRange">Navegar por año</label>
+        <input type="range" id="timelineRange" min="0" max="100" value="75" step="1">
+        <span class="tl-range-labels"><span>1950</span><span>2025</span></span>
+      </div>
+      <div class="tl-scroller" id="timelineScroller">
+        <div class="tl-inner">
+          <div class="tl-track" id="timelineTrack"></div>
+          <div class="tl-events" id="timelineEvents"></div>
+        </div>
+      </div>
+      <div id="timelineDetail" class="tl-detail"></div>
+    </section>
+
+    <h2 class="catalog-heading">Simulaciones destacadas</h2>
+    <p class="catalog-section-desc" style="margin:-12px 0 20px">Los 228 algoritmos del catálogo tienen simulación interactiva. Aquí algunos populares:</p>
+    <div class="algo-hub-grid" id="catalogFeatured"></div>
+
+    <div class="catalog-layout">
+      <aside class="catalog-sidebar">
+        <h3 class="catalog-sidebar-title">Categorías</h3>
+        <nav class="catalog-nav" id="catalogNav" aria-label="Categorías de algoritmos"></nav>
+      </aside>
+
+      <div class="catalog-main">
+        <div id="catalogSections"></div>
+        <p class="catalog-empty" id="catalogEmpty" hidden>No hay resultados para tu búsqueda. Prueba con otro término.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/algorithms-data.js"></script>
+  <script src="js/algo-registry.js"></script>
+  <script src="js/ml-history-data.js"></script>
+  <script src="js/algo-map.js"></script>
+  <script src="js/ml-timeline.js"></script>
+  <script src="js/catalog-ui.js"></script>
+</body>
+</html>

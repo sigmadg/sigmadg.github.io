@@ -1,275 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Gaby Ordóñez</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-  <!-- Custom styles for this template -->
-  <link href="css/clean-blog.min.css" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biotecnología — Laboratorio de materias | SigmaDG</title>
+  <link rel="stylesheet" href="../css/section-hero.css">
+  <link rel="stylesheet" href="css/bio-lab.css">
 </head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand" href="../index.html">Gaby Ordóñez</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="../index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" >Curriculum</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" >Portafolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Biotecnología</a>
-          </li>
-        </ul>
-      </div>
+<body class="bio-lab theme-bio">
+  <header class="section-hero">
+    <div class="section-hero__media" aria-hidden="true">
+      <img class="section-hero__img" src="img/home-bg.jpg" alt="">
+      <div class="section-hero__overlay"></div>
     </div>
-  </nav>
-
-  <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h1>Biotecnología</h1>
-          </div>
-        </div>
+    <div class="section-hero__glow section-hero__glow--1" aria-hidden="true"></div>
+    <div class="section-hero__glow section-hero__glow--2" aria-hidden="true"></div>
+    <nav class="section-nav">
+      <a href="../index.html">← Blog</a>
+      <span class="nav-sep">|</span>
+      <a href="../../index.html#blog">Portafolio</a>
+      <span class="nav-sep">|</span>
+      <a href="apuntes-intro.html">Apuntes introductorios</a>
+    </nav>
+    <div class="section-hero__inner">
+      <p class="section-hero__eyebrow">SigmaDG · Plan de estudios</p>
+      <h1 class="section-hero__title">Biotecnología</h1>
+      <p class="section-hero__desc">Explora 27 materias organizadas por área. Cada una tendrá laboratorio interactivo con simulaciones, visualizaciones y apuntes paso a paso.</p>
+      <div class="section-hero__stats">
+        <div class="section-stat"><strong>27</strong><span>Materias</span></div>
+        <div class="section-stat"><strong>6</strong><span>Áreas</span></div>
+        <div class="section-stat"><strong>6</strong><span>Apuntes</span></div>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a href="S1-4.html">
-            <h2 class="post-title">
-              Enemigos del tiempo
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 1, Actividad 4
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            en Junio 16 del 2020</p>
+  <main class="bio-hub">
+    <section class="bio-viz-section" aria-labelledby="areasHeading">
+      <div class="bio-section-head">
+        <h2 class="bio-section-title" id="areasHeading">Mapa del plan de estudios</h2>
+        <p class="bio-section-desc">Selecciona un área para filtrar el catálogo o explora todas las materias.</p>
+      </div>
+      <div class="bio-filter-chips" id="bioAreaFilters" role="tablist" aria-label="Filtrar por área"></div>
+      <div class="bio-areas-map" id="bioAreasMap"></div>
+    </section>
+
+    <section class="bio-viz-section" aria-labelledby="catalogHeading">
+      <div class="bio-section-head bio-section-head--row">
+        <div>
+          <h2 class="bio-section-title" id="catalogHeading">Catálogo de materias</h2>
+          <p class="bio-section-desc" id="bioCatalogStats"></p>
         </div>
-        <hr>
-        <div class="post-preview">
-          <a href="S2-1.html">
-            <h2 class="post-title">
-             Reglamento y Código de ética.
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 2, Actividad 1
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            on Junio 24, 2020</p>
-        </div>
-        <hr>
-        <div class="post-preview">
-          <a href="S2-2.html">
-            <h2 class="post-title">
-             Modelo educativo
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 2, Actividad 2
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            on Junio 24, 2020</p>
-        </div>
-        <hr>
-       <div class="post-preview">
-          <a href="S3-1.html">
-            <h2 class="post-title">
-             Inteligencias múltiples
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 3, Actividad 1
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            on Junio 27, 2020</p>
-        </div>
-                 <div class="post-preview">
-          <a href="S3-2.html">
-            <h2 class="post-title">
-             Aprendizaje autónomo y estrategias
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 3, Actividad 2
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            on Junio 29, 2020</p>
-        </div>
-                 <div class="post-preview">
-          <a href="S3-3.html">
-            <h2 class="post-title">
-             Análisis del programa educativo
-            </h2>
-              <h3 class="post-subtitle">
-              Introducción a la vida universitaria en línea
-            </h3>
-            <h3 class="post-subtitle">
-            Sesión 3, Actividad 3
-            </h3>
-          </a>
-          <p class="post-meta">Posteado por
-            <a href="#">SigmaDG</a>
-            on Junio 29, 2020</p>
-        </div>
-        <hr>
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Tareas anteriores &rarr;</a>
+        <label class="catalog-search-wrap">
+          <span class="sr-only">Buscar materia</span>
+          <input type="search" id="bioCatalogSearch" class="catalog-search" placeholder="Buscar materia…" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="catalog-layout">
+        <aside class="catalog-sidebar">
+          <h3 class="catalog-sidebar-title">Navegación</h3>
+          <nav class="catalog-nav" id="bioCatalogNav" aria-label="Áreas del plan de estudios"></nav>
+        </aside>
+        <div class="catalog-main">
+          <div id="bioCatalogSections"></div>
+          <p class="catalog-empty" id="bioCatalogEmpty" hidden>No hay resultados. Prueba otro término o quita el filtro de área.</p>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <hr>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-                    <ul class="list-inline text-center">
-
-            <li class="list-inline-item">
-              <a href="https://twitter.com/sigma_dg">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.facebook.com/sigmagaby/">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://github.com/SigmaDG">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.instagram.com/sigmadg">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.youtube.com/channel/UCiiFSdy7gYwywZEwQfoOPOQ?view_as=subscriber">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://www.pinterest.com.mx/sigmadexter/boards/">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-pinterest fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-
-                        <li class="list-inline-item">
-              <a href="https://www.twitch.tv/sigmadg">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitch fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-               <li class="list-inline-item">
-              <a href="https://www.linkedin.com/in/ana-gabriela-ord%C3%B3%C3%B1ez-7898b6161/">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-
-            </li>
-
-
-          </ul>
-
-
-          <p class="copyright text-muted">Copyright &copy; SigmaDG 2020</p>
-        </div>
+    <section class="bio-viz-section bio-apuntes-section" aria-labelledby="apuntesHeading">
+      <div class="bio-section-head">
+        <h2 class="bio-section-title" id="apuntesHeading">Apuntes introductorios</h2>
+        <p class="bio-section-desc">Material de «Introducción a la vida universitaria en línea» (2020).</p>
       </div>
+      <div class="bio-apuntes-grid">
+        <a href="S1-4.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S1 · A4</span>
+          <h3>Enemigos del tiempo</h3>
+          <time datetime="2020-06-16">Jun 2020</time>
+        </a>
+        <a href="S2-1.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S2 · A1</span>
+          <h3>Reglamento y Código de ética</h3>
+          <time datetime="2020-06-24">Jun 2020</time>
+        </a>
+        <a href="S2-2.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S2 · A2</span>
+          <h3>Modelo educativo</h3>
+          <time datetime="2020-06-24">Jun 2020</time>
+        </a>
+        <a href="S3-1.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S3 · A1</span>
+          <h3>Inteligencias múltiples</h3>
+          <time datetime="2020-06-27">Jun 2020</time>
+        </a>
+        <a href="S3-2.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S3 · A2</span>
+          <h3>Aprendizaje autónomo</h3>
+          <time datetime="2020-06-29">Jun 2020</time>
+        </a>
+        <a href="S3-3.html" class="bio-apunte-card">
+          <span class="bio-apunte-session">S3 · A3</span>
+          <h3>Programa educativo</h3>
+          <time datetime="2020-06-29">Jun 2020</time>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <aside class="bio-drawer" id="bioDrawer" aria-hidden="true">
+    <div class="bio-drawer__backdrop" id="bioDrawerBackdrop"></div>
+    <div class="bio-drawer__panel" role="dialog" aria-labelledby="bioDrawerTitle">
+      <button type="button" class="bio-drawer__close" id="bioDrawerClose" aria-label="Cerrar">×</button>
+      <div id="bioDrawerContent"></div>
     </div>
+  </aside>
+
+  <footer class="bio-footer">
+    <p>© 2025 SigmaDG · <a href="../index.html">Blog</a></p>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/clean-blog.min.js"></script>
-
+  <script src="js/subjects-data.js"></script>
+  <script src="js/bio-catalog-ui.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,652 @@
+/* Biotecnología — laboratorio v2 */
+
+:root {
+  --color-primary: #22c55e;
+  --color-accent: #23f0ec;
+  --color-secondary: #10b981;
+  --lab-bg: #0a0b0d;
+  --lab-card: linear-gradient(145deg, rgba(30, 32, 36, 0.95), rgba(35, 39, 43, 0.95));
+  --lab-border: rgba(255, 255, 255, 0.1);
+  --lab-text: #e4e8ef;
+  --lab-muted: #9aa3b2;
+  --lab-radius: 16px;
+  --lab-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body.bio-lab {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--lab-bg);
+  background-image:
+    radial-gradient(at 15% 20%, rgba(34, 197, 94, 0.09) 0px, transparent 45%),
+    radial-gradient(at 85% 75%, rgba(35, 240, 236, 0.06) 0px, transparent 45%);
+  background-attachment: fixed;
+  color: var(--lab-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+/* Hero styles moved to ../css/section-hero.css */
+
+/* Hub sections */
+.bio-hub {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.bio-viz-section {
+  margin-bottom: 48px;
+  padding: 28px;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-border);
+  border-radius: var(--lab-radius);
+}
+
+.bio-section-head {
+  margin-bottom: 24px;
+}
+
+.bio-section-head--row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bio-section-head--row .bio-section-title::after {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.bio-section-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.bio-section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 2px;
+}
+
+.bio-section-desc {
+  margin: 0;
+  font-size: 14px;
+  color: var(--lab-muted);
+  line-height: 1.55;
+}
+
+/* Filter chips */
+.bio-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.bio-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--lab-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--lab-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all var(--lab-transition);
+}
+
+.bio-chip:hover {
+  border-color: var(--chip-color, var(--color-primary));
+  color: #fff;
+}
+
+.bio-chip.active {
+  border-color: var(--chip-color, var(--color-primary));
+  background: color-mix(in srgb, var(--chip-color, var(--color-primary)) 15%, transparent);
+  color: #fff;
+}
+
+.bio-chip[data-area="all"].active {
+  border-color: var(--color-accent);
+  background: rgba(35, 240, 236, 0.1);
+  color: var(--color-accent);
+}
+
+/* Area map cards */
+.bio-areas-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.bio-area-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 22px 20px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--lab-border);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: all var(--lab-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-area-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--area-color);
+  opacity: 0.6;
+  transition: opacity var(--lab-transition);
+}
+
+.bio-area-card:hover,
+.bio-area-card.active {
+  transform: translateY(-4px);
+  border-color: var(--area-color);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.bio-area-card.active {
+  background: color-mix(in srgb, var(--area-color) 8%, rgba(0, 0, 0, 0.3));
+}
+
+.bio-area-card.active::before { opacity: 1; }
+
+.bio-area-card__icon {
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.bio-area-card__count {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--area-color);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.bio-area-card__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.bio-area-card__desc {
+  font-size: 12px;
+  color: var(--lab-muted);
+  line-height: 1.45;
+}
+
+/* Search */
+.catalog-search-wrap {
+  flex: 1;
+  min-width: min(100%, 280px);
+  max-width: 320px;
+}
+
+.catalog-search {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--lab-border);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--lab-transition), box-shadow var(--lab-transition);
+}
+
+.catalog-search::placeholder { color: #6b7280; }
+
+.catalog-search:focus {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
+}
+
+/* Catalog layout */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.catalog-sidebar {
+  position: sticky;
+  top: 20px;
+  padding: 18px 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--lab-border);
+  border-radius: 14px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.catalog-sidebar-title {
+  margin: 0 0 12px;
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--lab-muted);
+}
+
+.catalog-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.catalog-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--lab-muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+  transition: all var(--lab-transition);
+}
+
+.catalog-nav-link span { flex: 1; }
+
+.catalog-nav-link small {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cat-color, var(--color-primary));
+  opacity: 0.8;
+}
+
+.catalog-nav-link:hover {
+  background: rgba(34, 197, 94, 0.08);
+  color: #fff;
+  border-left-color: var(--cat-color, var(--color-primary));
+}
+
+/* Area blocks */
+.bio-area-block {
+  margin-bottom: 36px;
+  padding: 24px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--lab-border);
+  scroll-margin-top: 20px;
+}
+
+.bio-area-block .catalog-section-head {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.bio-area-block__icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.catalog-section-title {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.catalog-section-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--lab-muted);
+}
+
+/* Subject cards grid */
+.bio-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.bio-subject-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--lab-border);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: inherit;
+  transition: all var(--lab-transition);
+}
+
+.bio-subject-card:hover {
+  border-color: var(--card-color, var(--color-primary));
+  background: color-mix(in srgb, var(--card-color, var(--color-primary)) 8%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.bio-subject-card__icon {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.bio-subject-card__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.bio-subject-card__status {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--lab-muted);
+  border: 1px solid var(--lab-border);
+}
+
+.catalog-empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--lab-muted);
+  border: 1px dashed var(--lab-border);
+  border-radius: 12px;
+  margin-top: 16px;
+}
+
+/* Drawer */
+.bio-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility 0.3s;
+}
+
+.bio-drawer.open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.bio-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bio-drawer.open .bio-drawer__backdrop { opacity: 1; }
+
+.bio-drawer__panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: min(420px, 100vw);
+  padding: 32px 28px;
+  background: var(--lab-card);
+  border-left: 1px solid var(--lab-border);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.bio-drawer.open .bio-drawer__panel { transform: translateX(0); }
+
+.bio-drawer__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background var(--lab-transition);
+}
+
+.bio-drawer__close:hover { background: rgba(255, 255, 255, 0.12); }
+
+.bio-drawer__tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: color-mix(in srgb, var(--area-color, var(--color-primary)) 15%, transparent);
+  color: var(--area-color, var(--color-primary));
+  border: 1px solid color-mix(in srgb, var(--area-color, var(--color-primary)) 35%, transparent);
+  margin-bottom: 16px;
+}
+
+.bio-drawer__panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  padding-right: 40px;
+}
+
+.bio-drawer__area {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.bio-drawer__panel p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--lab-muted);
+  line-height: 1.65;
+}
+
+.bio-drawer__features {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.bio-drawer__features li {
+  position: relative;
+  padding: 8px 0 8px 20px;
+  font-size: 13px;
+  color: var(--lab-text);
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.bio-drawer__features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.bio-drawer__slug code {
+  font-size: 12px;
+  color: var(--lab-muted);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Apuntes */
+.bio-apuntes-section {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.bio-apuntes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.bio-apunte-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--lab-card);
+  border: 1px solid var(--lab-border);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--lab-transition);
+}
+
+.bio-apunte-card:hover {
+  border-color: rgba(34, 197, 94, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.bio-apunte-session {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.bio-apunte-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.35;
+}
+
+.bio-apunte-card time {
+  font-size: 12px;
+  color: var(--lab-muted);
+  margin-top: auto;
+}
+
+/* Footer */
+.bio-footer {
+  padding: 28px 24px;
+  text-align: center;
+  border-top: 1px solid var(--lab-border);
+}
+
+.bio-footer p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--lab-muted);
+}
+
+.bio-footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bio-footer a:hover { color: #fff; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .catalog-layout { grid-template-columns: 1fr; }
+
+  .catalog-sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .catalog-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .catalog-nav-link {
+    flex: 1 1 auto;
+    min-width: 140px;
+  }
+
+  .bio-section-head--row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .catalog-search-wrap { max-width: none; }
+
+  .bio-drawer__panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--lab-border);
+    top: auto;
+    height: 85vh;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+  }
+
+  .bio-drawer.open .bio-drawer__panel { transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .bio-viz-section { padding: 20px 16px; }
+  .bio-areas-map { grid-template-columns: 1fr 1fr; }
+  .bio-subjects-grid { grid-template-columns: 1fr; }
+}

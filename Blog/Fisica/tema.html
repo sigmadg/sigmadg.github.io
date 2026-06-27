@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tema — Laboratorio | Física · SigmaDG</title>
+  <link rel="stylesheet" href="../css/section-hero.css">
+  <link rel="stylesheet" href="css/tema-lab.css">
+</head>
+<body class="tema-lab theme-physics">
+  <header class="tema-lab-header">
+    <nav class="tema-lab-nav">
+      <a href="index.html">← Física</a>
+      <a href="../index.html">Blog</a>
+    </nav>
+    <p class="tema-breadcrumb" id="temaBreadcrumb"></p>
+    <h1 class="tema-title" id="temaTitle">Cargando…</h1>
+    <div class="tema-meta" id="temaMeta"></div>
+    <div class="tema-tabs" role="tablist">
+      <button type="button" class="tema-tab active" data-panel="theory" role="tab">Teoría</button>
+      <button type="button" class="tema-tab" data-panel="example" role="tab">Ejemplo</button>
+      <button type="button" class="tema-tab" data-panel="exam" role="tab">Razonamiento</button>
+      <button type="button" class="tema-tab" data-panel="sim" role="tab">Simulación</button>
+    </div>
+  </header>
+
+  <main class="tema-main">
+    <section class="tema-panel active" id="panel-theory" role="tabpanel">
+      <h2>Fundamentos teóricos</h2>
+      <div class="tema-theory" id="temaTheory"></div>
+    </section>
+
+    <section class="tema-panel" id="panel-example" role="tabpanel">
+      <h2>Ejemplo resuelto</h2>
+      <div class="tema-example" id="temaExample"></div>
+    </section>
+
+    <section class="tema-panel" id="panel-exam" role="tabpanel">
+      <h2>Razonamiento para examen</h2>
+      <p class="tema-exam-intro">Preguntas integradoras, cadena lógica, estrategia y errores típicos en exámenes de razonamiento complejo.</p>
+      <div class="tema-exam" id="temaExam"></div>
+    </section>
+
+    <section class="tema-panel" id="panel-sim" role="tabpanel">
+      <h2>Simulación interactiva</h2>
+      <p class="tema-sim-intro" id="simIntro"></p>
+      <div class="tema-sim-layout">
+        <div>
+          <div class="tema-sim-canvas-wrap">
+            <canvas id="simCanvas" width="800" height="420"></canvas>
+          </div>
+          <p class="tema-sim-caption" id="simCaption"></p>
+        </div>
+        <aside class="tema-sim-sidebar">
+          <h3>Variantes del tema</h3>
+          <div class="tema-variants" id="simVariants"></div>
+          <div id="simControls"></div>
+          <div class="tema-playback">
+            <button type="button" id="simPlay">▶ Reproducir</button>
+            <button type="button" id="simReset">⟲ Reiniciar</button>
+          </div>
+          <div class="tema-metrics" id="simMetrics"></div>
+        </aside>
+      </div>
+    </section>
+
+    <nav class="tema-nav-topics" id="temaNavTopics" aria-label="Temas anterior y siguiente"></nav>
+  </main>
+
+  <script src="js/propedeuticos-data.js"></script>
+  <script src="js/topic-content.js"></script>
+  <script src="js/exam-reasoning.js"></script>
+  <script src="js/topic-registry.js"></script>
+  <script src="js/sim-variant-modes.js"></script>
+  <script src="js/physics-sims.js"></script>
+  <script src="js/topic-lab.js"></script>
+</body>
+</html>

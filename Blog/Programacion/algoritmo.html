@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algoritmo — Simulación | Programación · SigmaDG</title>
+  <link rel="stylesheet" href="css/algo-lab.css">
+</head>
+<body class="algo-lab">
+  <header class="algo-lab-header">
+    <nav class="algo-lab-nav">
+      <a href="index.html">← Programación</a>
+      <span class="nav-sep">|</span>
+      <a href="../index.html">Blog</a>
+      <span class="nav-sep">|</span>
+      <a href="../../index.html#blog">Portafolio</a>
+    </nav>
+    <p class="algo-breadcrumb" id="algoBreadcrumb"></p>
+    <h1 class="algo-lab-title" id="algoTitle">Cargando…</h1>
+    <p class="algo-lab-subtitle" id="algoSubtitle"></p>
+    <div class="algo-meta" id="algoMeta"></div>
+
+    <div class="algo-steps" id="algoSteps" role="tablist"></div>
+    <p class="algo-step-desc" id="stepDesc"></p>
+  </header>
+
+  <main class="algo-lab-main">
+    <section class="algo-panel">
+      <h3>Visualización</h3>
+      <div class="algo-canvas-wrap">
+        <canvas id="algoCanvas" aria-label="Simulación interactiva del algoritmo"></canvas>
+      </div>
+      <p class="algo-caption" id="algoCaption"></p>
+    </section>
+
+    <aside class="algo-panel algo-controls">
+      <h3>Controles</h3>
+      <div id="algoControls"></div>
+
+      <div class="algo-playback">
+        <button type="button" class="btn-play" id="btnPlay">▶ Reproducir</button>
+        <button type="button" class="btn-next" id="btnNext">Siguiente</button>
+        <button type="button" class="btn-reset" id="btnReset">Reiniciar</button>
+      </div>
+
+      <h3>Métricas en vivo</h3>
+      <div class="algo-metrics" id="algoMetrics"></div>
+    </aside>
+  </main>
+
+  <nav class="algo-nav-topics" id="algoNav" aria-label="Algoritmo anterior y siguiente"></nav>
+
+  <script src="js/algorithms-data.js"></script>
+  <script src="js/algo-registry.js"></script>
+  <script src="js/algo-sims.js"></script>
+  <script src="js/algo-lab-page.js"></script>
+</body>
+</html>
